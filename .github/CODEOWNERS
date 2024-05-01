@@ -1,0 +1,4 @@
+### Copied from .github/CODEOWNERS-manual ###
+
+### Automatically generated from package.xml ###
+autoware_utils/** esteve.fernandez@tier4.jp ryohsuke.mitsudome@tier4.jp
