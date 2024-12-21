@@ -18,6 +18,8 @@
 
 #include <gtest/gtest.h>
 
+#include <string>
+
 TEST(UUIDHelperTest, generate_uuid)
 {
   // Generate two UUIDs and ensure they are all different
