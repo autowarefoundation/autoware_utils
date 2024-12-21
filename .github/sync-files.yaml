@@ -32,3 +32,9 @@
     - source: CPPLINT.cfg
     - source: codecov.yaml
     - source: setup.cfg
+    - source: .github/workflows/build-and-test.yaml
+      pre-commands: |
+        sed -i '/build-depends-repos/d' {source}
+    - source: .github/workflows/build-and-test-differential.yaml
+      pre-commands: |
+        sed -i '/build-depends-repos/d' {source}
