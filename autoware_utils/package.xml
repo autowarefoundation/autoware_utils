@@ -14,10 +14,29 @@
 
   <depend>builtin_interfaces</depend>
   <depend>libboost-system-dev</depend>
+  <depend>autoware_internal_debug_msgs</depend>
+  <depend>autoware_internal_msgs</depend>
+  <depend>autoware_internal_planning_msgs</depend>
+  <depend>autoware_perception_msgs</depend>
+  <depend>autoware_planning_msgs</depend>
+  <depend>autoware_vehicle_msgs</depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>logging_demo</depend>
+  <depend>pcl_conversions</depend>
+  <depend>tf2</depend>
+  <depend>tf2_eigen</depend>
+  <depend>tf2_geometry_msgs</depend>
+  <depend>pcl_ros</depend>
+  <depend>visualization_msgs</depend>
+
   <depend>rclcpp</depend>
+
   <depend>unique_identifier_msgs</depend>
 
   <test_depend>ament_cmake_ros</test_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>autoware_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
