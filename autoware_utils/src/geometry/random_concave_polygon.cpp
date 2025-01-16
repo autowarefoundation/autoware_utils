@@ -326,8 +326,7 @@ bool is_convex(const autoware_utils::Polygon2d & polygon)
 bool test_intersection(
   const std::vector<autoware_utils::Polygon2d> & polygons1,
   const std::vector<autoware_utils::Polygon2d> & polygons2,
-  const std::function<bool(
-    const autoware_utils::Polygon2d &, const autoware_utils::Polygon2d &)> &
+  const std::function<bool(const autoware_utils::Polygon2d &, const autoware_utils::Polygon2d &)> &
     intersection_func)
 {
   for (const auto & poly1 : polygons1) {

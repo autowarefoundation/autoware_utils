@@ -35,9 +35,7 @@ public:
 
   Vector2d(const double x, const double y) : x_(x), y_(y) {}
 
-  explicit Vector2d(const autoware_utils::Point2d & point) : x_(point.x()), y_(point.y())
-  {
-  }
+  explicit Vector2d(const autoware_utils::Point2d & point) : x_(point.x()), y_(point.y()) {}
 
   double cross(const Vector2d & other) const { return x_ * other.y() - y_ * other.x(); }
 
@@ -101,8 +99,7 @@ public:
   static std::optional<Polygon2d> create(
     PointList2d && outer, std::vector<PointList2d> && inners) noexcept;
 
-  static std::optional<Polygon2d> create(
-    const autoware_utils::Polygon2d & polygon) noexcept;
+  static std::optional<Polygon2d> create(const autoware_utils::Polygon2d & polygon) noexcept;
 
   const PointList2d & outer() const noexcept { return outer_; }
 
@@ -137,8 +134,7 @@ public:
 
   static std::optional<ConvexPolygon2d> create(PointList2d && vertices) noexcept;
 
-  static std::optional<ConvexPolygon2d> create(
-    const autoware_utils::Polygon2d & polygon) noexcept;
+  static std::optional<ConvexPolygon2d> create(const autoware_utils::Polygon2d & polygon) noexcept;
 
   const PointList2d & vertices() const noexcept { return outer(); }
 

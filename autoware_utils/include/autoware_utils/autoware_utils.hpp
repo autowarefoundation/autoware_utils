@@ -20,7 +20,6 @@
 #include "autoware_utils/geometry/boost_polygon_utils.hpp"
 #include "autoware_utils/geometry/ear_clipping.hpp"
 #include "autoware_utils/geometry/geometry.hpp"
-#include "autoware_utils/geometry/geometry.hpp"
 #include "autoware_utils/geometry/gjk_2d.hpp"
 #include "autoware_utils/geometry/pose_deviation.hpp"
 #include "autoware_utils/geometry/random_concave_polygon.hpp"

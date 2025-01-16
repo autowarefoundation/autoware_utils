@@ -1,11 +1,13 @@
 # autoware_utils Library
 
 ## Overview
+
 The **autoware_utils** library is a comprehensive toolkit designed to facilitate the development of autonomous driving applications. This library provides essential utilities for geometry, mathematics, ROS (Robot Operating System) expansions, diagnostics, and more. It is extensively used in the Autoware project to handle common tasks such as geometric calculations, data normalization, message conversions, performance monitoring, and point cloud transformations.
 
 ### Design
 
 #### Geometry Module
+
 The geometry module provides classes and functions for handling 2D and 3D points, vectors, polygons, and performing geometric operations:
 
 - **`boost_geometry.hpp`**: Integrates Boost.Geometry for advanced geometric computations, defining point, segment, box, linestring, ring, and polygon types.
@@ -28,6 +30,7 @@ The geometry module provides classes and functions for handling 2D and 3D points
   - Conversion between different coordinate systems.
 
 #### Math Module
+
 The math module offers a variety of mathematical utilities:
 
 - **`accumulator.hpp`**: A class for accumulating statistical data, supporting min, max, and mean calculations.
@@ -38,6 +41,7 @@ The math module offers a variety of mathematical utilities:
 - **`unit_conversion.hpp`**: Functions for converting between different units (e.g., degrees to radians, km/h to m/s).
 
 #### ROS Module
+
 The ROS module provides utilities for working with ROS messages and nodes:
 
 - **`debug_publisher.hpp`**: A helper class for publishing debug messages with timestamps.
@@ -60,6 +64,7 @@ The ROS module provides utilities for working with ROS messages and nodes:
 - **`pcl_conversion.hpp`**: Efficient conversion and transformation of PointCloud2 messages to PCL point clouds.
 
 #### System Module
+
 The system module provides low-level utilities for performance monitoring and error handling:
 
 - **`backtrace.hpp`**: Prints backtraces for debugging.
@@ -68,13 +73,13 @@ The system module provides low-level utilities for performance monitoring and er
 - **`time_keeper.hpp`**: Tracks and reports the processing time of various functions.
 
 #### Transform Module
+
 Efficient methods for transforming and manipulating point clouds.
-
-
 
 ## Usage
 
 ### Including Headers
+
 To use the Autoware Utils library in your project, include the necessary headers at the top of your source files:
 
 ```cpp
@@ -82,6 +87,7 @@ To use the Autoware Utils library in your project, include the necessary headers
 #include "autoware_utils/math/accumulator.hpp"
 #include "autoware_utils/ros/debug_publisher.hpp"
 ```
+
 or you can include `autoware_utils/autoware_utils.hpp` for all features:
 
 ```cpp
@@ -91,6 +97,7 @@ or you can include `autoware_utils/autoware_utils.hpp` for all features:
 ### Example Code Snippets
 
 #### Using Vector2d from alt_geometry.hpp
+
 ```cpp
 #include "autoware_utils/geometry/alt_geometry.hpp"
 
@@ -111,6 +118,7 @@ int main() {
 ```
 
 #### Using Accumulator from accumulator.hpp
+
 ```cpp
 #include "autoware_utils/math/accumulator.hpp"
 
@@ -133,6 +141,7 @@ int main() {
 ### Detailed Usage Examples
 
 #### Transform Point Clouds with ManagedTransformBuffer
+
 ```cpp
 #include "autoware_utils/ros/managed_transform_buffer.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
@@ -162,6 +171,7 @@ int main(int argc, char * argv[]) {
 ```
 
 #### Update Parameters Dynamically with update_param.hpp
+
 ```cpp
 #include "autoware_utils/ros/update_param.hpp"
 #include <rclcpp/rclcpp.hpp>
@@ -172,7 +182,7 @@ int main(int argc, char * argv[]) {
 
   double param_value = 0.0;
   std::vector<rclcpp::Parameter> params = node->get_parameters({"my_param"});
-  
+
   if (autoware_utils::update_param(params, "my_param", param_value)) {
     RCLCPP_INFO(node->get_logger(), "Updated parameter value: %f", param_value);
   } else {
@@ -185,6 +195,7 @@ int main(int argc, char * argv[]) {
 ```
 
 #### Logging Processing Times with ProcessingTimePublisher
+
 ```cpp
 #include "autoware_utils/ros/processing_time_publisher.hpp"
 #include <rclcpp/rclcpp.hpp>
@@ -211,6 +222,7 @@ int main(int argc, char * argv[]) {
 ```
 
 #### Manipulating Polygons with boost_polygon_utils.hpp
+
 ```cpp
 #include "autoware_utils/geometry/boost_polygon_utils.hpp"
 #include "autoware_utils/geometry/boost_geometry.hpp"
@@ -239,6 +251,7 @@ int main(int argc, char * argv[]) {
 ```
 
 #### Efficient Point Cloud Conversion with pcl_conversion.hpp
+
 ```cpp
 #include "autoware_utils/ros/pcl_conversion.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
@@ -268,6 +281,7 @@ int main(int argc, char * argv[]) {
 ```
 
 #### Handling Debug Message Types with debug_traits.hpp
+
 ```cpp
 #include "autoware_utils/ros/debug_publisher.hpp"
 #include "autoware_utils/ros/debug_traits.hpp"
