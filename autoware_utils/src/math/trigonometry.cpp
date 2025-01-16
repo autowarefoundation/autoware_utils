@@ -25,8 +25,8 @@ namespace autoware_utils
 
 float sin(float radian)
 {
-  float degree = radian * (180.f / static_cast<float>(autoware_utils::pi)) *
-                 (discrete_arcs_num_360 / 360.f);
+  float degree =
+    radian * (180.f / static_cast<float>(autoware_utils::pi)) * (discrete_arcs_num_360 / 360.f);
   size_t idx =
     (static_cast<int>(std::round(degree)) % discrete_arcs_num_360 + discrete_arcs_num_360) %
     discrete_arcs_num_360;
@@ -86,14 +86,10 @@ std::pair<float, float> sin_and_cos(float radian)
 // 2. output of the function is changed from degrees to radians.
 namespace detail_fast_atan2
 {
-static const float atan2_p1 =
-  0.9997878412794807f * static_cast<float>(180) / autoware_utils::pi;
-static const float atan2_p3 =
-  -0.3258083974640975f * static_cast<float>(180) / autoware_utils::pi;
-static const float atan2_p5 =
-  0.1555786518463281f * static_cast<float>(180) / autoware_utils::pi;
-static const float atan2_p7 =
-  -0.04432655554792128f * static_cast<float>(180) / autoware_utils::pi;
+static const float atan2_p1 = 0.9997878412794807f * static_cast<float>(180) / autoware_utils::pi;
+static const float atan2_p3 = -0.3258083974640975f * static_cast<float>(180) / autoware_utils::pi;
+static const float atan2_p5 = 0.1555786518463281f * static_cast<float>(180) / autoware_utils::pi;
+static const float atan2_p7 = -0.04432655554792128f * static_cast<float>(180) / autoware_utils::pi;
 static const float atan2_DBL_EPSILON = 2.2204460492503131e-016f;
 }  // namespace detail_fast_atan2
 
