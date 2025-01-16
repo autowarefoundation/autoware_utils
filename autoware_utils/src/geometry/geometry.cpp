@@ -182,8 +182,7 @@ Point2d transform_point(const Point2d & point, const geometry_msgs::msg::Transfo
   return Point2d{transformed.x(), transformed.y()};
 }
 
-Eigen::Vector3d transform_point(
-  const Eigen::Vector3d & point, const geometry_msgs::msg::Pose & pose)
+Eigen::Vector3d transform_point(const Eigen::Vector3d & point, const geometry_msgs::msg::Pose & pose)
 {
   geometry_msgs::msg::Transform transform;
   transform.translation.x = pose.position.x;
@@ -260,7 +259,7 @@ tf2::fromMsg(transform, tf);
 geometry_msgs::msg::TransformStamped transform_stamped;
 transform_stamped.transform = tf2::toMsg(tf.inverse());
 
-return transformPose(pose, transform_stamped);
+return transform_pose(pose, transform_stamped);
 }
 */
 
@@ -273,7 +272,7 @@ geometry_msgs::msg::Pose inverse_transform_pose(
   geometry_msgs::msg::TransformStamped transform_stamped;
   transform_stamped.transform = tf2::toMsg(tf.inverse());
 
-  return transformPose(pose, transform_stamped);
+  return transform_pose(pose, transform_stamped);
 }
 
 // Transform pose in world coordinates to local coordinates
@@ -354,8 +353,7 @@ geometry_msgs::msg::Pose calc_offset_pose(
  * @return If all element of covariance is 0, return false.
  */
 //
-bool is_twist_covariance_valid(
-  const geometry_msgs::msg::TwistWithCovariance & twist_with_covariance)
+bool is_twist_covariance_valid(const geometry_msgs::msg::TwistWithCovariance & twist_with_covariance)
 {
   for (const auto & c : twist_with_covariance.covariance) {
     if (c != 0.0) {

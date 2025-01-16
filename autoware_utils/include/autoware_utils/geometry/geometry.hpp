@@ -27,7 +27,6 @@
 #define EIGEN_MPL2_ONLY
 #include <Eigen/Core>
 
-#include <autoware_internal_planning_msgs/msg/path_with_lane_id.hpp>
 #include <autoware_planning_msgs/msg/path.hpp>
 #include <autoware_planning_msgs/msg/trajectory.hpp>
 #include <geometry_msgs/msg/point32.hpp>
@@ -39,6 +38,7 @@
 #include <geometry_msgs/msg/twist_with_covariance.hpp>
 #include <geometry_msgs/msg/vector3.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
+#include <autoware_internal_planning_msgs/msg/path_with_lane_id.hpp>
 
 #include <tf2/utils.h>
 
@@ -135,8 +135,7 @@ inline geometry_msgs::msg::Point get_point(const autoware_planning_msgs::msg::Pa
 }
 
 template <>
-inline geometry_msgs::msg::Point get_point(
-  const autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
+inline geometry_msgs::msg::Point get_point(const autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
 {
   return p.point.pose.position;
 }
@@ -173,8 +172,7 @@ inline geometry_msgs::msg::Pose get_pose(const autoware_planning_msgs::msg::Path
 }
 
 template <>
-inline geometry_msgs::msg::Pose get_pose(
-  const autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
+inline geometry_msgs::msg::Pose get_pose(const autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
 {
   return p.point.pose;
 }
@@ -199,8 +197,7 @@ inline double get_longitudinal_velocity(const autoware_planning_msgs::msg::PathP
 }
 
 template <>
-inline double get_longitudinal_velocity(
-  const autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
+inline double get_longitudinal_velocity(const autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
 {
   return p.point.longitudinal_velocity_mps;
 }
@@ -239,8 +236,7 @@ inline void set_pose(
 
 template <>
 inline void set_pose(
-  const geometry_msgs::msg::Pose & pose,
-  autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
+  const geometry_msgs::msg::Pose & pose, autoware_internal_planning_msgs::msg::PathPointWithLaneId & p)
 {
   p.point.pose = pose;
 }
@@ -574,8 +570,7 @@ inline double calc_norm(const geometry_msgs::msg::Vector3 & v)
  * @return If all element of covariance is 0, return false.
  */
 //
-bool is_twist_covariance_valid(
-  const geometry_msgs::msg::TwistWithCovariance & twist_with_covariance);
+bool is_twist_covariance_valid(const geometry_msgs::msg::TwistWithCovariance & twist_with_covariance);
 
 // NOTE: much faster than boost::geometry::intersects()
 std::optional<geometry_msgs::msg::Point> intersect(

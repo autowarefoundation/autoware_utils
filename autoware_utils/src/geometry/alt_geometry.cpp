@@ -62,7 +62,8 @@ std::optional<Polygon2d> Polygon2d::create(
   return poly;
 }
 
-std::optional<Polygon2d> Polygon2d::create(const autoware_utils::Polygon2d & polygon) noexcept
+std::optional<Polygon2d> Polygon2d::create(
+  const autoware_utils::Polygon2d & polygon) noexcept
 {
   PointList2d outer;
   for (const auto & point : polygon.outer()) {

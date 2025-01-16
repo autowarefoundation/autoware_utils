@@ -68,7 +68,7 @@ double calc_yaw_deviation(
 {
   const auto base_yaw = tf2::getYaw(base_pose.orientation);
   const auto target_yaw = tf2::getYaw(target_pose.orientation);
-  return normalizeRadian(target_yaw - base_yaw);
+  return normalize_radian(target_yaw - base_yaw);
 }
 
 PoseDeviation calc_pose_deviation(
