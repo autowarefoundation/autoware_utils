@@ -4,7 +4,7 @@ project(autoware_utils)
 find_package(autoware_cmake REQUIRED)
 autoware_package()
 
-file(GLOB_RECURSE src_cpps 
+file(GLOB_RECURSE src_cpps
     src/*.cpp
     src/geometry/*.cpp
     src/math/*.cpp
