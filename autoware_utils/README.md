@@ -13,7 +13,7 @@ The geometry module provides classes and functions for handling 2D and 3D points
 - **`boost_geometry.hpp`**: Integrates Boost.Geometry for advanced geometric computations, defining point, segment, box, linestring, ring, and polygon types.
 - **`alt_geometry.hpp`**: Implements alternative geometric types and operations for 2D vectors and polygons, including vector arithmetic, polygon creation, and various geometric predicates.
 - **`ear_clipping.hpp`**: Provides algorithms for triangulating polygons using the ear clipping method.
-- **`gjk_2d.hpp`**: Implements the GJK (Gilbert–Johnson–Keerthi) algorithm for fast intersection detection between convex polygons.
+- **`gjk_2d.hpp`**: Implements the GJK algorithm for fast intersection detection between convex polygons.
 - **`sat_2d.hpp`**: Implements the SAT (Separating Axis Theorem) algorithm for detecting intersections between convex polygons.
 - **`random_concave_polygon.hpp` and `random_convex_polygon.hpp`**: Generate random concave and convex polygons for testing purposes.
 - **`pose_deviation.hpp`**: Calculates deviations between poses in terms of lateral, longitudinal, and yaw angles.

@@ -379,7 +379,7 @@ geometry_msgs::msg::TransformStamped pose2transform(
   const geometry_msgs::msg::PoseStamped & pose, const std::string & child_frame_id);
 
 template <class Point1, class Point2>
-tf2::Vector3 point2tfvector(const Point1 & src, const Point2 & dst)
+tf2::Vector3 point_2_tf_vector(const Point1 & src, const Point2 & dst)
 {
   const auto src_p = get_point(src);
   const auto dst_p = get_point(dst);

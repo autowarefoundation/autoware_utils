@@ -28,7 +28,7 @@ namespace autoware_utils
  * @brief Creates a SensorDataQoS profile with a single depth.
  * @return rclcpp::SensorDataQoS The QoS profile with depth set to 1.
  */
-inline rclcpp::SensorDataQoS single_depth_sensor_qoss()
+inline rclcpp::SensorDataQoS single_depth_sensor_qos()
 {
   rclcpp::SensorDataQoS qos;
   qos.get_rmw_qos_profile().depth = 1;
