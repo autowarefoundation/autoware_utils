@@ -525,15 +525,15 @@ geometry_msgs::msg::Pose calc_interpolated_pose(
 
   if (set_orientation_from_position_direction) {
     const double input_poses_dist = calc_distance2d(get_point(src_pose), get_point(dst_pose));
-    const bool is_driving_forward = is_driving_forward(src_pose, dst_pose);
+    const bool is_driving_forward_flag = is_driving_forward(src_pose, dst_pose);
 
     // Get orientation from interpolated point and src_pose
-    if ((is_driving_forward && clamped_ratio > 1.0 - (1e-6)) || input_poses_dist < 1e-3) {
+    if ((is_driving_forward_flag && clamped_ratio > 1.0 - (1e-6)) || input_poses_dist < 1e-3) {
       output_pose.orientation = get_pose(dst_pose).orientation;
-    } else if (!is_driving_forward && clamped_ratio < 1e-6) {
+    } else if (!is_driving_forward_flag && clamped_ratio < 1e-6) {
       output_pose.orientation = get_pose(src_pose).orientation;
     } else {
-      const auto & base_pose = is_driving_forward ? dst_pose : src_pose;
+      const auto & base_pose = is_driving_forward_flag ? dst_pose : src_pose;
       const double pitch = calc_elevation_angle(get_point(output_pose), get_point(base_pose));
       const double yaw = calc_azimuth_angle(get_point(output_pose), get_point(base_pose));
       output_pose.orientation = create_quaternion_from_rpy(0.0, pitch, yaw);
