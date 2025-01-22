@@ -25,7 +25,10 @@
 
 #include <geometry_msgs/msg/point.hpp>
 
-namespace autoware_utils
+namespace autoware
+{
+
+namespace utils
 {
 // 2D
 struct Point2d;
@@ -93,12 +96,13 @@ inline Point3d from_msg(const geometry_msgs::msg::Point & msg)
   point.z() = msg.z;
   return point;
 }
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 BOOST_GEOMETRY_REGISTER_POINT_2D(                                 // NOLINT
-  autoware_utils::Point2d, double, cs::cartesian, x(), y())       // NOLINT
+  autoware::utils::Point2d, double, cs::cartesian, x(), y())       // NOLINT
 BOOST_GEOMETRY_REGISTER_POINT_3D(                                 // NOLINT
-  autoware_utils::Point3d, double, cs::cartesian, x(), y(), z())  // NOLINT
-BOOST_GEOMETRY_REGISTER_RING(autoware_utils::LinearRing2d)        // NOLINT
+  autoware::utils::Point3d, double, cs::cartesian, x(), y(), z())  // NOLINT
+BOOST_GEOMETRY_REGISTER_RING(autoware::utils::LinearRing2d)        // NOLINT
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__BOOST_GEOMETRY_HPP_

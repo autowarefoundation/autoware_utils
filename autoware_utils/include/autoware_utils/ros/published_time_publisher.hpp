@@ -26,7 +26,9 @@
 #include <string>
 #include <utility>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 
 class PublishedTimePublisher
@@ -109,6 +111,7 @@ private:
   // store them for each different publisher of the node
   std::map<rmw_gid_t, rclcpp::Publisher<PublishedTime>::SharedPtr, GidCompare> publishers_;
 };
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 #endif  // AUTOWARE_UTILS__ROS__PUBLISHED_TIME_PUBLISHER_HPP_

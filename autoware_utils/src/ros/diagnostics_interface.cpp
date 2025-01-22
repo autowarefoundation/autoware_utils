@@ -21,7 +21,9 @@
 #include <algorithm>
 #include <string>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 DiagnosticsInterface::DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name)
 : clock_(node->get_clock())
@@ -103,4 +105,5 @@ diagnostic_msgs::msg::DiagnosticArray DiagnosticsInterface::create_diagnostics_a
 
   return diagnostics_msg;
 }
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware

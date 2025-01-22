@@ -16,7 +16,7 @@
 
 #include <utility>
 
-namespace autoware_utils::sat
+namespace autoware::utils::sat
 {
 
 namespace
@@ -79,4 +79,4 @@ bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_poly
          has_no_separating_axis(convex_polygon2, convex_polygon1);
 }
 
-}  // namespace autoware_utils::sat
+}  // namespace autoware::utils::sat

@@ -17,13 +17,13 @@
 
 #include "autoware_utils/geometry/boost_geometry.hpp"
 
-namespace autoware_utils::gjk
+namespace autoware::utils::gjk
 {
 /**
  * @brief Check if 2 convex polygons intersect using the GJK algorithm
  * @details much faster than boost::geometry::overlaps() but limited to convex polygons
  */
 bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
-}  // namespace autoware_utils::gjk
+}  // namespace autoware::utils::gjk
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__GJK_2D_HPP_

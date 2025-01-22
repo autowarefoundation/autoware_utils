@@ -29,7 +29,9 @@
 #include <utility>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 namespace
 {
@@ -287,7 +289,7 @@ Polygon2d inward_denting(LinearRing2d & ring)
 }  // namespace
 
 /// @brief checks if a polygon is convex
-bool is_convex(const autoware_utils::Polygon2d & polygon)
+bool is_convex(const autoware::utils::Polygon2d & polygon)
 {
   const auto & outer_ring = polygon.outer();
   size_t num_points = outer_ring.size();
@@ -324,9 +326,9 @@ bool is_convex(const autoware_utils::Polygon2d & polygon)
 /// @brief checks for collisions between two vectors of convex polygons using a specified collision
 /// detection algorithm
 bool test_intersection(
-  const std::vector<autoware_utils::Polygon2d> & polygons1,
-  const std::vector<autoware_utils::Polygon2d> & polygons2,
-  const std::function<bool(const autoware_utils::Polygon2d &, const autoware_utils::Polygon2d &)> &
+  const std::vector<autoware::utils::Polygon2d> & polygons1,
+  const std::vector<autoware::utils::Polygon2d> & polygons2,
+  const std::function<bool(const autoware::utils::Polygon2d &, const autoware::utils::Polygon2d &)> &
     intersection_func)
 {
   for (const auto & poly1 : polygons1) {
@@ -404,4 +406,5 @@ std::optional<Polygon2d> random_concave_polygon(const size_t vertices, const dou
   }
   return poly;
 }
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware

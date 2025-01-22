@@ -17,7 +17,9 @@
 
 #include <cstddef>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 
 constexpr size_t sin_table_size = 32769;
@@ -25,6 +27,7 @@ constexpr size_t discrete_arcs_num_90 = 32768;
 constexpr size_t discrete_arcs_num_360 = 131072;
 extern const float g_sin_table[sin_table_size];
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 #endif  // AUTOWARE_UTILS__MATH__SIN_TABLE_HPP_

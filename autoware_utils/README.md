@@ -101,7 +101,7 @@ or you can include `autoware_utils/autoware_utils.hpp` for all features:
 ```cpp
 #include "autoware_utils/geometry/alt_geometry.hpp"
 
-using namespace autoware_utils::alt;
+using namespace autoware::utils::alt;
 
 int main() {
   Vector2d vec1(3.0, 4.0);
@@ -123,7 +123,7 @@ int main() {
 #include "autoware_utils/math/accumulator.hpp"
 
 int main() {
-  autoware_utils::Accumulator<double> acc;
+  autoware::utils::Accumulator<double> acc;
 
   acc.add(1.0);
   acc.add(2.0);
@@ -152,7 +152,7 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("transform_node");
 
   // Initialize ManagedTransformBuffer
-  autoware_utils::ManagedTransformBuffer transform_buffer(node, false);
+  autoware::utils::ManagedTransformBuffer transform_buffer(node, false);
 
   // Load point cloud data
   sensor_msgs::msg::PointCloud2 cloud_in; // Assume this is populated with data
@@ -183,7 +183,7 @@ int main(int argc, char * argv[]) {
   double param_value = 0.0;
   std::vector<rclcpp::Parameter> params = node->get_parameters({"my_param"});
 
-  if (autoware_utils::update_param(params, "my_param", param_value)) {
+  if (autoware::utils::update_param(params, "my_param", param_value)) {
     RCLCPP_INFO(node->get_logger(), "Updated parameter value: %f", param_value);
   } else {
     RCLCPP_WARN(node->get_logger(), "Parameter 'my_param' not found.");
@@ -206,7 +206,7 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("processing_time_node");
 
   // Initialize ProcessingTimePublisher
-  autoware_utils::ProcessingTimePublisher processing_time_pub(node.get(), "~/debug/processing_time_ms");
+  autoware::utils::ProcessingTimePublisher processing_time_pub(node.get(), "~/debug/processing_time_ms");
 
   // Simulate some processing times
   std::map<std::string, double> processing_times = {
@@ -233,17 +233,17 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("polygon_node");
 
   // Create a polygon
-  autoware_utils::Polygon2d polygon;
+  autoware::utils::Polygon2d polygon;
   // Assume polygon is populated with points
 
   // Rotate the polygon by 90 degrees
-  autoware_utils::Polygon2d rotated_polygon = autoware_utils::rotate_polygon(polygon, M_PI / 2);
+  autoware::utils::Polygon2d rotated_polygon = autoware::utils::rotate_polygon(polygon, M_PI / 2);
 
   // Expand the polygon by an offset
-  autoware_utils::Polygon2d expanded_polygon = autoware_utils::expand_polygon(polygon, 1.0);
+  autoware::utils::Polygon2d expanded_polygon = autoware::utils::expand_polygon(polygon, 1.0);
 
   // Check if the polygon is clockwise
-  bool is_clockwise = autoware_utils::is_clockwise(polygon);
+  bool is_clockwise = autoware::utils::is_clockwise(polygon);
 
   rclcpp::shutdown();
   return 0;
@@ -273,7 +273,7 @@ int main(int argc, char * argv[]) {
   // Populate transform matrix with actual values
 
   // Convert and transform point cloud
-  autoware_utils::transform_point_cloud_from_ros_msg(cloud_in, pcl_cloud, transform);
+  autoware::utils::transform_point_cloud_from_ros_msg(cloud_in, pcl_cloud, transform);
 
   rclcpp::shutdown();
   return 0;
@@ -292,7 +292,7 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("debug_node");
 
   // Initialize DebugPublisher
-  autoware_utils::DebugPublisher debug_pub(node, "/debug");
+  autoware::utils::DebugPublisher debug_pub(node, "/debug");
 
   // Publish a debug message with custom type
   float debug_data = 42.0;

@@ -22,7 +22,9 @@
 #include <optional>
 #include <string>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 inline geometry_msgs::msg::Point create_marker_position(double x, double y, double z)
 {
@@ -76,6 +78,7 @@ void append_marker_array(
   visualization_msgs::msg::MarkerArray * marker_array,
   const std::optional<rclcpp::Time> & current_time = {});
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 #endif  // AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_

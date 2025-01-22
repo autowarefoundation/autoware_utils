@@ -19,7 +19,9 @@
 
 #include <string>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 template <class T>
 T get_or_declare_parameter(rclcpp::Node & node, const std::string & name)
@@ -30,6 +32,7 @@ T get_or_declare_parameter(rclcpp::Node & node, const std::string & name)
 
   return node.declare_parameter<T>(name);
 }
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 #endif  // AUTOWARE_UTILS__ROS__PARAMETER_HPP_

@@ -36,7 +36,9 @@ void fromMsg(const geometry_msgs::msg::PoseStamped & msg, tf2::Stamped<tf2::Tran
 }
 }  // namespace tf2
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 geometry_msgs::msg::Vector3 get_rpy(const geometry_msgs::msg::Quaternion & quat)
 {
@@ -213,7 +215,7 @@ geometry_msgs::msg::Point32 transform_point(
 {
   const auto point =
     geometry_msgs::build<geometry_msgs::msg::Point>().x(point32.x).y(point32.y).z(point32.z);
-  const auto transformed_point = autoware_utils::transform_point(point, pose);
+  const auto transformed_point = autoware::utils::transform_point(point, pose);
   return geometry_msgs::build<geometry_msgs::msg::Point32>()
     .x(transformed_point.x)
     .y(transformed_point.y)
@@ -394,4 +396,5 @@ bool intersects_convex(const Polygon2d & convex_polygon1, const Polygon2d & conv
   return gjk::intersects(convex_polygon1, convex_polygon2);
 }
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware

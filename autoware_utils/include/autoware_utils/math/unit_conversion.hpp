@@ -17,7 +17,9 @@
 
 #include "autoware_utils/math/constants.hpp"
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 constexpr double deg2rad(const double deg)
 {
@@ -38,6 +40,7 @@ constexpr double mps2kmph(const double mps)
 {
   return mps * 3600.0 / 1000.0;
 }
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 #endif  // AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_

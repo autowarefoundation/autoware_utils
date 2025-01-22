@@ -20,7 +20,9 @@
 #include <unordered_map>
 #include <utility>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 
 /**
@@ -137,6 +139,7 @@ public:
   }
 };
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
 
 #endif  // AUTOWARE_UTILS__SYSTEM__LRU_CACHE_HPP_

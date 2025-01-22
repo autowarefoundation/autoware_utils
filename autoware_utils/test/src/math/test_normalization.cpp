@@ -18,7 +18,7 @@
 
 TEST(normalization, normalize_degree)  // NOLINT for gtest
 {
-  using autoware_utils::normalize_degree;
+  using autoware::utils::normalize_degree;
 
   // -180 <= deg < 180
   {
@@ -51,7 +51,7 @@ TEST(normalization, normalize_degree)  // NOLINT for gtest
 
 TEST(normalization, normalize_radian)  // NOLINT for gtest
 {
-  using autoware_utils::normalize_radian;
+  using autoware::utils::normalize_radian;
 
   // -M_PI <= deg < M_PI
   {

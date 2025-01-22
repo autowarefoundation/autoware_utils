@@ -20,13 +20,15 @@
 #include <cmath>
 #include <utility>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 
 float sin(float radian)
 {
   float degree =
-    radian * (180.f / static_cast<float>(autoware_utils::pi)) * (discrete_arcs_num_360 / 360.f);
+    radian * (180.f / static_cast<float>(autoware::utils::pi)) * (discrete_arcs_num_360 / 360.f);
   size_t idx =
     (static_cast<int>(std::round(degree)) % discrete_arcs_num_360 + discrete_arcs_num_360) %
     discrete_arcs_num_360;
@@ -47,13 +49,13 @@ float sin(float radian)
 
 float cos(float radian)
 {
-  return sin(radian + static_cast<float>(autoware_utils::pi) / 2.f);
+  return sin(radian + static_cast<float>(autoware::utils::pi) / 2.f);
 }
 
 std::pair<float, float> sin_and_cos(float radian)
 {
   constexpr float tmp =
-    (180.f / static_cast<float>(autoware_utils::pi)) * (discrete_arcs_num_360 / 360.f);
+    (180.f / static_cast<float>(autoware::utils::pi)) * (discrete_arcs_num_360 / 360.f);
   const float degree = radian * tmp;
   size_t idx =
     (static_cast<int>(std::round(degree)) % discrete_arcs_num_360 + discrete_arcs_num_360) %
@@ -86,10 +88,10 @@ std::pair<float, float> sin_and_cos(float radian)
 // 2. output of the function is changed from degrees to radians.
 namespace detail_fast_atan2
 {
-static const float atan2_p1 = 0.9997878412794807f * static_cast<float>(180) / autoware_utils::pi;
-static const float atan2_p3 = -0.3258083974640975f * static_cast<float>(180) / autoware_utils::pi;
-static const float atan2_p5 = 0.1555786518463281f * static_cast<float>(180) / autoware_utils::pi;
-static const float atan2_p7 = -0.04432655554792128f * static_cast<float>(180) / autoware_utils::pi;
+static const float atan2_p1 = 0.9997878412794807f * static_cast<float>(180) / autoware::utils::pi;
+static const float atan2_p3 = -0.3258083974640975f * static_cast<float>(180) / autoware::utils::pi;
+static const float atan2_p5 = 0.1555786518463281f * static_cast<float>(180) / autoware::utils::pi;
+static const float atan2_p7 = -0.04432655554792128f * static_cast<float>(180) / autoware::utils::pi;
 static const float atan2_DBL_EPSILON = 2.2204460492503131e-016f;
 }  // namespace detail_fast_atan2
 
@@ -118,8 +120,9 @@ float opencv_fast_atan2(float dy, float dx)
   if (dx < 0) a = 180.f - a;
   if (dy < 0) a = 360.f - a;
 
-  a = a * autoware_utils::pi / 180.f;
+  a = a * autoware::utils::pi / 180.f;
   return a;
 }
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware

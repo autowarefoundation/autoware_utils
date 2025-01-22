@@ -20,7 +20,9 @@
 #include <random>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 namespace
 {
@@ -110,4 +112,5 @@ Polygon2d random_convex_polygon(const size_t vertices, const double max)
   boost::geometry::correct(poly);
   return poly;
 }
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware

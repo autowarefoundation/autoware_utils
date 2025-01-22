@@ -18,14 +18,14 @@
 
 TEST(constants, pi)  // NOLINT for gtest
 {
-  using autoware_utils::pi;
+  using autoware::utils::pi;
 
   EXPECT_DOUBLE_EQ(pi, 3.14159265358979323846);
 }
 
 TEST(constants, gravity)  // NOLINT for gtest
 {
-  using autoware_utils::gravity;
+  using autoware::utils::gravity;
 
   EXPECT_DOUBLE_EQ(gravity, 9.80665);
 }

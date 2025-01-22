@@ -24,7 +24,9 @@
 #include <string>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 
 ProcessingTimeNode::ProcessingTimeNode(const std::string & name) : name_(name)
@@ -202,4 +204,5 @@ ScopedTimeTrack::~ScopedTimeTrack()  // NOLINT
   time_keeper_.end_track(func_name_);
 }
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware

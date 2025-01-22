@@ -16,7 +16,9 @@
 
 #include <string>
 
-namespace autoware_utils
+namespace autoware
+{
+namespace utils
 {
 visualization_msgs::msg::Marker create_default_marker(
   const std::string & frame_id, const rclcpp::Time & now, const std::string & ns, const int32_t id,
@@ -69,4 +71,5 @@ void append_marker_array(
   }
 }
 
-}  // namespace autoware_utils
+}  // namespace utils
+}  // namespace autoware
