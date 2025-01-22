@@ -29,5 +29,4 @@ Polygon2d random_convex_polygon(const size_t vertices, const double max);
 }  // namespace utils
 }  // namespace autoware
 
-
 #endif  // AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_

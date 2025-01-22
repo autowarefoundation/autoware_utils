@@ -61,5 +61,4 @@ void DiagnosticsInterface::add_key_value(const std::string & key, const T & valu
 }  // namespace utils
 }  // namespace autoware
 
-
 #endif  // AUTOWARE_UTILS__ROS__DIAGNOSTICS_INTERFACE_HPP_

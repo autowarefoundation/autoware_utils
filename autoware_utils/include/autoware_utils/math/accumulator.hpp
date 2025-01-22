@@ -93,5 +93,4 @@ std::ostream & operator<<(std::ostream & os, const Accumulator<T> & accumulator)
 }  // namespace utils
 }  // namespace autoware
 
-
 #endif  // AUTOWARE_UTILS__MATH__ACCUMULATOR_HPP_

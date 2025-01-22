@@ -181,7 +181,8 @@ Polygon2d to_polygon2d(
   return is_clockwise(polygon) ? polygon : inverse_clockwise(polygon);
 }
 
-autoware::utils::Polygon2d to_polygon2d(const autoware_perception_msgs::msg::DetectedObject & object)
+autoware::utils::Polygon2d to_polygon2d(
+  const autoware_perception_msgs::msg::DetectedObject & object)
 {
   return autoware::utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
 }
