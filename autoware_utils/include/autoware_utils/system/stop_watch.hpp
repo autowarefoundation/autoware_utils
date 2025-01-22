@@ -19,9 +19,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 template <
   class OutputUnit = std::chrono::seconds, class InternalUnit = std::chrono::microseconds,
@@ -60,7 +58,6 @@ private:
 
   std::unordered_map<std::string, Time> t_start_;
 };
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_

@@ -28,9 +28,7 @@
 #include <thread>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 /**
  * @brief Class representing a node in the time tracking tree
@@ -175,7 +173,7 @@ private:
     current_time_node_;                            //!< Shared pointer to the current time node
   std::shared_ptr<ProcessingTimeNode> root_node_;  //!< Shared pointer to the root time node
   std::thread::id root_node_thread_id_;            //!< ID of the thread that started the tracking
-  autoware::utils::StopWatch<
+  autoware_utils::StopWatch<
     std::chrono::milliseconds, std::chrono::microseconds, std::chrono::steady_clock>
     stop_watch_;  //!< StopWatch object for tracking the processing time
 
@@ -212,7 +210,6 @@ private:
   TimeKeeper & time_keeper_;     //!< Reference to the TimeKeeper object
 };
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__SYSTEM__TIME_KEEPER_HPP_

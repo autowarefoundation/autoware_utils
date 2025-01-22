@@ -96,9 +96,7 @@ inline void doTransform(
 #endif
 }  // namespace tf2
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 template <class T>
 geometry_msgs::msg::Point get_point(const T & p)
@@ -590,7 +588,6 @@ std::optional<geometry_msgs::msg::Point> intersect(
  */
 bool intersects_convex(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__GEOMETRY_HPP_

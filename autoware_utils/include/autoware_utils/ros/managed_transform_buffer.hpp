@@ -47,9 +47,7 @@ struct hash<std::pair<std::string, std::string>>
 };
 }  // namespace std
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 using std::chrono_literals::operator""ms;
 using Key = std::pair<std::string, std::string>;
@@ -76,7 +74,7 @@ public:
         return get_static_transform(target_frame, source_frame, eigen_transform);
       };
     } else {
-      tf_listener_ = std::make_unique<autoware::utils::TransformListener>(node);
+      tf_listener_ = std::make_unique<autoware_utils::TransformListener>(node);
       get_transform_ = [this](
                          const std::string & target_frame, const std::string & source_frame,
                          Eigen::Matrix4f & eigen_transform) {
@@ -176,7 +174,7 @@ private:
     }
 
     // Get the transform from the TF tree
-    tf_listener_ = std::make_unique<autoware::utils::TransformListener>(node_);
+    tf_listener_ = std::make_unique<autoware_utils::TransformListener>(node_);
     auto tf = tf_listener_->get_transform(
       target_frame, source_frame, rclcpp::Time(0), rclcpp::Duration(1000ms));
     tf_listener_.reset();
@@ -221,11 +219,10 @@ private:
 
   TFMap buffer_;
   rclcpp::Node * const node_;
-  std::unique_ptr<autoware::utils::TransformListener> tf_listener_;
+  std::unique_ptr<autoware_utils::TransformListener> tf_listener_;
   std::function<bool(const std::string &, const std::string &, Eigen::Matrix4f &)> get_transform_;
 };
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_

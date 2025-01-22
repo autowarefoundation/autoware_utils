@@ -23,9 +23,7 @@
 #include <sstream>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 
 // cppcheck-suppress unusedFunction
@@ -52,5 +50,4 @@ void print_backtrace()
   free(symbol_list);
 }
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils

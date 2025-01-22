@@ -19,9 +19,7 @@
 #include <utility>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 // Alternatives for Boost.Geometry ----------------------------------------------------------------
 namespace alt
@@ -64,7 +62,7 @@ std::optional<Polygon2d> Polygon2d::create(
   return poly;
 }
 
-std::optional<Polygon2d> Polygon2d::create(const autoware::utils::Polygon2d & polygon) noexcept
+std::optional<Polygon2d> Polygon2d::create(const autoware_utils::Polygon2d & polygon) noexcept
 {
   PointList2d outer;
   for (const auto & point : polygon.outer()) {
@@ -86,16 +84,16 @@ std::optional<Polygon2d> Polygon2d::create(const autoware::utils::Polygon2d & po
   return Polygon2d::create(outer, inners);
 }
 
-autoware::utils::Polygon2d Polygon2d::to_boost() const
+autoware_utils::Polygon2d Polygon2d::to_boost() const
 {
-  autoware::utils::Polygon2d polygon;
+  autoware_utils::Polygon2d polygon;
 
   for (const auto & point : outer_) {
     polygon.outer().emplace_back(point.x(), point.y());
   }
 
   for (const auto & inner : inners_) {
-    autoware::utils::LinearRing2d _inner;
+    autoware_utils::LinearRing2d _inner;
     for (const auto & point : inner) {
       _inner.emplace_back(point.x(), point.y());
     }
@@ -138,7 +136,7 @@ std::optional<ConvexPolygon2d> ConvexPolygon2d::create(PointList2d && vertices) 
 }
 
 std::optional<ConvexPolygon2d> ConvexPolygon2d::create(
-  const autoware::utils::Polygon2d & polygon) noexcept
+  const autoware_utils::Polygon2d & polygon) noexcept
 {
   PointList2d vertices;
   for (const auto & point : polygon.outer()) {
@@ -646,5 +644,4 @@ bool within(
 
   return true;
 }
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils

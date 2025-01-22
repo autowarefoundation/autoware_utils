@@ -22,9 +22,7 @@
 #include <utility>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 // Alternatives for Boost.Geometry ----------------------------------------------------------------
 // TODO(mitukou1109): remove namespace
@@ -37,7 +35,7 @@ public:
 
   Vector2d(const double x, const double y) : x_(x), y_(y) {}
 
-  explicit Vector2d(const autoware::utils::Point2d & point) : x_(point.x()), y_(point.y()) {}
+  explicit Vector2d(const autoware_utils::Point2d & point) : x_(point.x()), y_(point.y()) {}
 
   double cross(const Vector2d & other) const { return x_ * other.y() - y_ * other.x(); }
 
@@ -101,7 +99,7 @@ public:
   static std::optional<Polygon2d> create(
     PointList2d && outer, std::vector<PointList2d> && inners) noexcept;
 
-  static std::optional<Polygon2d> create(const autoware::utils::Polygon2d & polygon) noexcept;
+  static std::optional<Polygon2d> create(const autoware_utils::Polygon2d & polygon) noexcept;
 
   const PointList2d & outer() const noexcept { return outer_; }
 
@@ -111,7 +109,7 @@ public:
 
   std::vector<PointList2d> & inners() noexcept { return inners_; }
 
-  autoware::utils::Polygon2d to_boost() const;
+  autoware_utils::Polygon2d to_boost() const;
 
 protected:
   Polygon2d(const PointList2d & outer, const std::vector<PointList2d> & inners)
@@ -136,7 +134,7 @@ public:
 
   static std::optional<ConvexPolygon2d> create(PointList2d && vertices) noexcept;
 
-  static std::optional<ConvexPolygon2d> create(const autoware::utils::Polygon2d & polygon) noexcept;
+  static std::optional<ConvexPolygon2d> create(const autoware_utils::Polygon2d & polygon) noexcept;
 
   const PointList2d & vertices() const noexcept { return outer(); }
 
@@ -197,7 +195,6 @@ bool within(const alt::Point2d & point, const alt::ConvexPolygon2d & poly);
 
 bool within(
   const alt::ConvexPolygon2d & poly_contained, const alt::ConvexPolygon2d & poly_containing);
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__ALT_GEOMETRY_HPP_

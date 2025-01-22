@@ -22,9 +22,7 @@
 #include <string>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 class DiagnosticsInterface
 {
@@ -58,7 +56,6 @@ void DiagnosticsInterface::add_key_value(const std::string & key, const T & valu
   add_key_value(key_value);
 }
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__ROS__DIAGNOSTICS_INTERFACE_HPP_

@@ -21,9 +21,7 @@
 #include <string>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 
 /**
@@ -250,7 +248,6 @@ std::vector<typename MessageT::ConstSharedPtr> All<MessageT>::take_data()
 
 }  // namespace polling_policy
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_

@@ -23,8 +23,8 @@
 namespace
 {
 namespace bg = boost::geometry;
-using autoware::utils::Point2d;
-using autoware::utils::Polygon2d;
+using autoware_utils::Point2d;
+using autoware_utils::Polygon2d;
 
 void append_point_to_polygon(Polygon2d & polygon, const geometry_msgs::msg::Point & geom_point)
 {
@@ -68,9 +68,7 @@ double get_circle_area(const geometry_msgs::msg::Vector3 & dimensions)
 }
 }  // namespace
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 bool is_clockwise(const Polygon2d & polygon)
 {
@@ -125,16 +123,16 @@ Polygon2d to_polygon2d(
   Polygon2d polygon;
 
   if (shape.type == autoware_perception_msgs::msg::Shape::BOUNDING_BOX) {
-    const auto point0 = autoware::utils::calc_offset_pose(
+    const auto point0 = autoware_utils::calc_offset_pose(
                           pose, shape.dimensions.x / 2.0, shape.dimensions.y / 2.0, 0.0)
                           .position;
-    const auto point1 = autoware::utils::calc_offset_pose(
+    const auto point1 = autoware_utils::calc_offset_pose(
                           pose, -shape.dimensions.x / 2.0, shape.dimensions.y / 2.0, 0.0)
                           .position;
-    const auto point2 = autoware::utils::calc_offset_pose(
+    const auto point2 = autoware_utils::calc_offset_pose(
                           pose, -shape.dimensions.x / 2.0, -shape.dimensions.y / 2.0, 0.0)
                           .position;
-    const auto point3 = autoware::utils::calc_offset_pose(
+    const auto point3 = autoware_utils::calc_offset_pose(
                           pose, shape.dimensions.x / 2.0, -shape.dimensions.y / 2.0, 0.0)
                           .position;
 
@@ -181,21 +179,20 @@ Polygon2d to_polygon2d(
   return is_clockwise(polygon) ? polygon : inverse_clockwise(polygon);
 }
 
-autoware::utils::Polygon2d to_polygon2d(
-  const autoware_perception_msgs::msg::DetectedObject & object)
+autoware_utils::Polygon2d to_polygon2d(const autoware_perception_msgs::msg::DetectedObject & object)
 {
-  return autoware::utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
+  return autoware_utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
 }
 
-autoware::utils::Polygon2d to_polygon2d(const autoware_perception_msgs::msg::TrackedObject & object)
+autoware_utils::Polygon2d to_polygon2d(const autoware_perception_msgs::msg::TrackedObject & object)
 {
-  return autoware::utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
+  return autoware_utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
 }
 
-autoware::utils::Polygon2d to_polygon2d(
+autoware_utils::Polygon2d to_polygon2d(
   const autoware_perception_msgs::msg::PredictedObject & object)
 {
-  return autoware::utils::to_polygon2d(
+  return autoware_utils::to_polygon2d(
     object.kinematics.initial_pose_with_covariance.pose, object.shape);
 }
 
@@ -205,13 +202,13 @@ Polygon2d to_footprint(
 {
   Polygon2d polygon;
   const auto point0 =
-    autoware::utils::calc_offset_pose(base_link_pose, base_to_front, width / 2.0, 0.0).position;
+    autoware_utils::calc_offset_pose(base_link_pose, base_to_front, width / 2.0, 0.0).position;
   const auto point1 =
-    autoware::utils::calc_offset_pose(base_link_pose, base_to_front, -width / 2.0, 0.0).position;
+    autoware_utils::calc_offset_pose(base_link_pose, base_to_front, -width / 2.0, 0.0).position;
   const auto point2 =
-    autoware::utils::calc_offset_pose(base_link_pose, -base_to_rear, -width / 2.0, 0.0).position;
+    autoware_utils::calc_offset_pose(base_link_pose, -base_to_rear, -width / 2.0, 0.0).position;
   const auto point3 =
-    autoware::utils::calc_offset_pose(base_link_pose, -base_to_rear, width / 2.0, 0.0).position;
+    autoware_utils::calc_offset_pose(base_link_pose, -base_to_rear, width / 2.0, 0.0).position;
 
   append_point_to_polygon(polygon, point0);
   append_point_to_polygon(polygon, point1);
@@ -267,5 +264,4 @@ Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset)
   boost::geometry::correct(expanded_polygon);
   return expanded_polygon;
 }
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils

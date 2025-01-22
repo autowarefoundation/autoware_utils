@@ -15,13 +15,10 @@
 #ifndef AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
 #define AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 constexpr double pi = 3.14159265358979323846;  // To be replaced by std::numbers::pi in C++20
 constexpr double gravity = 9.80665;
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__MATH__CONSTANTS_HPP_

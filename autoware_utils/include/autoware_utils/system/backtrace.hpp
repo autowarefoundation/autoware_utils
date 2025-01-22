@@ -15,14 +15,11 @@
 #ifndef AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
 #define AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 
 void print_backtrace();
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_

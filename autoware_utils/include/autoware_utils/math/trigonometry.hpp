@@ -17,9 +17,7 @@
 
 #include <utility>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 
 float sin(float radian);
@@ -30,7 +28,6 @@ std::pair<float, float> sin_and_cos(float radian);
 
 float opencv_fast_atan2(float dy, float dx);
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__MATH__TRIGONOMETRY_HPP_

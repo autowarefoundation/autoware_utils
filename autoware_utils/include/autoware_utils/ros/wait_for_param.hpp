@@ -21,9 +21,7 @@
 #include <memory>
 #include <string>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 template <class T>
 T wait_for_param(
@@ -49,8 +47,6 @@ T wait_for_param(
 
   return {};
 }
-
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__ROS__WAIT_FOR_PARAM_HPP_

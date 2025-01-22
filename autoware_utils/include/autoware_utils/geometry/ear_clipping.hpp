@@ -20,9 +20,7 @@
 #include <optional>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 struct LinkedPoint
 {
@@ -103,7 +101,6 @@ std::vector<alt::ConvexPolygon2d> triangulate(const alt::Polygon2d & polygon);
  * @return A vector of convex triangles representing the triangulated polygon.
  */
 std::vector<Polygon2d> triangulate(const Polygon2d & polygon);
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__EAR_CLIPPING_HPP_

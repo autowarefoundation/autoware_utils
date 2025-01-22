@@ -16,9 +16,7 @@
 
 #include <rcutils/logging.h>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 LoggerLevelConfigure::LoggerLevelConfigure(rclcpp::Node * node) : ros_logger_(node->get_logger())
 {
@@ -60,5 +58,4 @@ void LoggerLevelConfigure::on_logger_config_service(
   return;
 }
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils

@@ -45,9 +45,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 class LoggerLevelConfigure
 {
@@ -66,6 +64,5 @@ private:
     const ConfigLogger::Response::SharedPtr response);
 };
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 #endif  // AUTOWARE_UTILS__ROS__LOGGER_LEVEL_CONFIGURE_HPP_

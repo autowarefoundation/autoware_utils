@@ -25,15 +25,13 @@
 #include <string>
 #include <unordered_map>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 namespace debug_publisher
 {
 template <
   class T_msg, class T,
-  std::enable_if_t<autoware::utils::debug_traits::is_debug_message<T_msg>::value, std::nullptr_t> =
+  std::enable_if_t<autoware_utils::debug_traits::is_debug_message<T_msg>::value, std::nullptr_t> =
     nullptr>
 T_msg to_debug_msg(const T & data, const rclcpp::Time & stamp)
 {
@@ -74,7 +72,6 @@ private:
   const char * ns_;
   std::unordered_map<std::string, std::shared_ptr<rclcpp::PublisherBase>> pub_map_;
 };
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_

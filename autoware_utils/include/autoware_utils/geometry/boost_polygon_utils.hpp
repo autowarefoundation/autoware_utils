@@ -24,9 +24,7 @@
 
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 bool is_clockwise(const Polygon2d & polygon);
 Polygon2d inverse_clockwise(const Polygon2d & polygon);
@@ -49,7 +47,6 @@ Polygon2d to_footprint(
   const double base_to_rear, const double width);
 double get_area(const autoware_perception_msgs::msg::Shape & shape);
 Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset);
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__BOOST_POLYGON_UTILS_HPP_

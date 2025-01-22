@@ -18,9 +18,7 @@
 #ifndef AUTOWARE_UTILS__MATH__ACCUMULATOR_HPP_
 #define AUTOWARE_UTILS__MATH__ACCUMULATOR_HPP_
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 /**
  * @brief class to accumulate statistical data, supporting min, max and mean.
@@ -90,7 +88,6 @@ std::ostream & operator<<(std::ostream & os, const Accumulator<T> & accumulator)
   return os;
 }
 
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__MATH__ACCUMULATOR_HPP_

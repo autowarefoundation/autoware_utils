@@ -20,9 +20,7 @@
 #include <string>
 #include <vector>
 
-namespace autoware
-{
-namespace utils
+namespace autoware_utils
 {
 template <class T>
 bool update_param(
@@ -40,7 +38,6 @@ bool update_param(
   value = itr->template get_value<T>();
   return true;
 }
-}  // namespace utils
-}  // namespace autoware
+}  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__ROS__UPDATE_PARAM_HPP_
