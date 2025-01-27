@@ -4,6 +4,10 @@ project(autoware_utils)
 find_package(autoware_cmake REQUIRED)
 autoware_package()
 
+find_package(Boost REQUIRED)
+target_compile_definitions(autoware_utils
+  PRIVATE BOOST_MAJOR_VERSION=${Boost_MAJOR_VERSION} BOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
+
 file(GLOB_RECURSE src_files
     src/*.cpp
     src/geometry/*.cpp

@@ -20,7 +20,12 @@
 #include <boost/geometry/algorithms/correct.hpp>
 #include <boost/geometry/algorithms/intersects.hpp>
 #include <boost/geometry/algorithms/is_valid.hpp>
+
+#if BOOST_MAJOR_VERSION == 1 && BOOST_MINOR_VERSION < 76
 #include <boost/geometry/strategies/agnostic/hull_graham_andrew.hpp>
+#else
+#error TODO: add support for Boost 1.76 or later (Ubuntu 24.04, ROS Jazzy)
+#endif
 
 #include <algorithm>
 #include <limits>
