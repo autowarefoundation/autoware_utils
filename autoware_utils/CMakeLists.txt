@@ -5,8 +5,6 @@ find_package(autoware_cmake REQUIRED)
 autoware_package()
 
 find_package(Boost REQUIRED)
-target_compile_definitions(autoware_utils
-  PRIVATE BOOST_MAJOR_VERSION=${Boost_MAJOR_VERSION} BOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
 file(GLOB_RECURSE src_files
     src/*.cpp
@@ -19,6 +17,8 @@ file(GLOB_RECURSE src_files
 ament_auto_add_library(autoware_utils SHARED
   ${src_files}
 )
+target_compile_definitions(autoware_utils
+  PRIVATE BOOST_MAJOR_VERSION=${Boost_MAJOR_VERSION} BOOST_MINOR_VERSION=${Boost_MINOR_VERSION})
 
 if(BUILD_TESTING)
   file(GLOB_RECURSE test_files test/**/*.cpp)
