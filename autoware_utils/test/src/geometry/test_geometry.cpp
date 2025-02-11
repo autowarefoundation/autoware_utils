@@ -745,7 +745,8 @@ TEST(geometry, pose2transform)
     pose_stamped.pose.position.x = 1.0;
     pose_stamped.pose.position.y = 2.0;
     pose_stamped.pose.position.z = 3.0;
-    pose_stamped.pose.orientation = create_quaternion_from_rpy(deg2rad(30), deg2rad(30), deg2rad(30));
+    pose_stamped.pose.orientation =
+      create_quaternion_from_rpy(deg2rad(30), deg2rad(30), deg2rad(30));
     const std::string child_frame_id = "child";
 
     const geometry_msgs::msg::TransformStamped transform_stamped =
@@ -2024,8 +2025,7 @@ TEST(geometry, intersectPolygonRand)
   }
 }
 
-double calculate_total_polygon_area(
-  const std::vector<autoware_utils::Polygon2d> & polygons)
+double calculate_total_polygon_area(const std::vector<autoware_utils::Polygon2d> & polygons)
 {
   double totalArea = 0.0;
   for (const auto & polygon : polygons) {
@@ -2152,10 +2152,10 @@ TEST(geometry, intersectPolygonWithHoles)
     const auto triangles1 = triangulate(outerConcave);
     const auto triangles2 = triangulate(innerConcave);
 
-    const bool gjk_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::intersects_convex);
-    const bool sat_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::sat::intersects);
+    const bool gjk_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::intersects_convex);
+    const bool sat_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::sat::intersects);
 
     EXPECT_FALSE(gjk_intersect);
     EXPECT_FALSE(sat_intersect);
@@ -2184,10 +2184,10 @@ TEST(geometry, intersectPolygonWithHoles)
 
     const auto triangles1 = triangulate(outerConcave);
     const auto triangles2 = triangulate(intersectingInnerConcave);
-    const auto gjk_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::intersects_convex);
-    const auto sat_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::sat::intersects);
+    const auto gjk_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::intersects_convex);
+    const auto sat_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::sat::intersects);
 
     EXPECT_TRUE(gjk_intersect);
     EXPECT_TRUE(sat_intersect);
@@ -2220,10 +2220,10 @@ TEST(
     const auto triangles1 = triangulate(poly1);
     const auto triangles2 = triangulate(poly2);
 
-    const auto gjk_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::intersects_convex);
-    const auto sat_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::sat::intersects);
+    const auto gjk_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::intersects_convex);
+    const auto sat_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::sat::intersects);
 
     EXPECT_TRUE(gjk_intersect);
     EXPECT_TRUE(sat_intersect);
@@ -2248,10 +2248,10 @@ TEST(
     const auto triangles1 = triangulate(poly1);
     const auto triangles2 = triangulate(poly2);
 
-    const auto gjk_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::intersects_convex);
-    const auto sat_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::sat::intersects);
+    const auto gjk_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::intersects_convex);
+    const auto sat_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::sat::intersects);
 
     EXPECT_FALSE(gjk_intersect);
     EXPECT_FALSE(sat_intersect);
@@ -2275,10 +2275,10 @@ TEST(
     auto triangles1 = triangulate(poly1);
     auto triangles2 = triangulate(poly2);
 
-    const auto gjk_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::intersects_convex);
-    const auto sat_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::sat::intersects);
+    const auto gjk_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::intersects_convex);
+    const auto sat_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::sat::intersects);
 
     EXPECT_FALSE(gjk_intersect);
     EXPECT_FALSE(sat_intersect);
@@ -2303,10 +2303,10 @@ TEST(
     const auto triangles1 = triangulate(poly1);
     const auto triangles2 = triangulate(poly2);
 
-    const auto gjk_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::intersects_convex);
-    const auto sat_intersect = autoware_utils::test_intersection(
-      triangles1, triangles2, autoware_utils::sat::intersects);
+    const auto gjk_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::intersects_convex);
+    const auto sat_intersect =
+      autoware_utils::test_intersection(triangles1, triangles2, autoware_utils::sat::intersects);
 
     EXPECT_FALSE(gjk_intersect);
     EXPECT_FALSE(sat_intersect);
@@ -2315,10 +2315,10 @@ TEST(
     poly1.outer()[1].y() += 1e-12;
     {
       const auto triangles = triangulate(poly1);
-      const bool gjk_intersect = autoware_utils::test_intersection(
-        triangles, triangles2, autoware_utils::intersects_convex);
-      const bool sat_intersect = autoware_utils::test_intersection(
-        triangles, triangles2, autoware_utils::sat::intersects);
+      const bool gjk_intersect =
+        autoware_utils::test_intersection(triangles, triangles2, autoware_utils::intersects_convex);
+      const bool sat_intersect =
+        autoware_utils::test_intersection(triangles, triangles2, autoware_utils::sat::intersects);
       EXPECT_TRUE(gjk_intersect);
       EXPECT_TRUE(sat_intersect);
     }
@@ -2356,8 +2356,7 @@ TEST(geometry, intersectConcavePolygonRand)
 
     for (const auto & polygon : polygons) {
       sw.tic();
-      std::vector<autoware_utils::Polygon2d> triangles =
-        autoware_utils::triangulate(polygon);
+      std::vector<autoware_utils::Polygon2d> triangles = autoware_utils::triangulate(polygon);
       triangulation_ns += sw.toc();
       triangulations.push_back(triangles);
     }
