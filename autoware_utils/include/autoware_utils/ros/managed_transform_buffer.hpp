@@ -12,12 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
+#define AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
+
 #include <autoware_utils_pcl/managed_transform_buffer.hpp>
-#include <autoware_utils_pcl/pcl_conversion.hpp>
-#include <autoware_utils_pcl/transforms.hpp>
 
-#include <gtest/gtest.h>
-
-TEST(AutowareUtilsPcl, Build)
+namespace autoware_utils
 {
-}
+
+using namespace autoware_utils_pcl;  // NOLINT(build/namespaces)
+
+}  // namespace autoware_utils
+
+#endif  // AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_

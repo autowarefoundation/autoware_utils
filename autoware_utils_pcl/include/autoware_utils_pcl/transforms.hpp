@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_PCL__TRANSFORM_HPP_
-#define AUTOWARE_UTILS_PCL__TRANSFORM_HPP_
+#ifndef AUTOWARE_UTILS_PCL__TRANSFORMS_HPP_
+#define AUTOWARE_UTILS_PCL__TRANSFORMS_HPP_
 
 #include <Eigen/Core>
 #include <rclcpp/rclcpp.hpp>
@@ -48,4 +48,4 @@ void transform_pointcloud(
 }
 }  // namespace autoware_utils_pcl
 
-#endif  // AUTOWARE_UTILS_PCL__TRANSFORM_HPP_
+#endif  // AUTOWARE_UTILS_PCL__TRANSFORMS_HPP_
