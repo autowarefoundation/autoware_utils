@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
-#define AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
+#ifndef AUTOWARE_UTILS_TF2__TRANSFORM_LISTENER_HPP_
+#define AUTOWARE_UTILS_TF2__TRANSFORM_LISTENER_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -26,7 +26,7 @@
 #include <memory>
 #include <string>
 
-namespace autoware_utils
+namespace autoware_utils_tf2
 {
 class TransformListener
 {
@@ -82,6 +82,6 @@ private:
   std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 };
-}  // namespace autoware_utils
+}  // namespace autoware_utils_tf2
 
-#endif  // AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
+#endif  // AUTOWARE_UTILS_TF2__TRANSFORM_LISTENER_HPP_

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
-#define AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
+#ifndef AUTOWARE_UTILS_PCL__TRANSFORM_HPP_
+#define AUTOWARE_UTILS_PCL__TRANSFORM_HPP_
 
 #include <Eigen/Core>
 #include <rclcpp/rclcpp.hpp>
@@ -21,7 +21,7 @@
 #include <pcl/common/transforms.h>
 #include <pcl/point_cloud.h>
 
-namespace autoware_utils
+namespace autoware_utils_pcl
 {
 template <typename PointT>
 void transform_pointcloud(
@@ -46,6 +46,6 @@ void transform_pointcloud(
     pcl::transformPointCloud(cloud_in, cloud_out, transform);
   }
 }
-}  // namespace autoware_utils
+}  // namespace autoware_utils_pcl
 
-#endif  // AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
+#endif  // AUTOWARE_UTILS_PCL__TRANSFORM_HPP_

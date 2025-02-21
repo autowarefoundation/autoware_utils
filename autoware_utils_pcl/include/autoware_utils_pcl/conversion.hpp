@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__PCL_CONVERSION_HPP_
-#define AUTOWARE_UTILS__ROS__PCL_CONVERSION_HPP_
+#ifndef AUTOWARE_UTILS_PCL__CONVERSION_HPP_
+#define AUTOWARE_UTILS_PCL__CONVERSION_HPP_
 
 #include <pcl/common/transforms.h>
 #include <pcl_conversions/pcl_conversions.h>
 
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_pcl
 {
 /**
  * @brief a faster implementation of converting sensor_msgs::msg::PointCloud2 to
@@ -67,6 +67,6 @@ void transform_point_cloud_from_ros_msg(
   }
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_pcl
 
-#endif  // AUTOWARE_UTILS__ROS__PCL_CONVERSION_HPP_
+#endif  // AUTOWARE_UTILS_PCL__CONVERSION_HPP_

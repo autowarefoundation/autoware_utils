@@ -12,11 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
-#define AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
+#ifndef AUTOWARE_UTILS_PCL__MANAGED_TRANSFORM_BUFFER_HPP_
+#define AUTOWARE_UTILS_PCL__MANAGED_TRANSFORM_BUFFER_HPP_
 
-#include "autoware_utils/ros/transform_listener.hpp"
-
+#include <autoware_utils_tf2/transform_listener.hpp>
 #include <eigen3/Eigen/Core>
 #include <pcl_ros/transforms.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -47,7 +46,7 @@ struct hash<std::pair<std::string, std::string>>
 };
 }  // namespace std
 
-namespace autoware_utils
+namespace autoware_utils_pcl
 {
 using std::chrono_literals::operator""ms;
 using Key = std::pair<std::string, std::string>;
@@ -223,6 +222,6 @@ private:
   std::function<bool(const std::string &, const std::string &, Eigen::Matrix4f &)> get_transform_;
 };
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_pcl
 
-#endif  // AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
+#endif  // AUTOWARE_UTILS_PCL__MANAGED_TRANSFORM_BUFFER_HPP_
