@@ -16,7 +16,7 @@
 #define AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
 
 #include "autoware_utils/geometry/geometry.hpp"
-#include "autoware_utils_tf2/transform_listener.hpp"
+#include "autoware_utils/ros/transform_listener.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 

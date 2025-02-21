@@ -73,7 +73,7 @@ public:
         return get_static_transform(target_frame, source_frame, eigen_transform);
       };
     } else {
-      tf_listener_ = std::make_unique<autoware_utils::TransformListener>(node);
+      tf_listener_ = std::make_unique<autoware_utils_tf2::TransformListener>(node);
       get_transform_ = [this](
                          const std::string & target_frame, const std::string & source_frame,
                          Eigen::Matrix4f & eigen_transform) {
@@ -173,7 +173,7 @@ private:
     }
 
     // Get the transform from the TF tree
-    tf_listener_ = std::make_unique<autoware_utils::TransformListener>(node_);
+    tf_listener_ = std::make_unique<autoware_utils_tf2::TransformListener>(node_);
     auto tf = tf_listener_->get_transform(
       target_frame, source_frame, rclcpp::Time(0), rclcpp::Duration(1000ms));
     tf_listener_.reset();
@@ -218,7 +218,7 @@ private:
 
   TFMap buffer_;
   rclcpp::Node * const node_;
-  std::unique_ptr<autoware_utils::TransformListener> tf_listener_;
+  std::unique_ptr<autoware_utils_tf2::TransformListener> tf_listener_;
   std::function<bool(const std::string &, const std::string &, Eigen::Matrix4f &)> get_transform_;
 };
 
