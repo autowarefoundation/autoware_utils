@@ -12,16 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
-#define AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
+#include <rclcpp/rclcpp.hpp>
 
-#include <autoware_utils_pcl/managed_transform_buffer.hpp>
+#include <gtest/gtest.h>
 
-namespace autoware_utils
+int main(int argc, char * argv[])
 {
-
-using namespace autoware_utils_pcl;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
-
-#endif  // AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
+  testing::InitGoogleTest(&argc, argv);
+  rclcpp::init(argc, argv);
+  bool result = RUN_ALL_TESTS();
+  rclcpp::shutdown();
+  return result;
+}
