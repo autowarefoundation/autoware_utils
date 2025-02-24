@@ -301,7 +301,7 @@ Eigen::Vector3d inverse_transform_point(
 }
 
 // Transform point in world coordinates to local coordinates
-geometry_msgs::msg::Point inverseTransformPoint(
+geometry_msgs::msg::Point inverse_transform_point(
   const geometry_msgs::msg::Point & point, const geometry_msgs::msg::Pose & pose)
 {
   const Eigen::Vector3d local_vec =
