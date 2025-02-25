@@ -2,8 +2,8 @@
 Changelog for package autoware_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.2.0 (2025-02-26)
+------------------
 * feat(autoware_utils): porting from universe to core (`#30 <https://github.com/autowarefoundation/autoware_utils/issues/30>`_)
   feat(autoware_utils):replace autoware_universe_utils dependency with autoware_utils for all the packages under universe/planning folder, autoware_utils, solve build conflict: v0.0
 * Contributors: 心刚
