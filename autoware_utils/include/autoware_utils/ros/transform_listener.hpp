@@ -15,12 +15,12 @@
 #ifndef AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
 #define AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
 
-#include <autoware_utils_tf2/transform_listener.hpp>
+#include <autoware_utils_geometry/transform_listener.hpp>
 
 namespace autoware_utils
 {
 
-using namespace autoware_utils_tf2;  // NOLINT(build/namespaces)
+using namespace autoware_utils_geometry;  // NOLINT(build/namespaces)
 
 }  // namespace autoware_utils
 
