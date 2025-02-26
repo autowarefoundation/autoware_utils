@@ -47,7 +47,6 @@ The ROS module provides utilities for working with ROS messages and nodes:
 - **`debug_publisher.hpp`**: A helper class for publishing debug messages with timestamps.
 - **`diagnostics_interface.hpp`**: An interface for publishing diagnostic messages.
 - **`logger_level_configure.hpp`**: Utility for configuring logger levels dynamically.
-- **`managed_transform_buffer.hpp`**: A managed buffer for handling static and dynamic transforms.
 - **`marker_helper.hpp`**: Helper functions for creating and manipulating visualization markers.
 - **`msg_covariance.hpp`**: Indices for accessing covariance matrices in ROS messages.
 - **`msg_operation.hpp`**: Overloaded operators for quaternion messages.
@@ -56,12 +55,10 @@ The ROS module provides utilities for working with ROS messages and nodes:
 - **`processing_time_publisher.hpp`**: Publishes processing times as diagnostic messages.
 - **`published_time_publisher.hpp`**: Tracks and publishes the time when messages are published.
 - **`self_pose_listener.hpp`**: Listens to the self-pose of the vehicle.
-- **`transform_listener.hpp`**: Manages transformation listeners.
 - **`update_param.hpp`**: Updates parameters from remote nodes.
 - **`uuid_helper.hpp`**: Utilities for generating and managing UUIDs.
 - **`wait_for_param.hpp`**: Waits for parameters from remote nodes.
 - **`debug_traits.hpp`**: Traits for identifying debug message types.
-- **`pcl_conversion.hpp`**: Efficient conversion and transformation of PointCloud2 messages to PCL point clouds.
 
 #### System Module
 
@@ -71,10 +68,6 @@ The system module provides low-level utilities for performance monitoring and er
 - **`lru_cache.hpp`**: Implements an LRU (Least Recently Used) cache.
 - **`stop_watch.hpp`**: Measures elapsed time for profiling.
 - **`time_keeper.hpp`**: Tracks and reports the processing time of various functions.
-
-#### Transform Module
-
-Efficient methods for transforming and manipulating point clouds.
 
 ## Usage
 
@@ -139,36 +132,6 @@ int main() {
 ```
 
 ### Detailed Usage Examples
-
-#### Transform Point Clouds with ManagedTransformBuffer
-
-```cpp
-#include "autoware_utils/ros/managed_transform_buffer.hpp"
-#include "sensor_msgs/msg/point_cloud2.hpp"
-#include <rclcpp/rclcpp.hpp>
-
-int main(int argc, char * argv[]) {
-  rclcpp::init(argc, argv);
-  auto node = rclcpp::Node::make_shared("transform_node");
-
-  // Initialize ManagedTransformBuffer
-  autoware_utils::ManagedTransformBuffer transform_buffer(node, false);
-
-  // Load point cloud data
-  sensor_msgs::msg::PointCloud2 cloud_in; // Assume this is populated with data
-  sensor_msgs::msg::PointCloud2 cloud_out;
-
-  // Transform point cloud from "base_link" to "map" frame
-  if (transform_buffer.transform_pointcloud("map", cloud_in, cloud_out)) {
-    RCLCPP_INFO(node->get_logger(), "Point cloud transformed successfully.");
-  } else {
-    RCLCPP_ERROR(node->get_logger(), "Failed to transform point cloud.");
-  }
-
-  rclcpp::shutdown();
-  return 0;
-}
-```
 
 #### Update Parameters Dynamically with update_param.hpp
 
@@ -244,36 +207,6 @@ int main(int argc, char * argv[]) {
 
   // Check if the polygon is clockwise
   bool is_clockwise = autoware_utils::is_clockwise(polygon);
-
-  rclcpp::shutdown();
-  return 0;
-}
-```
-
-#### Efficient Point Cloud Conversion with pcl_conversion.hpp
-
-```cpp
-#include "autoware_utils/ros/pcl_conversion.hpp"
-#include "sensor_msgs/msg/point_cloud2.hpp"
-#include <pcl/point_types.h>
-#include <pcl/PCLPointCloud2.h>
-#include <Eigen/Core>
-#include <rclcpp/rclcpp.hpp>
-
-int main(int argc, char * argv[]) {
-  rclcpp::init(argc, argv);
-  auto node = rclcpp::Node::make_shared("pcl_conversion_node");
-
-  // Load point cloud data
-  sensor_msgs::msg::PointCloud2 cloud_in; // Assume this is populated with data
-  pcl::PointCloud<pcl::PointXYZ> pcl_cloud;
-
-  // Define transformation matrix
-  Eigen::Matrix4f transform = Eigen::Matrix4f::Identity();
-  // Populate transform matrix with actual values
-
-  // Convert and transform point cloud
-  autoware_utils::transform_point_cloud_from_ros_msg(cloud_in, pcl_cloud, transform);
 
   rclcpp::shutdown();
   return 0;
