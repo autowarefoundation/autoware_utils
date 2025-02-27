@@ -1,4 +1,4 @@
-// Copyright 2025 The Autoware Contributors
+// Copyright 2023 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,16 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
-#define AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
+#ifndef AUTOWARE_UTILS_MATH__SIN_TABLE_HPP_
+#define AUTOWARE_UTILS_MATH__SIN_TABLE_HPP_
 
-#include <autoware_utils_math/normalization.hpp>
+#include <cstddef>
 
-namespace autoware_utils
+namespace autoware_utils_math
 {
 
-using namespace autoware_utils_math;  // NOLINT(build/namespaces)
+constexpr size_t sin_table_size = 32769;
+constexpr size_t discrete_arcs_num_90 = 32768;
+constexpr size_t discrete_arcs_num_360 = 131072;
+extern const float g_sin_table[sin_table_size];
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_math
 
-#endif  // AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
+#endif  // AUTOWARE_UTILS_MATH__SIN_TABLE_HPP_

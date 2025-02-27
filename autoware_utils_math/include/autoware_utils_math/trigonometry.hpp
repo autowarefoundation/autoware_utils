@@ -1,4 +1,4 @@
-// Copyright 2025 The Autoware Contributors
+// Copyright 2023 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,16 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
-#define AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
+#ifndef AUTOWARE_UTILS_MATH__TRIGONOMETRY_HPP_
+#define AUTOWARE_UTILS_MATH__TRIGONOMETRY_HPP_
 
-#include <autoware_utils_math/normalization.hpp>
+#include <utility>
 
-namespace autoware_utils
+namespace autoware_utils_math
 {
 
-using namespace autoware_utils_math;  // NOLINT(build/namespaces)
+float sin(float radian);
 
-}  // namespace autoware_utils
+float cos(float radian);
 
-#endif  // AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
+std::pair<float, float> sin_and_cos(float radian);
+
+float opencv_fast_atan2(float dy, float dx);
+
+}  // namespace autoware_utils_math
+
+#endif  // AUTOWARE_UTILS_MATH__TRIGONOMETRY_HPP_
