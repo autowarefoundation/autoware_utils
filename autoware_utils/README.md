@@ -29,17 +29,6 @@ The geometry module provides classes and functions for handling 2D and 3D points
   - Intersection checks for convex polygons using GJK.
   - Conversion between different coordinate systems.
 
-#### Math Module
-
-The math module offers a variety of mathematical utilities:
-
-- **`accumulator.hpp`**: A class for accumulating statistical data, supporting min, max, and mean calculations.
-- **`constants.hpp`**: Defines commonly used mathematical constants like π and gravity.
-- **`normalization.hpp`**: Functions for normalizing angles and degrees.
-- **`range.hpp`**: Functions for generating sequences of numbers (arange, linspace).
-- **`trigonometry.hpp`**: Optimized trigonometric functions for faster computation.
-- **`unit_conversion.hpp`**: Functions for converting between different units (e.g., degrees to radians, km/h to m/s).
-
 #### ROS Module
 
 The ROS module provides utilities for working with ROS messages and nodes:

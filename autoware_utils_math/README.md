@@ -3,9 +3,14 @@
 ## Overview
 
 The **autoware_utils_math** library is a comprehensive toolkit designed to facilitate the development of autonomous driving applications.
-This package provides essential utilities for geometry.
-It is extensively used in the Autoware project to handle common tasks such as geometric calculations and message conversions.
+This package provides essential utilities for mathematics.
+It is extensively used in the Autoware project to handle common tasks such as value normalization and unit conversion.
 
 ## Design
 
-- **`transform_listener.hpp`**: Manages transformation listeners.
+- **`accumulator.hpp`**: A class for accumulating statistical data, supporting min, max, and mean calculations.
+- **`constants.hpp`**: Defines commonly used mathematical constants like π and gravity.
+- **`normalization.hpp`**: Functions for normalizing angles and degrees.
+- **`range.hpp`**: Functions for generating sequences of numbers (arange, linspace).
+- **`trigonometry.hpp`**: Optimized trigonometric functions for faster computation.
+- **`unit_conversion.hpp`**: Functions for converting between different units (e.g., degrees to radians, km/h to m/s).
