@@ -12,16 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__LOGGER_LEVEL_CONFIGURE_HPP_
-#define AUTOWARE_UTILS__ROS__LOGGER_LEVEL_CONFIGURE_HPP_
+#include "autoware_utils_logging/logger_level_configure.hpp"
 
-#include <autoware_utils_logging/logger_level_configure.hpp>
+#include <gtest/gtest.h>
 
-namespace autoware_utils
+#include <memory>
+
+class LoggerLevelConfigureNode : public rclcpp::Node
 {
+public:
+  using LoggerLevelConfigure = autoware_utils_logging::LoggerLevelConfigure;
 
-using namespace autoware_utils_logging;  // NOLINT(build/namespaces)
+  LoggerLevelConfigureNode() : rclcpp::Node("__auto__")
+  {
+    logger_configure_ = std::make_unique<LoggerLevelConfigure>(this);
+  }
 
-}  // namespace autoware_utils
+private:
+  std::unique_ptr<LoggerLevelConfigure> logger_configure_;
+};
 
-#endif  // AUTOWARE_UTILS__ROS__LOGGER_LEVEL_CONFIGURE_HPP_
+TEST(TestLoggerLevelConfigure, Instantiation)
+{
+  const auto node = std::make_shared<LoggerLevelConfigureNode>();
+}
