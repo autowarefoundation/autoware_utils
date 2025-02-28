@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **autoware_utils_math** library is a comprehensive toolkit designed to facilitate the development of autonomous driving applications.
+The **autoware_utils** library is a comprehensive toolkit designed to facilitate the development of autonomous driving applications.
 This package provides essential utilities for mathematics.
 It is extensively used in the Autoware project to handle common tasks such as value normalization and unit conversion.
 
