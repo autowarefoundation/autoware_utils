@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,37 +15,13 @@
 #ifndef AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
 #define AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
 
-#include <Eigen/Core>
-#include <rclcpp/rclcpp.hpp>
-
-#include <pcl/common/transforms.h>
-#include <pcl/point_cloud.h>
+#include <autoware_utils_pcl/transforms.hpp>
 
 namespace autoware_utils
 {
-template <typename PointT>
-void transform_pointcloud(
-  const pcl::PointCloud<PointT> & cloud_in, pcl::PointCloud<PointT> & cloud_out,
-  const Eigen::Matrix<float, 4, 4> & transform)
-{
-  if (cloud_in.empty() || cloud_in.width == 0) {
-    RCLCPP_WARN(rclcpp::get_logger("transform_pointcloud"), "input point cloud is empty!");
-  } else {
-    pcl::transformPointCloud(cloud_in, cloud_out, transform);
-  }
-}
 
-template <typename PointT>
-void transform_pointcloud(
-  const pcl::PointCloud<PointT> & cloud_in, pcl::PointCloud<PointT> & cloud_out,
-  const Eigen::Affine3f & transform)
-{
-  if (cloud_in.empty() || cloud_in.width == 0) {
-    RCLCPP_WARN(rclcpp::get_logger("transform_pointcloud"), "input point cloud is empty!");
-  } else {
-    pcl::transformPointCloud(cloud_in, cloud_out, transform);
-  }
-}
+using namespace autoware_utils_pcl;  // NOLINT(build/namespaces)
+
 }  // namespace autoware_utils
 
 #endif  // AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
