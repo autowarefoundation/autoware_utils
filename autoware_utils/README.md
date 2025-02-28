@@ -47,8 +47,6 @@ The ROS module provides utilities for working with ROS messages and nodes:
 - **`debug_publisher.hpp`**: A helper class for publishing debug messages with timestamps.
 - **`diagnostics_interface.hpp`**: An interface for publishing diagnostic messages.
 - **`logger_level_configure.hpp`**: Utility for configuring logger levels dynamically.
-- **`managed_transform_buffer.hpp`**: A managed buffer for handling static and dynamic transforms.
-- **`marker_helper.hpp`**: Helper functions for creating and manipulating visualization markers.
 - **`msg_covariance.hpp`**: Indices for accessing covariance matrices in ROS messages.
 - **`msg_operation.hpp`**: Overloaded operators for quaternion messages.
 - **`parameter.hpp`**: Simplifies parameter retrieval and declaration.

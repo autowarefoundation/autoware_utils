@@ -12,16 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
-#define AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
+#include <gtest/gtest.h>
 
-#include <autoware_utils_visualization/marker_helper.hpp>
-
-namespace autoware_utils
+int main(int argc, char ** argv)
 {
-
-using namespace autoware_utils_visualization;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
-
-#endif  // AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
