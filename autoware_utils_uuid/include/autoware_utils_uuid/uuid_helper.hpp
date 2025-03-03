@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__UUID_HELPER_HPP_
-#define AUTOWARE_UTILS__ROS__UUID_HELPER_HPP_
+#ifndef AUTOWARE_UTILS_UUID__UUID_HELPER_HPP_
+#define AUTOWARE_UTILS_UUID__UUID_HELPER_HPP_
 
 #include <unique_identifier_msgs/msg/uuid.hpp>
 
@@ -23,8 +23,9 @@
 #include <random>
 #include <string>
 
-namespace autoware_utils
+namespace autoware_utils_uuid
 {
+
 inline unique_identifier_msgs::msg::UUID generate_uuid()
 {
   // Generate random number
@@ -67,6 +68,6 @@ inline unique_identifier_msgs::msg::UUID to_uuid_msg(const boost::uuids::uuid & 
   return ros_uuid;
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_uuid
 
-#endif  // AUTOWARE_UTILS__ROS__UUID_HELPER_HPP_
+#endif  // AUTOWARE_UTILS_UUID__UUID_HELPER_HPP_
