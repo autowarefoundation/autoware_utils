@@ -1,4 +1,4 @@
-// Copyright 2023 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,11 +15,14 @@
 #ifndef AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
 #define AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
 
-namespace autoware_utils
-{
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-void print_backtrace();
+#pragma message("#include <autoware_utils/system/backtrace.hpp> is deprecated. Use #include <autoware_utils_system/backtrace.hpp> instead.")
+#include <autoware_utils_system/backtrace.hpp>
+namespace autoware_utils { using namespace autoware_utils_system; }
 
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_

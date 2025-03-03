@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/system/backtrace.hpp"
+#include "autoware_utils_system/backtrace.hpp"
 
-#include "rclcpp/rclcpp.hpp"
+#include <rclcpp/rclcpp.hpp>
 
 #include <execinfo.h>
 
@@ -23,7 +23,7 @@
 #include <sstream>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_system
 {
 
 // cppcheck-suppress unusedFunction
@@ -50,4 +50,4 @@ void print_backtrace()
   free(symbol_list);
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_system
