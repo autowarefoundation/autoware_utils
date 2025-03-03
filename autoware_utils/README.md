@@ -56,7 +56,6 @@ The ROS module provides utilities for working with ROS messages and nodes:
 - **`published_time_publisher.hpp`**: Tracks and publishes the time when messages are published.
 - **`self_pose_listener.hpp`**: Listens to the self-pose of the vehicle.
 - **`update_param.hpp`**: Updates parameters from remote nodes.
-- **`uuid_helper.hpp`**: Utilities for generating and managing UUIDs.
 - **`wait_for_param.hpp`**: Waits for parameters from remote nodes.
 - **`debug_traits.hpp`**: Traits for identifying debug message types.
 
