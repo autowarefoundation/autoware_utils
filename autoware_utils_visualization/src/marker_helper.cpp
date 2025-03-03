@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/ros/marker_helper.hpp"
+#include "autoware_utils_visualization/marker_helper.hpp"
 
 #include <string>
 
-namespace autoware_utils
+namespace autoware_utils_visualization
 {
 visualization_msgs::msg::Marker create_default_marker(
   const std::string & frame_id, const rclcpp::Time & now, const std::string & ns, const int32_t id,
@@ -69,4 +69,4 @@ void append_marker_array(
   }
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_visualization
