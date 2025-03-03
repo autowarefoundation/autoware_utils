@@ -15,13 +15,14 @@
 #ifndef AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
 #define AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
 
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
+
+#pragma message("#include <autoware_utils/ros/marker_helper.hpp> is deprecated. Use #include <autoware_utils_visualization/marker_helper.hpp> instead.")
 #include <autoware_utils_visualization/marker_helper.hpp>
+namespace autoware_utils { using namespace autoware_utils_visualization; }
 
-namespace autoware_utils
-{
-
-using namespace autoware_utils_visualization;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
