@@ -9,7 +9,7 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
 )
 
 if(BUILD_TESTING)
-  file(GLOB_RECURSE test_files test/**/*.cpp)
+  file(GLOB_RECURSE test_files test/*.cpp)
   ament_auto_add_gtest(test_${PROJECT_NAME} ${test_files})
 endif()
 
