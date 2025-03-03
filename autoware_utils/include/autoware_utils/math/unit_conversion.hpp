@@ -15,13 +15,14 @@
 #ifndef AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_
 #define AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_
 
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
+
+#pragma message("#include <autoware_utils/math/unit_conversion.hpp> is deprecated. Use #include <autoware_utils_math/unit_conversion.hpp> instead.")
 #include <autoware_utils_math/unit_conversion.hpp>
+namespace autoware_utils { using namespace autoware_utils_math; }
 
-namespace autoware_utils
-{
-
-using namespace autoware_utils_math;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_
