@@ -1,4 +1,4 @@
-// Copyright 2023 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,16 +15,14 @@
 #ifndef AUTOWARE_UTILS__MATH__SIN_TABLE_HPP_
 #define AUTOWARE_UTILS__MATH__SIN_TABLE_HPP_
 
-#include <cstddef>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils
-{
+#pragma message("#include <autoware_utils/math/sin_table.hpp> is deprecated. Use #include <autoware_utils_math/sin_table.hpp> instead.")
+#include <autoware_utils_math/sin_table.hpp>
+namespace autoware_utils { using namespace autoware_utils_math; }
 
-constexpr size_t sin_table_size = 32769;
-constexpr size_t discrete_arcs_num_90 = 32768;
-constexpr size_t discrete_arcs_num_360 = 131072;
-extern const float g_sin_table[sin_table_size];
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__MATH__SIN_TABLE_HPP_

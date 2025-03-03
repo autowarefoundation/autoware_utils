@@ -1,4 +1,4 @@
-// Copyright 2025 The Autoware Contributors
+// Copyright 2020 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
-#define AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+#ifndef AUTOWARE_UTILS_MATH__CONSTANTS_HPP_
+#define AUTOWARE_UTILS_MATH__CONSTANTS_HPP_
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+namespace autoware_utils_math
+{
 
-#pragma message("#include <autoware_utils/math/constants.hpp> is deprecated. Use #include <autoware_utils_math/constants.hpp> instead.")
-#include <autoware_utils_math/constants.hpp>
-namespace autoware_utils { using namespace autoware_utils_math; }
+constexpr double pi = 3.14159265358979323846;  // To be replaced by std::numbers::pi in C++20
+constexpr double gravity = 9.80665;
 
-// clang-format on
-// NOLINTEND
+}  // namespace autoware_utils_math
 
-#endif  // AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+#endif  // AUTOWARE_UTILS_MATH__CONSTANTS_HPP_

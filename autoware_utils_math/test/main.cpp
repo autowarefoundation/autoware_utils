@@ -12,17 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
-#define AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+#include <gtest/gtest.h>
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
-
-#pragma message("#include <autoware_utils/math/constants.hpp> is deprecated. Use #include <autoware_utils_math/constants.hpp> instead.")
-#include <autoware_utils_math/constants.hpp>
-namespace autoware_utils { using namespace autoware_utils_math; }
-
-// clang-format on
-// NOLINTEND
-
-#endif  // AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+int main(int argc, char ** argv)
+{
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

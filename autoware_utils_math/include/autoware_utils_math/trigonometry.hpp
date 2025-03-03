@@ -1,4 +1,4 @@
-// Copyright 2025 The Autoware Contributors
+// Copyright 2023 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
-#define AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+#ifndef AUTOWARE_UTILS_MATH__TRIGONOMETRY_HPP_
+#define AUTOWARE_UTILS_MATH__TRIGONOMETRY_HPP_
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <utility>
 
-#pragma message("#include <autoware_utils/math/constants.hpp> is deprecated. Use #include <autoware_utils_math/constants.hpp> instead.")
-#include <autoware_utils_math/constants.hpp>
-namespace autoware_utils { using namespace autoware_utils_math; }
+namespace autoware_utils_math
+{
 
-// clang-format on
-// NOLINTEND
+float sin(float radian);
 
-#endif  // AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+float cos(float radian);
+
+std::pair<float, float> sin_and_cos(float radian);
+
+float opencv_fast_atan2(float dy, float dx);
+
+}  // namespace autoware_utils_math
+
+#endif  // AUTOWARE_UTILS_MATH__TRIGONOMETRY_HPP_

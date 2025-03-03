@@ -1,4 +1,4 @@
-// Copyright 2025 The Autoware Contributors
+// Copyright 2023 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
-#define AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+#ifndef AUTOWARE_UTILS_MATH__SIN_TABLE_HPP_
+#define AUTOWARE_UTILS_MATH__SIN_TABLE_HPP_
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <cstddef>
 
-#pragma message("#include <autoware_utils/math/constants.hpp> is deprecated. Use #include <autoware_utils_math/constants.hpp> instead.")
-#include <autoware_utils_math/constants.hpp>
-namespace autoware_utils { using namespace autoware_utils_math; }
+namespace autoware_utils_math
+{
 
-// clang-format on
-// NOLINTEND
+constexpr size_t sin_table_size = 32769;
+constexpr size_t discrete_arcs_num_90 = 32768;
+constexpr size_t discrete_arcs_num_360 = 131072;
+extern const float g_sin_table[sin_table_size];
 
-#endif  // AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+}  // namespace autoware_utils_math
+
+#endif  // AUTOWARE_UTILS_MATH__SIN_TABLE_HPP_
