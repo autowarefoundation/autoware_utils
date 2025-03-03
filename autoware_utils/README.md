@@ -99,27 +99,6 @@ int main() {
 }
 ```
 
-#### Using Accumulator from accumulator.hpp
-
-```cpp
-#include "autoware_utils/math/accumulator.hpp"
-
-int main() {
-  autoware_utils::Accumulator<double> acc;
-
-  acc.add(1.0);
-  acc.add(2.0);
-  acc.add(3.0);
-
-  std::cout << "Mean: " << acc.mean() << "\n";
-  std::cout << "Min: " << acc.min() << "\n";
-  std::cout << "Max: " << acc.max() << "\n";
-  std::cout << "Count: " << acc.count() << "\n";
-
-  return 0;
-}
-```
-
 ### Detailed Usage Examples
 
 #### Update Parameters Dynamically with update_param.hpp
