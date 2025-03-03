@@ -64,9 +64,6 @@ The ROS module provides utilities for working with ROS messages and nodes:
 
 The system module provides low-level utilities for performance monitoring and error handling:
 
-- **`backtrace.hpp`**: Prints backtraces for debugging.
-- **`lru_cache.hpp`**: Implements an LRU (Least Recently Used) cache.
-- **`stop_watch.hpp`**: Measures elapsed time for profiling.
 - **`time_keeper.hpp`**: Tracks and reports the processing time of various functions.
 
 ## Usage

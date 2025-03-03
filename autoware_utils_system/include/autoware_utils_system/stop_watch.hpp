@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_
-#define AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_
+#ifndef AUTOWARE_UTILS_SYSTEM__STOP_WATCH_HPP_
+#define AUTOWARE_UTILS_SYSTEM__STOP_WATCH_HPP_
 
 #include <chrono>
 #include <string>
 #include <unordered_map>
 
-namespace autoware_utils
+namespace autoware_utils_system
 {
 template <
   class OutputUnit = std::chrono::seconds, class InternalUnit = std::chrono::microseconds,
@@ -58,6 +58,6 @@ private:
 
   std::unordered_map<std::string, Time> t_start_;
 };
-}  // namespace autoware_utils
+}  // namespace autoware_utils_system
 
-#endif  // AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_
+#endif  // AUTOWARE_UTILS_SYSTEM__STOP_WATCH_HPP_

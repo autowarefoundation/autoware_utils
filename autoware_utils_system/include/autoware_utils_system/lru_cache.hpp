@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#ifndef AUTOWARE_UTILS__SYSTEM__LRU_CACHE_HPP_
-#define AUTOWARE_UTILS__SYSTEM__LRU_CACHE_HPP_
+#ifndef AUTOWARE_UTILS_SYSTEM__LRU_CACHE_HPP_
+#define AUTOWARE_UTILS_SYSTEM__LRU_CACHE_HPP_
 
 #include <cstddef>
 #include <list>
@@ -20,7 +20,7 @@
 #include <unordered_map>
 #include <utility>
 
-namespace autoware_utils
+namespace autoware_utils_system
 {
 
 /**
@@ -137,6 +137,6 @@ public:
   }
 };
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_system
 
-#endif  // AUTOWARE_UTILS__SYSTEM__LRU_CACHE_HPP_
+#endif  // AUTOWARE_UTILS_SYSTEM__LRU_CACHE_HPP_

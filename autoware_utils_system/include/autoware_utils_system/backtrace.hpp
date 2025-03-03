@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
-#define AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
+#ifndef AUTOWARE_UTILS_SYSTEM__BACKTRACE_HPP_
+#define AUTOWARE_UTILS_SYSTEM__BACKTRACE_HPP_
 
-namespace autoware_utils
+namespace autoware_utils_system
 {
 
 void print_backtrace();
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_system
 
-#endif  // AUTOWARE_UTILS__SYSTEM__BACKTRACE_HPP_
+#endif  // AUTOWARE_UTILS_SYSTEM__BACKTRACE_HPP_
