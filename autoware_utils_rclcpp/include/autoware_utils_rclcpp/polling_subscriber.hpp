@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#ifndef AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_
-#define AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_
+#ifndef AUTOWARE_UTILS_RCLCPP__POLLING_SUBSCRIBER_HPP_
+#define AUTOWARE_UTILS_RCLCPP__POLLING_SUBSCRIBER_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -21,7 +21,7 @@
 #include <string>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_rclcpp
 {
 
 /**
@@ -248,6 +248,6 @@ std::vector<typename MessageT::ConstSharedPtr> All<MessageT>::take_data()
 
 }  // namespace polling_policy
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_rclcpp
 
-#endif  // AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_
+#endif  // AUTOWARE_UTILS_RCLCPP__POLLING_SUBSCRIBER_HPP_

@@ -12,19 +12,49 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__WAIT_FOR_PARAM_HPP_
-#define AUTOWARE_UTILS__ROS__WAIT_FOR_PARAM_HPP_
+#ifndef AUTOWARE_UTILS_RCLCPP__PARAMETER_HPP_
+#define AUTOWARE_UTILS_RCLCPP__PARAMETER_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 
 #include <chrono>
 #include <memory>
 #include <string>
+#include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_rclcpp
 {
+
 template <class T>
-T wait_for_param(
+T get_or_declare_parameter(rclcpp::Node & node, const std::string & name)
+{
+  if (node.has_parameter(name)) {
+    return node.get_parameter(name).get_value<T>();
+  }
+
+  return node.declare_parameter<T>(name);
+}
+
+template <class T>
+bool update_param(
+  const std::vector<rclcpp::Parameter> & params, const std::string & name, T & value)
+{
+  const auto itr = std::find_if(
+    params.cbegin(), params.cend(),
+    [&name](const rclcpp::Parameter & p) { return p.get_name() == name; });
+
+  // Not found
+  if (itr == params.cend()) {
+    return false;
+  }
+
+  value = itr->template get_value<T>();
+  return true;
+}
+
+// NOTE: This function does not appear to be used.
+template <class T>
+[[deprecated]] T wait_for_param(
   rclcpp::Node * node, const std::string & remote_node_name, const std::string & param_name)
 {
   std::chrono::seconds sec(1);
@@ -47,6 +77,7 @@ T wait_for_param(
 
   return {};
 }
-}  // namespace autoware_utils
 
-#endif  // AUTOWARE_UTILS__ROS__WAIT_FOR_PARAM_HPP_
+}  // namespace autoware_utils_rclcpp
+
+#endif  // AUTOWARE_UTILS_RCLCPP__PARAMETER_HPP_
