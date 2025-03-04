@@ -27,6 +27,7 @@ TEST(TestPollingSubscriber, PubSub)
   const auto pub_node = std::make_shared<rclcpp::Node>("pub_node");
   const auto sub_node = std::make_shared<rclcpp::Node>("sub_node");
 
+  const auto pub = pub_node->create_publisher<std_msgs::msg::String>("/test/text", 1);
   const auto sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
     std_msgs::msg::String>::create_subscription(sub_node.get(), "/test/text", 1);
 
@@ -38,6 +39,15 @@ TEST(TestPollingSubscriber, PubSub)
   while (rclcpp::ok() && !executor.is_spinning()) {
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
+
+  std_msgs::msg::String pub_msg;
+  pub_msg.data = "foo-bar";
+  pub->publish(pub_msg);
+
+  const auto sub_msg = sub->take_data();
+  EXPECT_NE(sub_msg, nullptr);
+  EXPECT_EQ(sub_msg->data, pub_msg.data);
+
   executor.cancel();
   thread.join();
 }
