@@ -1,4 +1,4 @@
-// Copyright 2021 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,29 +15,14 @@
 #ifndef AUTOWARE_UTILS__ROS__UPDATE_PARAM_HPP_
 #define AUTOWARE_UTILS__ROS__UPDATE_PARAM_HPP_
 
-#include <rclcpp/rclcpp.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <string>
-#include <vector>
+#pragma message("#include <autoware_utils/ros/update_param.hpp> is deprecated. Use #include <autoware_utils_rclcpp/parameter.hpp> instead.")
+#include <autoware_utils_rclcpp/parameter.hpp>
+namespace autoware_utils { using namespace autoware_utils_rclcpp; }
 
-namespace autoware_utils
-{
-template <class T>
-bool update_param(
-  const std::vector<rclcpp::Parameter> & params, const std::string & name, T & value)
-{
-  const auto itr = std::find_if(
-    params.cbegin(), params.cend(),
-    [&name](const rclcpp::Parameter & p) { return p.get_name() == name; });
-
-  // Not found
-  if (itr == params.cend()) {
-    return false;
-  }
-
-  value = itr->template get_value<T>();
-  return true;
-}
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__UPDATE_PARAM_HPP_

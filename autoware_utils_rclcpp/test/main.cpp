@@ -12,17 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_
-#define AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_
+#include <rclcpp/rclcpp.hpp>
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <gtest/gtest.h>
 
-#pragma message("#include <autoware_utils/ros/polling_subscriber.hpp> is deprecated. Use #include <autoware_utils_rclcpp/polling_subscriber.hpp> instead.")
-#include <autoware_utils_rclcpp/polling_subscriber.hpp>
-namespace autoware_utils { using namespace autoware_utils_rclcpp; }
+class RclcppEnvironment : public testing::Environment
+{
+public:
+  RclcppEnvironment(int argc, char ** argv) : argc(argc), argv(argv) {}
+  void SetUp() override { rclcpp::init(argc, argv); }
+  void TearDown() override { rclcpp::shutdown(); }
 
-// clang-format on
-// NOLINTEND
+private:
+  int argc;
+  char ** argv;
+};
 
-#endif  // AUTOWARE_UTILS__ROS__POLLING_SUBSCRIBER_HPP_
+int main(int argc, char ** argv)
+{
+  testing::InitGoogleTest(&argc, argv);
+  testing::AddGlobalTestEnvironment(new RclcppEnvironment(argc, argv));
+  return RUN_ALL_TESTS();
+}

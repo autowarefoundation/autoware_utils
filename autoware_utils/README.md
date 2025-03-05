@@ -50,14 +50,10 @@ The ROS module provides utilities for working with ROS messages and nodes:
 - **`marker_helper.hpp`**: Helper functions for creating and manipulating visualization markers.
 - **`msg_covariance.hpp`**: Indices for accessing covariance matrices in ROS messages.
 - **`msg_operation.hpp`**: Overloaded operators for quaternion messages.
-- **`parameter.hpp`**: Simplifies parameter retrieval and declaration.
-- **`polling_subscriber.hpp`**: A subscriber class with different polling policies (latest, newest, all).
 - **`processing_time_publisher.hpp`**: Publishes processing times as diagnostic messages.
 - **`published_time_publisher.hpp`**: Tracks and publishes the time when messages are published.
 - **`self_pose_listener.hpp`**: Listens to the self-pose of the vehicle.
-- **`update_param.hpp`**: Updates parameters from remote nodes.
 - **`uuid_helper.hpp`**: Utilities for generating and managing UUIDs.
-- **`wait_for_param.hpp`**: Waits for parameters from remote nodes.
 - **`debug_traits.hpp`**: Traits for identifying debug message types.
 
 #### System Module
@@ -132,30 +128,6 @@ int main() {
 ```
 
 ### Detailed Usage Examples
-
-#### Update Parameters Dynamically with update_param.hpp
-
-```cpp
-#include "autoware_utils/ros/update_param.hpp"
-#include <rclcpp/rclcpp.hpp>
-
-int main(int argc, char * argv[]) {
-  rclcpp::init(argc, argv);
-  auto node = rclcpp::Node::make_shared("param_node");
-
-  double param_value = 0.0;
-  std::vector<rclcpp::Parameter> params = node->get_parameters({"my_param"});
-
-  if (autoware_utils::update_param(params, "my_param", param_value)) {
-    RCLCPP_INFO(node->get_logger(), "Updated parameter value: %f", param_value);
-  } else {
-    RCLCPP_WARN(node->get_logger(), "Parameter 'my_param' not found.");
-  }
-
-  rclcpp::shutdown();
-  return 0;
-}
-```
 
 #### Logging Processing Times with ProcessingTimePublisher
 
