@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__DEBUG_TRAITS_HPP_
-#define AUTOWARE_UTILS__ROS__DEBUG_TRAITS_HPP_
+#ifndef AUTOWARE_UTILS_DEBUG__DEBUG_TRAITS_HPP_
+#define AUTOWARE_UTILS_DEBUG__DEBUG_TRAITS_HPP_
 
 #include <autoware_internal_debug_msgs/msg/bool_stamped.hpp>
 #include <autoware_internal_debug_msgs/msg/float32_multi_array_stamped.hpp>
@@ -28,8 +28,9 @@
 
 #include <type_traits>
 
-namespace autoware_utils::debug_traits
+namespace autoware_utils_debug::debug_traits
 {
+
 template <typename T>
 struct is_debug_message : std::false_type
 {
@@ -86,6 +87,7 @@ template <>
 struct is_debug_message<autoware_internal_debug_msgs::msg::StringStamped> : std::true_type
 {
 };
-}  // namespace autoware_utils::debug_traits
 
-#endif  // AUTOWARE_UTILS__ROS__DEBUG_TRAITS_HPP_
+}  // namespace autoware_utils_debug::debug_traits
+
+#endif  // AUTOWARE_UTILS_DEBUG__DEBUG_TRAITS_HPP_

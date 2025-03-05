@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#ifndef AUTOWARE_UTILS__SYSTEM__TIME_KEEPER_HPP_
-#define AUTOWARE_UTILS__SYSTEM__TIME_KEEPER_HPP_
+#ifndef AUTOWARE_UTILS_DEBUG__TIME_KEEPER_HPP_
+#define AUTOWARE_UTILS_DEBUG__TIME_KEEPER_HPP_
 
 #include <autoware_utils_system/stop_watch.hpp>
 #include <rclcpp/publisher.hpp>
@@ -27,7 +27,7 @@
 #include <thread>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_debug
 {
 /**
  * @brief Class representing a node in the time tracking tree
@@ -209,6 +209,6 @@ private:
   TimeKeeper & time_keeper_;     //!< Reference to the TimeKeeper object
 };
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_debug
 
-#endif  // AUTOWARE_UTILS__SYSTEM__TIME_KEEPER_HPP_
+#endif  // AUTOWARE_UTILS_DEBUG__TIME_KEEPER_HPP_

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__PUBLISHED_TIME_PUBLISHER_HPP_
-#define AUTOWARE_UTILS__ROS__PUBLISHED_TIME_PUBLISHER_HPP_
+#ifndef AUTOWARE_UTILS_DEBUG__PUBLISHED_TIME_PUBLISHER_HPP_
+#define AUTOWARE_UTILS_DEBUG__PUBLISHED_TIME_PUBLISHER_HPP_
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -26,7 +26,7 @@
 #include <string>
 #include <utility>
 
-namespace autoware_utils
+namespace autoware_utils_debug
 {
 
 class PublishedTimePublisher
@@ -109,6 +109,6 @@ private:
   // store them for each different publisher of the node
   std::map<rmw_gid_t, rclcpp::Publisher<PublishedTime>::SharedPtr, GidCompare> publishers_;
 };
-}  // namespace autoware_utils
+}  // namespace autoware_utils_debug
 
-#endif  // AUTOWARE_UTILS__ROS__PUBLISHED_TIME_PUBLISHER_HPP_
+#endif  // AUTOWARE_UTILS_DEBUG__PUBLISHED_TIME_PUBLISHER_HPP_

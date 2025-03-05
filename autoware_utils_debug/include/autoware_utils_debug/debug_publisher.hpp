@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
-#define AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
+#ifndef AUTOWARE_UTILS_DEBUG__DEBUG_PUBLISHER_HPP_
+#define AUTOWARE_UTILS_DEBUG__DEBUG_PUBLISHER_HPP_
 
-#include "autoware_utils/ros/debug_traits.hpp"
+#include "autoware_utils_debug/debug_traits.hpp"
 
 #include <rclcpp/publisher_base.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -25,14 +25,14 @@
 #include <string>
 #include <unordered_map>
 
-namespace autoware_utils
+namespace autoware_utils_debug
 {
 namespace debug_publisher
 {
 template <
   class T_msg, class T,
-  std::enable_if_t<autoware_utils::debug_traits::is_debug_message<T_msg>::value, std::nullptr_t> =
-    nullptr>
+  std::enable_if_t<
+    autoware_utils_debug::debug_traits::is_debug_message<T_msg>::value, std::nullptr_t> = nullptr>
 T_msg to_debug_msg(const T & data, const rclcpp::Time & stamp)
 {
   T_msg msg;
@@ -72,6 +72,6 @@ private:
   const char * ns_;
   std::unordered_map<std::string, std::shared_ptr<rclcpp::PublisherBase>> pub_map_;
 };
-}  // namespace autoware_utils
+}  // namespace autoware_utils_debug
 
-#endif  // AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
+#endif  // AUTOWARE_UTILS_DEBUG__DEBUG_PUBLISHER_HPP_
