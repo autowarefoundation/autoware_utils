@@ -12,25 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <rclcpp/rclcpp.hpp>
-
-#include <gtest/gtest.h>
-
-class RclcppEnvironment : public testing::Environment
-{
-public:
-  RclcppEnvironment(int argc, char ** argv) : argc(argc), argv(argv) {}
-  void SetUp() override { rclcpp::init(argc, argv); }
-  void TearDown() override { rclcpp::shutdown(); }
-
-private:
-  int argc;
-  char ** argv;
-};
+#include <autoware_utils_testing/gtest/ros_env.hpp>
 
 int main(int argc, char ** argv)
 {
   testing::InitGoogleTest(&argc, argv);
-  testing::AddGlobalTestEnvironment(new RclcppEnvironment(argc, argv));
+  testing::AddGlobalTestEnvironment(autoware_utils_testing::gtest::ros_env(argc, argv));
   return RUN_ALL_TESTS();
 }
