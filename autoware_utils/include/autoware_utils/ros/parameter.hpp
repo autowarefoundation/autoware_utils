@@ -1,4 +1,4 @@
-// Copyright 2023 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,21 +15,14 @@
 #ifndef AUTOWARE_UTILS__ROS__PARAMETER_HPP_
 #define AUTOWARE_UTILS__ROS__PARAMETER_HPP_
 
-#include <rclcpp/rclcpp.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <string>
+#pragma message("#include <autoware_utils/ros/parameter.hpp> is deprecated. Use #include <autoware_utils_rclcpp/parameter.hpp> instead.")
+#include <autoware_utils_rclcpp/parameter.hpp>
+namespace autoware_utils { using namespace autoware_utils_rclcpp; }
 
-namespace autoware_utils
-{
-template <class T>
-T get_or_declare_parameter(rclcpp::Node & node, const std::string & name)
-{
-  if (node.has_parameter(name)) {
-    return node.get_parameter(name).get_value<T>();
-  }
-
-  return node.declare_parameter<T>(name);
-}
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__PARAMETER_HPP_

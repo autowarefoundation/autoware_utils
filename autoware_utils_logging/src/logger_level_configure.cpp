@@ -12,12 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/ros/logger_level_configure.hpp"
+#include "autoware_utils_logging/logger_level_configure.hpp"
 
 #include <rcutils/logging.h>
 
-namespace autoware_utils
+namespace autoware_utils_logging
 {
+
 LoggerLevelConfigure::LoggerLevelConfigure(rclcpp::Node * node) : ros_logger_(node->get_logger())
 {
   using std::placeholders::_1;
@@ -58,4 +59,4 @@ void LoggerLevelConfigure::on_logger_config_service(
   return;
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_logging
