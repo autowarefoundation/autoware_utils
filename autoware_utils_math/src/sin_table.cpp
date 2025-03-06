@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/math/sin_table.hpp"
+#include "autoware_utils_math/sin_table.hpp"
 
-namespace autoware_utils
+namespace autoware_utils_math
 {
 
 const float g_sin_table[sin_table_size] = {
@@ -8212,4 +8212,4 @@ const float g_sin_table[sin_table_size] = {
   0.9999999816164293f, 0.9999999896592414f, 0.9999999954041073f, 0.9999999988510269f,
   1.0000000000000000f};
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_math
