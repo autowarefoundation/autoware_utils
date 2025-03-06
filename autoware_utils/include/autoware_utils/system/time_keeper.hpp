@@ -14,8 +14,7 @@
 #ifndef AUTOWARE_UTILS__SYSTEM__TIME_KEEPER_HPP_
 #define AUTOWARE_UTILS__SYSTEM__TIME_KEEPER_HPP_
 
-#include "autoware_utils/system/stop_watch.hpp"
-
+#include <autoware_utils_system/stop_watch.hpp>
 #include <rclcpp/publisher.hpp>
 
 #include <autoware_internal_debug_msgs/msg/processing_time_node.hpp>
@@ -173,7 +172,7 @@ private:
     current_time_node_;                            //!< Shared pointer to the current time node
   std::shared_ptr<ProcessingTimeNode> root_node_;  //!< Shared pointer to the root time node
   std::thread::id root_node_thread_id_;            //!< ID of the thread that started the tracking
-  autoware_utils::StopWatch<
+  autoware_utils_system::StopWatch<
     std::chrono::milliseconds, std::chrono::microseconds, std::chrono::steady_clock>
     stop_watch_;  //!< StopWatch object for tracking the processing time
 

@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,49 +15,14 @@
 #ifndef AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_
 #define AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_
 
-#include <chrono>
-#include <string>
-#include <unordered_map>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils
-{
-template <
-  class OutputUnit = std::chrono::seconds, class InternalUnit = std::chrono::microseconds,
-  class Clock = std::chrono::steady_clock>
-class StopWatch
-{
-public:
-  StopWatch() { tic(default_name); }
+#pragma message("#include <autoware_utils/system/stop_watch.hpp> is deprecated. Use #include <autoware_utils_system/stop_watch.hpp> instead.")
+#include <autoware_utils_system/stop_watch.hpp>
+namespace autoware_utils { using namespace autoware_utils_system; }
 
-  void tic(const std::string & name = default_name) { t_start_[name] = Clock::now(); }
-
-  void tic(const char * name) { tic(std::string(name)); }
-
-  double toc(const std::string & name, const bool reset = false)
-  {
-    const auto t_start = t_start_.at(name);
-    const auto t_end = Clock::now();
-    const auto duration = std::chrono::duration_cast<InternalUnit>(t_end - t_start).count();
-
-    if (reset) {
-      t_start_[name] = Clock::now();
-    }
-
-    const auto one_sec = std::chrono::duration_cast<InternalUnit>(OutputUnit(1)).count();
-
-    return static_cast<double>(duration) / one_sec;
-  }
-
-  double toc(const char * name, const bool reset = false) { return toc(std::string(name), reset); }
-
-  double toc(const bool reset = false) { return toc(default_name, reset); }
-
-private:
-  using Time = std::chrono::time_point<Clock>;
-  static constexpr const char * default_name{"__auto__"};
-
-  std::unordered_map<std::string, Time> t_start_;
-};
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__SYSTEM__STOP_WATCH_HPP_

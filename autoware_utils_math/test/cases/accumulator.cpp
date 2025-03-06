@@ -12,17 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
-#define AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+#include "autoware_utils_math/accumulator.hpp"
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <gtest/gtest.h>
 
-#pragma message("#include <autoware_utils/math/constants.hpp> is deprecated. Use #include <autoware_utils_math/constants.hpp> instead.")
-#include <autoware_utils_math/constants.hpp>
-namespace autoware_utils { using namespace autoware_utils_math; }
+TEST(TestAccumulator, Case1)
+{
+  autoware_utils_math::Accumulator a;
+  for (int i = 0; i < 10; ++i) {
+    a.add(i);
+  }
+  EXPECT_DOUBLE_EQ(a.count(), 10);
+  EXPECT_DOUBLE_EQ(a.min(), 0.0);
+  EXPECT_DOUBLE_EQ(a.max(), 9.0);
+  EXPECT_DOUBLE_EQ(a.mean(), 4.5);
+}
 
-// clang-format on
-// NOLINTEND
-
-#endif  // AUTOWARE_UTILS__MATH__CONSTANTS_HPP_
+TEST(TestAccumulator, Case2)
+{
+  autoware_utils_math::Accumulator a;
+  for (int i = 0; i < 10; ++i) {
+    a.add(i + 1);
+  }
+  EXPECT_DOUBLE_EQ(a.count(), 10);
+  EXPECT_DOUBLE_EQ(a.min(), 1.0);
+  EXPECT_DOUBLE_EQ(a.max(), 10.0);
+  EXPECT_DOUBLE_EQ(a.mean(), 5.5);
+}
