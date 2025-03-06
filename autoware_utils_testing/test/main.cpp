@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <gtest/gtest.h>
+#include <autoware_utils_testing/gtest/ros_env.hpp>
 
 int main(int argc, char ** argv)
 {
   testing::InitGoogleTest(&argc, argv);
+  testing::AddGlobalTestEnvironment(autoware_utils_testing::gtest::ros_env(argc, argv));
   return RUN_ALL_TESTS();
 }
