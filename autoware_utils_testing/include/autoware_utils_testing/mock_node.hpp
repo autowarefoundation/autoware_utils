@@ -17,18 +17,46 @@
 
 #include <rclcpp/rclcpp.hpp>
 
+#include <memory>
 #include <string>
+#include <unordered_map>
+#include <vector>
 
 namespace autoware_utils_testing
 {
+
+template <class T>
+struct Topic
+{
+  int count;
+  std::vector<T> data;
+};
 
 class MockNode : public rclcpp::Node
 {
 public:
   explicit MockNode(const std::string & name) : Node(name) {}
 
+  template <class T>
+  std::shared_ptr<Topic<T>> sub(const std::string & name, const rclcpp::QoS & qos);
+
 private:
+  std::unordered_map<std::string, std::shared_ptr<void>> topics_;
+  std::unordered_map<std::string, rclcpp::SubscriptionBase::SharedPtr> subs_;
 };
+
+template <class T>
+std::shared_ptr<Topic<T>> MockNode::sub(const std::string & name, const rclcpp::QoS & qos)
+{
+  const auto topic = std::make_shared<Topic<T>>();
+  const auto sub = create_subscription<T>(name, qos, [this, topic](const T & msg) {
+    topic->count += 1;
+    topic->data.push_back(msg);
+  });
+  subs_[name] = sub;
+  topics_[name] = topic;
+  return topic;
+}
 
 }  // namespace autoware_utils_testing
 
