@@ -12,16 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils_debug/published_time_publisher.hpp"
+#include "autoware_utils_debug/processing_time_publisher.hpp"
 
 #include <gtest/gtest.h>
 
 #include <memory>
 
-using autoware_utils_debug::PublishedTimePublisher;
+using autoware_utils_debug::ProcessingTimePublisher;
 
-TEST(TestPublishedTimePublisher, Instantiation)
+TEST(TestProcessingTimePublisher, Instantiation)
 {
   const auto node = std::make_shared<rclcpp::Node>("test_node");
-  PublishedTimePublisher(node.get());
+  ProcessingTimePublisher(node.get());
 }

@@ -12,6 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils_debug/processing_time_publisher.hpp"
+#include "autoware_utils_debug/time_keeper.hpp"
 
 #include <gtest/gtest.h>
+
+using autoware_utils_debug::ScopedTimeTrack;
+using autoware_utils_debug::TimeKeeper;
+
+TEST(TestTimeKeeper, Instantiation)
+{
+  TimeKeeper time_keeper;
+  ScopedTimeTrack st("test", time_keeper);
+}
