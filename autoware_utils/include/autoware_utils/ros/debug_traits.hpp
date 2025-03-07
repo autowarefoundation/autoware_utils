@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/debug_traits.hpp> is deprecated. Use #include <autoware_utils_debug/debug_traits.hpp> instead.")
 #include <autoware_utils_debug/debug_traits.hpp>
 namespace autoware_utils { using namespace autoware_utils_debug; }
 

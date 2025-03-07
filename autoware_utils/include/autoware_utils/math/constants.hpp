@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/math/constants.hpp> is deprecated. Use #include <autoware_utils_math/constants.hpp> instead.")
 #include <autoware_utils_math/constants.hpp>
 namespace autoware_utils { using namespace autoware_utils_math; }
 

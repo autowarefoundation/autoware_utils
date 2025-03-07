@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/system/time_keeper.hpp> is deprecated. Use #include <autoware_utils_debug/time_keeper.hpp> instead.")
 #include <autoware_utils_debug/time_keeper.hpp>
 namespace autoware_utils { using namespace autoware_utils_debug; }
 

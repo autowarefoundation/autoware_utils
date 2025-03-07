@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/logger_level_configure.hpp> is deprecated. Use #include <autoware_utils_logging/logger_level_configure.hpp> instead.")
 #include <autoware_utils_logging/logger_level_configure.hpp>
 namespace autoware_utils { using namespace autoware_utils_logging; }
 

@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/processing_time_publisher.hpp> is deprecated. Use #include <autoware_utils_debug/processing_time_publisher.hpp> instead.")
 #include <autoware_utils_debug/processing_time_publisher.hpp>
 namespace autoware_utils { using namespace autoware_utils_debug; }
 

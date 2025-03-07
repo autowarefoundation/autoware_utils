@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/transform_listener.hpp> is deprecated. Use #include <autoware_utils_tf/transform_listener.hpp> instead.")
 #include <autoware_utils_tf/transform_listener.hpp>
 namespace autoware_utils { using namespace autoware_utils_tf; }
 

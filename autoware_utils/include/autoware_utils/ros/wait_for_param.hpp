@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/wait_for_param.hpp> is deprecated. Use #include <autoware_utils_rclcpp/parameter.hpp> instead.")
 #include <autoware_utils_rclcpp/parameter.hpp>
 namespace autoware_utils { using namespace autoware_utils_rclcpp; }
 

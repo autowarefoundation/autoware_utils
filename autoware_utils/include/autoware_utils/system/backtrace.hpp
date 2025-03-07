@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/system/backtrace.hpp> is deprecated. Use #include <autoware_utils_system/backtrace.hpp> instead.")
 #include <autoware_utils_system/backtrace.hpp>
 namespace autoware_utils { using namespace autoware_utils_system; }
 

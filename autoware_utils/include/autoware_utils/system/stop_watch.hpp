@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/system/stop_watch.hpp> is deprecated. Use #include <autoware_utils_system/stop_watch.hpp> instead.")
 #include <autoware_utils_system/stop_watch.hpp>
 namespace autoware_utils { using namespace autoware_utils_system; }
 

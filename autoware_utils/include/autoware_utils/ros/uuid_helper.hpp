@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/uuid_helper.hpp> is deprecated. Use #include <autoware_utils_uuid/uuid_helper.hpp> instead.")
 #include <autoware_utils_uuid/uuid_helper.hpp>
 namespace autoware_utils { using namespace autoware_utils_uuid; }
 

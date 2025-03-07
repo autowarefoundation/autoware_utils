@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/system/lru_cache.hpp> is deprecated. Use #include <autoware_utils_system/lru_cache.hpp> instead.")
 #include <autoware_utils_system/lru_cache.hpp>
 namespace autoware_utils { using namespace autoware_utils_system; }
 

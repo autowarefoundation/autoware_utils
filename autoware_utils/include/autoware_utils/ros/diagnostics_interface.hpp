@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/diagnostics_interface.hpp> is deprecated. Use #include <autoware_utils_diagnostics/diagnostics_interface.hpp> instead.")
 #include <autoware_utils_diagnostics/diagnostics_interface.hpp>
 namespace autoware_utils { using namespace autoware_utils_diagnostics; }
 

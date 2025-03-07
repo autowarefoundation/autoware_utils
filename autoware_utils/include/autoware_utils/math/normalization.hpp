@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/math/normalization.hpp> is deprecated. Use #include <autoware_utils_math/normalization.hpp> instead.")
 #include <autoware_utils_math/normalization.hpp>
 namespace autoware_utils { using namespace autoware_utils_math; }
 

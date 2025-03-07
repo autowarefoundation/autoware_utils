@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/polling_subscriber.hpp> is deprecated. Use #include <autoware_utils_rclcpp/polling_subscriber.hpp> instead.")
 #include <autoware_utils_rclcpp/polling_subscriber.hpp>
 namespace autoware_utils { using namespace autoware_utils_rclcpp; }
 

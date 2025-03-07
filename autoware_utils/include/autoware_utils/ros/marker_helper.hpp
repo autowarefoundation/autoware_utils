@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/marker_helper.hpp> is deprecated. Use #include <autoware_utils_visualization/marker_helper.hpp> instead.")
 #include <autoware_utils_visualization/marker_helper.hpp>
 namespace autoware_utils { using namespace autoware_utils_visualization; }
 

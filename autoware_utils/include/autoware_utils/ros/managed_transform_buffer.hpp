@@ -18,7 +18,6 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#pragma message("#include <autoware_utils/ros/managed_transform_buffer.hpp> is deprecated. Use #include <autoware_utils_pcl/managed_transform_buffer.hpp> instead.")
 #include <autoware_utils_pcl/managed_transform_buffer.hpp>
 namespace autoware_utils { using namespace autoware_utils_pcl; }
 
