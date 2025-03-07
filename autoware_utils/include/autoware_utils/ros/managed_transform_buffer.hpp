@@ -15,13 +15,14 @@
 #ifndef AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
 #define AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
 
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
+
+#pragma message("#include <autoware_utils/ros/managed_transform_buffer.hpp> is deprecated. Use #include <autoware_utils_pcl/managed_transform_buffer.hpp> instead.")
 #include <autoware_utils_pcl/managed_transform_buffer.hpp>
+namespace autoware_utils { using namespace autoware_utils_pcl; }
 
-namespace autoware_utils
-{
-
-using namespace autoware_utils_pcl;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__MANAGED_TRANSFORM_BUFFER_HPP_
