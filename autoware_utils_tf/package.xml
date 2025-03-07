@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>autoware_utils_geometry</name>
+  <name>autoware_utils_tf</name>
   <version>1.1.0</version>
-  <description>The autoware_utils_geometry package</description>
+  <description>The autoware_utils_tf package</description>
   <maintainer email="egon.kang@autocore.ai">Jian Kang</maintainer>
   <maintainer email="ryohsuke.mitsudome@tier4.jp">Ryohsuke Mitsudome</maintainer>
   <maintainer email="esteve.fernandez@tier4.jp">Esteve Fernandez</maintainer>

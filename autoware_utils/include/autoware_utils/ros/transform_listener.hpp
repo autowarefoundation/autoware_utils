@@ -15,13 +15,14 @@
 #ifndef AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
 #define AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
 
-#include <autoware_utils_geometry/transform_listener.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils
-{
+#pragma message("#include <autoware_utils/ros/transform_listener.hpp> is deprecated. Use #include <autoware_utils_tf/transform_listener.hpp> instead.")
+#include <autoware_utils_tf/transform_listener.hpp>
+namespace autoware_utils { using namespace autoware_utils_tf; }
 
-using namespace autoware_utils_geometry;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__TRANSFORM_LISTENER_HPP_
