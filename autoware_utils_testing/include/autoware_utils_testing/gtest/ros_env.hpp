@@ -20,7 +20,7 @@
 namespace autoware_utils_testing::gtest
 {
 
-// Create an environment pointor that executes rclcpp init and shutdown.
+// Create an environment pointer that executes rclcpp init and shutdown.
 // Pass it to the AddGlobalTestEnvironment in your gtest main function.
 testing::Environment * ros_env(int argc, char ** argv);
 
