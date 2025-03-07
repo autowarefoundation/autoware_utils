@@ -17,7 +17,7 @@
 
 #include "autoware_utils_geometry/geometry/boost_geometry.hpp"
 
-namespace autoware_utils::sat
+namespace autoware_utils_geometry::sat
 {
 /**
  * @brief Check if 2 convex polygons intersect using the SAT algorithm
@@ -25,6 +25,6 @@ namespace autoware_utils::sat
  */
 bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
 
-}  // namespace autoware_utils::sat
+}  // namespace autoware_utils_geometry::sat
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__SAT_2D_HPP_

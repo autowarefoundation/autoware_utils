@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__MSG__COVARIANCE_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__MSG__COVARIANCE_HPP_
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 namespace xyz_covariance_index
 {
@@ -115,6 +115,6 @@ enum XYZ_UPPER_COV_IDX {
   Z_Z = 5,
 };
 }  // namespace xyz_upper_covariance_index
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__MSG__COVARIANCE_HPP_

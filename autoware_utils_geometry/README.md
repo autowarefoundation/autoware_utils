@@ -41,7 +41,7 @@ The geometry module provides classes and functions for handling 2D and 3D points
 ```cpp
 #include "autoware_utils/geometry/alt_geometry.hpp"
 
-using namespace autoware_utils::alt;
+using namespace autoware_utils_geometry::alt;
 
 int main() {
   Vector2d vec1(3.0, 4.0);

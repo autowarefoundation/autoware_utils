@@ -29,7 +29,7 @@
 #include <utility>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 namespace
 {
@@ -404,4 +404,4 @@ std::optional<Polygon2d> random_concave_polygon(const size_t vertices, const dou
   }
   return poly;
 }
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry

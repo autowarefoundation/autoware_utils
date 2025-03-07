@@ -36,7 +36,7 @@ void fromMsg(const geometry_msgs::msg::PoseStamped & msg, tf2::Stamped<tf2::Tran
 }
 }  // namespace tf2
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 geometry_msgs::msg::Vector3 get_rpy(const geometry_msgs::msg::Quaternion & quat)
 {
@@ -394,4 +394,4 @@ bool intersects_convex(const Polygon2d & convex_polygon1, const Polygon2d & conv
   return gjk::intersects(convex_polygon1, convex_polygon2);
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry

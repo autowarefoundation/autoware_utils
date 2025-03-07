@@ -96,7 +96,7 @@ inline void doTransform(
 #endif
 }  // namespace tf2
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 
 // TODO(Takagi, Isamu): Move to each function.
@@ -593,6 +593,6 @@ std::optional<geometry_msgs::msg::Point> intersect(
  */
 bool intersects_convex(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_

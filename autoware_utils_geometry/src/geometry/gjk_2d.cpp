@@ -18,7 +18,7 @@
 
 #include <boost/geometry/algorithms/equals.hpp>
 
-namespace autoware_utils::gjk
+namespace autoware_utils_geometry::gjk
 {
 
 namespace
@@ -147,4 +147,4 @@ bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_poly
   }
   return true;
 }
-}  // namespace autoware_utils::gjk
+}  // namespace autoware_utils_geometry::gjk

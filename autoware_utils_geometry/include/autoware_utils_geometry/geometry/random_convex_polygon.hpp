@@ -17,13 +17,13 @@
 
 #include <autoware_utils_geometry/geometry/geometry.hpp>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 /// @brief generate a random convex polygon
 /// @param vertices number of vertices for the desired polygon
 /// @param max points will be generated in the range [-max,max]
 /// @details algorithm from https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
 Polygon2d random_convex_polygon(const size_t vertices, const double max);
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_

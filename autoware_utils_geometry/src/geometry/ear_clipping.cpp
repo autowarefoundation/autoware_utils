@@ -18,7 +18,7 @@
 #include <limits>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 
 void remove_point(const std::size_t p_index, std::vector<LinkedPoint> & points)
@@ -631,4 +631,4 @@ std::vector<Polygon2d> triangulate(const Polygon2d & poly)
   }
   return triangles;
 }
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry

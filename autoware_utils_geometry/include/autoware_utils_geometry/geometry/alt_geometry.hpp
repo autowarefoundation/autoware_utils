@@ -22,7 +22,7 @@
 #include <utility>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 // Alternatives for Boost.Geometry ----------------------------------------------------------------
 // TODO(mitukou1109): remove namespace
@@ -195,6 +195,6 @@ bool within(const alt::Point2d & point, const alt::ConvexPolygon2d & poly);
 
 bool within(
   const alt::ConvexPolygon2d & poly_contained, const alt::ConvexPolygon2d & poly_containing);
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__ALT_GEOMETRY_HPP_

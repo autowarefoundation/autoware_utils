@@ -68,7 +68,7 @@ double get_circle_area(const geometry_msgs::msg::Vector3 & dimensions)
 }
 }  // namespace
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 bool is_clockwise(const Polygon2d & polygon)
 {
@@ -264,4 +264,4 @@ Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset)
   boost::geometry::correct(expanded_polygon);
   return expanded_polygon;
 }
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry

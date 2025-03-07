@@ -19,7 +19,7 @@
 #include <utility>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 // Alternatives for Boost.Geometry ----------------------------------------------------------------
 namespace alt
@@ -644,4 +644,4 @@ bool within(
 
   return true;
 }
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry

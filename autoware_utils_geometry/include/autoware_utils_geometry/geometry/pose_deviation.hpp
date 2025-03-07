@@ -18,7 +18,7 @@
 #include <geometry_msgs/msg/point.hpp>
 #include <geometry_msgs/msg/pose.hpp>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 struct PoseDeviation
 {
@@ -39,6 +39,6 @@ double calc_yaw_deviation(
 PoseDeviation calc_pose_deviation(
   const geometry_msgs::msg::Pose & base_pose, const geometry_msgs::msg::Pose & target_pose);
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__POSE_DEVIATION_HPP_

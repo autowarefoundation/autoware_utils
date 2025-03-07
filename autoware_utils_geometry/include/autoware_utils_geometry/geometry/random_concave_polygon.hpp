@@ -20,7 +20,7 @@
 #include <optional>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_geometry
 {
 /// @brief generate a random non-convex polygon
 /// @param vertices number of vertices for the desired polygon
@@ -42,6 +42,6 @@ bool test_intersection(
   const std::function<
     bool(const autoware_utils::Polygon2d &, const autoware_utils::Polygon2d &)> &);
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_geometry
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
