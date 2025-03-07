@@ -34,7 +34,6 @@ The geometry module provides classes and functions for handling 2D and 3D points
 The ROS module provides utilities for working with ROS messages and nodes:
 
 - **`debug_publisher.hpp`**: A helper class for publishing debug messages with timestamps.
-- **`diagnostics_interface.hpp`**: An interface for publishing diagnostic messages.
 - **`msg_covariance.hpp`**: Indices for accessing covariance matrices in ROS messages.
 - **`msg_operation.hpp`**: Overloaded operators for quaternion messages.
 - **`processing_time_publisher.hpp`**: Publishes processing times as diagnostic messages.

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/ros/diagnostics_interface.hpp"
+#include "autoware_utils_diagnostics/diagnostics_interface.hpp"
 
 #include <rclcpp/rclcpp.hpp>
 
@@ -21,7 +21,7 @@
 #include <algorithm>
 #include <string>
 
-namespace autoware_utils
+namespace autoware_utils_diagnostics
 {
 DiagnosticsInterface::DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name)
 : clock_(node->get_clock())
@@ -103,4 +103,4 @@ diagnostic_msgs::msg::DiagnosticArray DiagnosticsInterface::create_diagnostics_a
 
   return diagnostics_msg;
 }
-}  // namespace autoware_utils
+}  // namespace autoware_utils_diagnostics
