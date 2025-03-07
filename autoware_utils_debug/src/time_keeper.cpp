@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/system/time_keeper.hpp"
+#include "autoware_utils_debug/time_keeper.hpp"
 
 #include <rclcpp/logging.hpp>
 #include <rclcpp/rclcpp.hpp>
@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-namespace autoware_utils
+namespace autoware_utils_debug
 {
 
 ProcessingTimeNode::ProcessingTimeNode(const std::string & name) : name_(name)
@@ -202,4 +202,4 @@ ScopedTimeTrack::~ScopedTimeTrack()  // NOLINT
   time_keeper_.end_track(func_name_);
 }
 
-}  // namespace autoware_utils
+}  // namespace autoware_utils_debug

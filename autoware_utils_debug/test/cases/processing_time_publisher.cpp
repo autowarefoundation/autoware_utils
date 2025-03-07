@@ -12,17 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
-#define AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
+#include "autoware_utils_debug/processing_time_publisher.hpp"
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <gtest/gtest.h>
 
-#pragma message("#include <autoware_utils/ros/debug_publisher.hpp> is deprecated. Use #include <autoware_utils_debug/debug_publisher.hpp> instead.")
-#include <autoware_utils_debug/debug_publisher.hpp>
-namespace autoware_utils { using namespace autoware_utils_debug; }
+#include <memory>
 
-// clang-format on
-// NOLINTEND
+using autoware_utils_debug::ProcessingTimePublisher;
 
-#endif  // AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
+TEST(TestProcessingTimePublisher, Instantiation)
+{
+  const auto node = std::make_shared<rclcpp::Node>("test_node");
+  ProcessingTimePublisher(node.get());
+}

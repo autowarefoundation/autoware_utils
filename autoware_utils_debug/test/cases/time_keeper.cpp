@@ -12,17 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
-#define AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
+#include "autoware_utils_debug/time_keeper.hpp"
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <gtest/gtest.h>
 
-#pragma message("#include <autoware_utils/ros/debug_publisher.hpp> is deprecated. Use #include <autoware_utils_debug/debug_publisher.hpp> instead.")
-#include <autoware_utils_debug/debug_publisher.hpp>
-namespace autoware_utils { using namespace autoware_utils_debug; }
+using autoware_utils_debug::ScopedTimeTrack;
+using autoware_utils_debug::TimeKeeper;
 
-// clang-format on
-// NOLINTEND
-
-#endif  // AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
+TEST(TestTimeKeeper, Instantiation)
+{
+  TimeKeeper time_keeper;
+  ScopedTimeTrack st("test", time_keeper);
+}
