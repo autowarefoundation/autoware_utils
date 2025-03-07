@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,53 +15,14 @@
 #ifndef AUTOWARE_UTILS__ROS__PROCESSING_TIME_PUBLISHER_HPP_
 #define AUTOWARE_UTILS__ROS__PROCESSING_TIME_PUBLISHER_HPP_
 
-#include <rclcpp/rclcpp.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <diagnostic_msgs/msg/diagnostic_status.hpp>
+#pragma message("#include <autoware_utils/ros/processing_time_publisher.hpp> is deprecated. Use #include <autoware_utils_debug/processing_time_publisher.hpp> instead.")
+#include <autoware_utils_debug/processing_time_publisher.hpp>
+namespace autoware_utils { using namespace autoware_utils_debug; }
 
-#include <map>
-#include <sstream>
-#include <string>
-
-namespace autoware_utils
-{
-class ProcessingTimePublisher
-{
-public:
-  explicit ProcessingTimePublisher(
-    rclcpp::Node * node, const std::string & name = "~/debug/processing_time_ms",
-    const rclcpp::QoS & qos = rclcpp::QoS(1))
-  {
-    pub_processing_time_ =
-      node->create_publisher<diagnostic_msgs::msg::DiagnosticStatus>(name, qos);
-  }
-
-  void publish(const std::map<std::string, double> & processing_time_map)
-  {
-    diagnostic_msgs::msg::DiagnosticStatus status;
-
-    for (const auto & m : processing_time_map) {
-      diagnostic_msgs::msg::KeyValue key_value;
-      key_value.key = m.first;
-      key_value.value = to_string_with_precision(m.second, 3);
-      status.values.push_back(key_value);
-    }
-
-    pub_processing_time_->publish(status);
-  }
-
-private:
-  rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticStatus>::SharedPtr pub_processing_time_;
-
-  template <class T>
-  std::string to_string_with_precision(const T & value, const int precision)
-  {
-    std::ostringstream oss;
-    oss.precision(precision);
-    oss << std::fixed << value;
-    return oss.str();
-  }
-};
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__PROCESSING_TIME_PUBLISHER_HPP_
