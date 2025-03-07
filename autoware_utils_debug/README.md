@@ -28,7 +28,7 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("debug_node");
 
   // Initialize DebugPublisher
-  autoware_utils::DebugPublisher debug_pub(node, "/debug");
+  autoware_utils_debug::DebugPublisher debug_pub(node, "/debug");
 
   // Publish a debug message with custom type
   float debug_data = 42.0;
@@ -51,7 +51,7 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("processing_time_node");
 
   // Initialize ProcessingTimePublisher
-  autoware_utils::ProcessingTimePublisher processing_time_pub(node.get(), "~/debug/processing_time_ms");
+  autoware_utils_debug::ProcessingTimePublisher processing_time_pub(node.get(), "~/debug/processing_time_ms");
 
   // Simulate some processing times
   std::map<std::string, double> processing_times = {
