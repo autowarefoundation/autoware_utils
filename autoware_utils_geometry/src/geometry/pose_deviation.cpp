@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/geometry/pose_deviation.hpp"
+#include "autoware_utils_geometry/geometry/pose_deviation.hpp"
 
-#include "autoware_utils/math/normalization.hpp"
+#include "autoware_utils_math/normalization.hpp"
 
 #include <tf2/utils.h>
 
@@ -68,7 +68,7 @@ double calc_yaw_deviation(
 {
   const auto base_yaw = tf2::getYaw(base_pose.orientation);
   const auto target_yaw = tf2::getYaw(target_pose.orientation);
-  return normalize_radian(target_yaw - base_yaw);
+  return autoware_utils_math::normalize_radian(target_yaw - base_yaw);
 }
 
 PoseDeviation calc_pose_deviation(

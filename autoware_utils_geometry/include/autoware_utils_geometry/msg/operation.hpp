@@ -1,4 +1,4 @@
-// Copyright 2024 TIER IV, Inc.
+// Copyright 2022 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__GEOMETRY__SAT_2D_HPP_
-#define AUTOWARE_UTILS__GEOMETRY__SAT_2D_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__MSG__OPERATION_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__MSG__OPERATION_HPP_
 
-#include "autoware_utils/geometry/boost_geometry.hpp"
+#include "geometry_msgs/msg/quaternion.hpp"
 
-namespace autoware_utils::sat
+// NOTE: Do not use autoware_utils namespace
+namespace geometry_msgs
 {
-/**
- * @brief Check if 2 convex polygons intersect using the SAT algorithm
- * @details faster than boost::geometry::overlap() but speed decline sharply as vertices increase
- */
-bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
+namespace msg
+{
+Quaternion operator+(Quaternion a, Quaternion b) noexcept;
+Quaternion operator-(Quaternion a) noexcept;
+Quaternion operator-(Quaternion a, Quaternion b) noexcept;
+}  // namespace msg
+}  // namespace geometry_msgs
 
-}  // namespace autoware_utils::sat
-
-#endif  // AUTOWARE_UTILS__GEOMETRY__SAT_2D_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__MSG__OPERATION_HPP_

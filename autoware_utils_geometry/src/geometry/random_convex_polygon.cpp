@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/geometry/random_convex_polygon.hpp"
+#include "autoware_utils_geometry/geometry/random_convex_polygon.hpp"
 
 #include <boost/geometry/algorithms/correct.hpp>
 

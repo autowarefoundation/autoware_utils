@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/geometry/alt_geometry.hpp"
+#include "autoware_utils_geometry/geometry/alt_geometry.hpp"
 
 #include <algorithm>
 #include <limits>

@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__GEOMETRY__GEOMETRY_HPP_
-#define AUTOWARE_UTILS__GEOMETRY__GEOMETRY_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_
 
-#include "autoware_utils/geometry/boost_geometry.hpp"
-#include "autoware_utils/math/constants.hpp"
-#include "autoware_utils/math/normalization.hpp"
-#include "autoware_utils/ros/msg_covariance.hpp"
+#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
+#include "autoware_utils_geometry/msg/covariance.hpp"
+#include "autoware_utils_math/constants.hpp"
+#include "autoware_utils_math/normalization.hpp"
 
 #include <exception>
 #include <string>
@@ -98,6 +98,11 @@ inline void doTransform(
 
 namespace autoware_utils
 {
+
+// TODO(Takagi, Isamu): Move to each function.
+using autoware_utils_math::normalize_radian;
+using autoware_utils_math::pi;
+
 template <class T>
 geometry_msgs::msg::Point get_point(const T & p)
 {
@@ -590,4 +595,4 @@ bool intersects_convex(const Polygon2d & convex_polygon1, const Polygon2d & conv
 
 }  // namespace autoware_utils
 
-#endif  // AUTOWARE_UTILS__GEOMETRY__GEOMETRY_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_

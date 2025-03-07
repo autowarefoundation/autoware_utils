@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/geometry/gjk_2d.hpp"
+#include "autoware_utils_geometry/geometry/gjk_2d.hpp"
 
-#include "autoware_utils/geometry/boost_geometry.hpp"
+#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
 
 #include <boost/geometry/algorithms/equals.hpp>
 

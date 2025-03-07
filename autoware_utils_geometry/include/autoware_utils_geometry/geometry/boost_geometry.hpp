@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__GEOMETRY__BOOST_GEOMETRY_HPP_
-#define AUTOWARE_UTILS__GEOMETRY__BOOST_GEOMETRY_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_GEOMETRY_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_GEOMETRY_HPP_
 
 #include <boost/geometry/core/cs.hpp>
 #include <boost/geometry/geometries/geometries.hpp>
@@ -101,4 +101,4 @@ BOOST_GEOMETRY_REGISTER_POINT_3D(                                 // NOLINT
   autoware_utils::Point3d, double, cs::cartesian, x(), y(), z())  // NOLINT
 BOOST_GEOMETRY_REGISTER_RING(autoware_utils::LinearRing2d)        // NOLINT
 
-#endif  // AUTOWARE_UTILS__GEOMETRY__BOOST_GEOMETRY_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_GEOMETRY_HPP_

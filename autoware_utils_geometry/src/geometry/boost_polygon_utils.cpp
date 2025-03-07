@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/geometry/boost_polygon_utils.hpp"
+#include "autoware_utils_geometry/geometry/boost_polygon_utils.hpp"
 
-#include "autoware_utils/geometry/geometry.hpp"
+#include "autoware_utils_geometry/geometry/geometry.hpp"
 
 #include <boost/geometry/geometry.hpp>
 

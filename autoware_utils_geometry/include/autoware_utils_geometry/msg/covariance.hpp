@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__MSG_COVARIANCE_HPP_
-#define AUTOWARE_UTILS__ROS__MSG_COVARIANCE_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__MSG__COVARIANCE_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__MSG__COVARIANCE_HPP_
 
 namespace autoware_utils
 {
@@ -117,4 +117,4 @@ enum XYZ_UPPER_COV_IDX {
 }  // namespace xyz_upper_covariance_index
 }  // namespace autoware_utils
 
-#endif  // AUTOWARE_UTILS__ROS__MSG_COVARIANCE_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__MSG__COVARIANCE_HPP_

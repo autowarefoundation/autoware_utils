@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
-#define AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
 
-#include <autoware_utils/geometry/geometry.hpp>
+#include <autoware_utils_geometry/geometry/geometry.hpp>
 
 namespace autoware_utils
 {
@@ -26,4 +26,4 @@ namespace autoware_utils
 Polygon2d random_convex_polygon(const size_t vertices, const double max);
 }  // namespace autoware_utils
 
-#endif  // AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
