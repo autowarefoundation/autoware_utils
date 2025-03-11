@@ -69,17 +69,17 @@ int main(int argc, char * argv[]) {
   auto node = rclcpp::Node::make_shared("polygon_node");
 
   // Create a polygon
-  autoware_utils::Polygon2d polygon;
+  autoware_utils_geometry::Polygon2d polygon;
   // Assume polygon is populated with points
 
   // Rotate the polygon by 90 degrees
-  autoware_utils::Polygon2d rotated_polygon = autoware_utils::rotate_polygon(polygon, M_PI / 2);
+  autoware_utils_geometry::Polygon2d rotated_polygon = autoware_utils_geometry::rotate_polygon(polygon, M_PI / 2);
 
   // Expand the polygon by an offset
-  autoware_utils::Polygon2d expanded_polygon = autoware_utils::expand_polygon(polygon, 1.0);
+  autoware_utils_geometry::Polygon2d expanded_polygon = autoware_utils_geometry::expand_polygon(polygon, 1.0);
 
   // Check if the polygon is clockwise
-  bool is_clockwise = autoware_utils::is_clockwise(polygon);
+  bool is_clockwise = autoware_utils_geometry::is_clockwise(polygon);
 
   rclcpp::shutdown();
   return 0;

@@ -213,7 +213,7 @@ geometry_msgs::msg::Point32 transform_point(
 {
   const auto point =
     geometry_msgs::build<geometry_msgs::msg::Point>().x(point32.x).y(point32.y).z(point32.z);
-  const auto transformed_point = autoware_utils::transform_point(point, pose);
+  const auto transformed_point = autoware_utils_geometry::transform_point(point, pose);
   return geometry_msgs::build<geometry_msgs::msg::Point32>()
     .x(transformed_point.x)
     .y(transformed_point.y)

@@ -95,10 +95,10 @@ inline Point3d from_msg(const geometry_msgs::msg::Point & msg)
 }
 }  // namespace autoware_utils_geometry
 
-BOOST_GEOMETRY_REGISTER_POINT_2D(                                 // NOLINT
-  autoware_utils::Point2d, double, cs::cartesian, x(), y())       // NOLINT
-BOOST_GEOMETRY_REGISTER_POINT_3D(                                 // NOLINT
-  autoware_utils::Point3d, double, cs::cartesian, x(), y(), z())  // NOLINT
-BOOST_GEOMETRY_REGISTER_RING(autoware_utils::LinearRing2d)        // NOLINT
+BOOST_GEOMETRY_REGISTER_POINT_2D(                                          // NOLINT
+  autoware_utils_geometry::Point2d, double, cs::cartesian, x(), y())       // NOLINT
+BOOST_GEOMETRY_REGISTER_POINT_3D(                                          // NOLINT
+  autoware_utils_geometry::Point3d, double, cs::cartesian, x(), y(), z())  // NOLINT
+BOOST_GEOMETRY_REGISTER_RING(autoware_utils_geometry::LinearRing2d)        // NOLINT
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_GEOMETRY_HPP_

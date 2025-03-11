@@ -23,8 +23,8 @@
 namespace
 {
 namespace bg = boost::geometry;
-using autoware_utils::Point2d;
-using autoware_utils::Polygon2d;
+using autoware_utils_geometry::Point2d;
+using autoware_utils_geometry::Polygon2d;
 
 void append_point_to_polygon(Polygon2d & polygon, const geometry_msgs::msg::Point & geom_point)
 {
@@ -123,16 +123,16 @@ Polygon2d to_polygon2d(
   Polygon2d polygon;
 
   if (shape.type == autoware_perception_msgs::msg::Shape::BOUNDING_BOX) {
-    const auto point0 = autoware_utils::calc_offset_pose(
+    const auto point0 = autoware_utils_geometry::calc_offset_pose(
                           pose, shape.dimensions.x / 2.0, shape.dimensions.y / 2.0, 0.0)
                           .position;
-    const auto point1 = autoware_utils::calc_offset_pose(
+    const auto point1 = autoware_utils_geometry::calc_offset_pose(
                           pose, -shape.dimensions.x / 2.0, shape.dimensions.y / 2.0, 0.0)
                           .position;
-    const auto point2 = autoware_utils::calc_offset_pose(
+    const auto point2 = autoware_utils_geometry::calc_offset_pose(
                           pose, -shape.dimensions.x / 2.0, -shape.dimensions.y / 2.0, 0.0)
                           .position;
-    const auto point3 = autoware_utils::calc_offset_pose(
+    const auto point3 = autoware_utils_geometry::calc_offset_pose(
                           pose, shape.dimensions.x / 2.0, -shape.dimensions.y / 2.0, 0.0)
                           .position;
 
@@ -179,20 +179,24 @@ Polygon2d to_polygon2d(
   return is_clockwise(polygon) ? polygon : inverse_clockwise(polygon);
 }
 
-autoware_utils::Polygon2d to_polygon2d(const autoware_perception_msgs::msg::DetectedObject & object)
+autoware_utils_geometry::Polygon2d to_polygon2d(
+  const autoware_perception_msgs::msg::DetectedObject & object)
 {
-  return autoware_utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
+  return autoware_utils_geometry::to_polygon2d(
+    object.kinematics.pose_with_covariance.pose, object.shape);
 }
 
-autoware_utils::Polygon2d to_polygon2d(const autoware_perception_msgs::msg::TrackedObject & object)
+autoware_utils_geometry::Polygon2d to_polygon2d(
+  const autoware_perception_msgs::msg::TrackedObject & object)
 {
-  return autoware_utils::to_polygon2d(object.kinematics.pose_with_covariance.pose, object.shape);
+  return autoware_utils_geometry::to_polygon2d(
+    object.kinematics.pose_with_covariance.pose, object.shape);
 }
 
-autoware_utils::Polygon2d to_polygon2d(
+autoware_utils_geometry::Polygon2d to_polygon2d(
   const autoware_perception_msgs::msg::PredictedObject & object)
 {
-  return autoware_utils::to_polygon2d(
+  return autoware_utils_geometry::to_polygon2d(
     object.kinematics.initial_pose_with_covariance.pose, object.shape);
 }
 
@@ -200,15 +204,12 @@ Polygon2d to_footprint(
   const geometry_msgs::msg::Pose & base_link_pose, const double base_to_front,
   const double base_to_rear, const double width)
 {
+  using autoware_utils_geometry::calc_offset_pose;
   Polygon2d polygon;
-  const auto point0 =
-    autoware_utils::calc_offset_pose(base_link_pose, base_to_front, width / 2.0, 0.0).position;
-  const auto point1 =
-    autoware_utils::calc_offset_pose(base_link_pose, base_to_front, -width / 2.0, 0.0).position;
-  const auto point2 =
-    autoware_utils::calc_offset_pose(base_link_pose, -base_to_rear, -width / 2.0, 0.0).position;
-  const auto point3 =
-    autoware_utils::calc_offset_pose(base_link_pose, -base_to_rear, width / 2.0, 0.0).position;
+  const auto point0 = calc_offset_pose(base_link_pose, base_to_front, width / 2.0, 0.0).position;
+  const auto point1 = calc_offset_pose(base_link_pose, base_to_front, -width / 2.0, 0.0).position;
+  const auto point2 = calc_offset_pose(base_link_pose, -base_to_rear, -width / 2.0, 0.0).position;
+  const auto point3 = calc_offset_pose(base_link_pose, -base_to_rear, width / 2.0, 0.0).position;
 
   append_point_to_polygon(polygon, point0);
   append_point_to_polygon(polygon, point1);

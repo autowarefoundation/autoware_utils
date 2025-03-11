@@ -62,7 +62,8 @@ std::optional<Polygon2d> Polygon2d::create(
   return poly;
 }
 
-std::optional<Polygon2d> Polygon2d::create(const autoware_utils::Polygon2d & polygon) noexcept
+std::optional<Polygon2d> Polygon2d::create(
+  const autoware_utils_geometry::Polygon2d & polygon) noexcept
 {
   PointList2d outer;
   for (const auto & point : polygon.outer()) {
@@ -84,16 +85,16 @@ std::optional<Polygon2d> Polygon2d::create(const autoware_utils::Polygon2d & pol
   return Polygon2d::create(outer, inners);
 }
 
-autoware_utils::Polygon2d Polygon2d::to_boost() const
+autoware_utils_geometry::Polygon2d Polygon2d::to_boost() const
 {
-  autoware_utils::Polygon2d polygon;
+  autoware_utils_geometry::Polygon2d polygon;
 
   for (const auto & point : outer_) {
     polygon.outer().emplace_back(point.x(), point.y());
   }
 
   for (const auto & inner : inners_) {
-    autoware_utils::LinearRing2d _inner;
+    autoware_utils_geometry::LinearRing2d _inner;
     for (const auto & point : inner) {
       _inner.emplace_back(point.x(), point.y());
     }
@@ -136,7 +137,7 @@ std::optional<ConvexPolygon2d> ConvexPolygon2d::create(PointList2d && vertices) 
 }
 
 std::optional<ConvexPolygon2d> ConvexPolygon2d::create(
-  const autoware_utils::Polygon2d & polygon) noexcept
+  const autoware_utils_geometry::Polygon2d & polygon) noexcept
 {
   PointList2d vertices;
   for (const auto & point : polygon.outer()) {
