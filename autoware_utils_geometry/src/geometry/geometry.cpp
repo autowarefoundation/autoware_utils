@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils_geometry/geometry/geometry.hpp"
+#include "autoware_utils_geometry/geometry.hpp"
 
-#include "autoware_utils_geometry/geometry/gjk_2d.hpp"
+#include "autoware_utils_geometry/gjk_2d.hpp"
 
 #include <Eigen/Geometry>
 

@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GJK_2D_HPP_
-#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GJK_2D_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__GJK_2D_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__GJK_2D_HPP_
 
-#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
+#include <autoware_utils_geometry/boost_geometry.hpp>
 
 namespace autoware_utils_geometry::gjk
 {
@@ -26,4 +26,4 @@ namespace autoware_utils_geometry::gjk
 bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
 }  // namespace autoware_utils_geometry::gjk
 
-#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GJK_2D_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__GJK_2D_HPP_

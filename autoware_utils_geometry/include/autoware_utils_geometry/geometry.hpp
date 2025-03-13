@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_
-#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY_HPP_
 
-#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
+#include "autoware_utils_geometry/boost_geometry.hpp"
 #include "autoware_utils_geometry/msg/covariance.hpp"
 #include "autoware_utils_math/constants.hpp"
 #include "autoware_utils_math/normalization.hpp"
@@ -595,4 +595,4 @@ bool intersects_convex(const Polygon2d & convex_polygon1, const Polygon2d & conv
 
 }  // namespace autoware_utils_geometry
 
-#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__GEOMETRY_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY_HPP_

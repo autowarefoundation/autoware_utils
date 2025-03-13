@@ -18,7 +18,7 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#include <autoware_utils_geometry/geometry/boost_polygon_utils.hpp>
+#include <autoware_utils_geometry/boost_polygon_utils.hpp>
 namespace autoware_utils { using namespace autoware_utils_geometry; }
 
 // clang-format on

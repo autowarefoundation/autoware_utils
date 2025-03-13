@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__POSE_DEVIATION_HPP_
-#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__POSE_DEVIATION_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__POSE_DEVIATION_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__POSE_DEVIATION_HPP_
 
 #include <geometry_msgs/msg/point.hpp>
 #include <geometry_msgs/msg/pose.hpp>
@@ -41,4 +41,4 @@ PoseDeviation calc_pose_deviation(
 
 }  // namespace autoware_utils_geometry
 
-#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__POSE_DEVIATION_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__POSE_DEVIATION_HPP_

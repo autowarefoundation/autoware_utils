@@ -18,7 +18,7 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#include <autoware_utils_geometry/geometry/pose_deviation.hpp>
+#include <autoware_utils_geometry/pose_deviation.hpp>
 namespace autoware_utils { using namespace autoware_utils_geometry; }
 
 // clang-format on
