@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__EAR_CLIPPING_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__EAR_CLIPPING_HPP_
 
-#include "autoware_utils_geometry/geometry/alt_geometry.hpp"
+#include "autoware_utils_geometry/alt_geometry.hpp"
 
 #include <optional>
 #include <vector>

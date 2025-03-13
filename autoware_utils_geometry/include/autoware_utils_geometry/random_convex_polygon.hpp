@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
 
-#include <autoware_utils_geometry/geometry/geometry.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
 
 namespace autoware_utils_geometry
 {

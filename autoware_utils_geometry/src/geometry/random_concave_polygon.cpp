@@ -12,9 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils_geometry/geometry/random_concave_polygon.hpp"
+#include "autoware_utils_geometry/random_concave_polygon.hpp"
 
-#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
+#include "autoware_utils_geometry/boost_geometry.hpp"
 
 #include <boost/geometry/algorithms/convex_hull.hpp>
 #include <boost/geometry/algorithms/correct.hpp>

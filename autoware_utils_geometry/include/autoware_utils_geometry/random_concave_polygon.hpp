@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
 
-#include <autoware_utils_geometry/geometry/geometry.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
 
 #include <optional>
 #include <vector>

@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__GJK_2D_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__GJK_2D_HPP_
 
-#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
+#include <autoware_utils_geometry/boost_geometry.hpp>
 
 namespace autoware_utils_geometry::gjk
 {

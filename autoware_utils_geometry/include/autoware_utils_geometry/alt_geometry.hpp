@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__ALT_GEOMETRY_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__ALT_GEOMETRY_HPP_
 
-#include "autoware_utils_geometry/geometry/boost_geometry.hpp"
+#include "autoware_utils_geometry/boost_geometry.hpp"
 
 #include <list>
 #include <optional>
