@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__EAR_CLIPPING_HPP_
-#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__EAR_CLIPPING_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__EAR_CLIPPING_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__EAR_CLIPPING_HPP_
 
 #include "autoware_utils_geometry/geometry/alt_geometry.hpp"
 
@@ -103,4 +103,4 @@ std::vector<alt::ConvexPolygon2d> triangulate(const alt::Polygon2d & polygon);
 std::vector<Polygon2d> triangulate(const Polygon2d & polygon);
 }  // namespace autoware_utils_geometry
 
-#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__EAR_CLIPPING_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__EAR_CLIPPING_HPP_

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_POLYGON_UTILS_HPP_
-#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_POLYGON_UTILS_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__BOOST_POLYGON_UTILS_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__BOOST_POLYGON_UTILS_HPP_
 
 #include "autoware_utils_geometry/geometry/boost_geometry.hpp"
 
@@ -49,4 +49,4 @@ double get_area(const autoware_perception_msgs::msg::Shape & shape);
 Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset);
 }  // namespace autoware_utils_geometry
 
-#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__BOOST_POLYGON_UTILS_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__BOOST_POLYGON_UTILS_HPP_

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
-#define AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
+#ifndef AUTOWARE_UTILS_GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
+#define AUTOWARE_UTILS_GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
 
 #include <autoware_utils_geometry/geometry/geometry.hpp>
 
@@ -44,4 +44,4 @@ bool test_intersection(
 
 }  // namespace autoware_utils_geometry
 
-#endif  // AUTOWARE_UTILS_GEOMETRY__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
+#endif  // AUTOWARE_UTILS_GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_

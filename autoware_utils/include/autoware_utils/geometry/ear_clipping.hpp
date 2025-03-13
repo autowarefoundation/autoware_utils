@@ -18,7 +18,7 @@
 // NOLINTBEGIN(build/namespaces, whitespace/line_length)
 // clang-format off
 
-#include <autoware_utils_geometry/geometry/ear_clipping.hpp>
+#include <autoware_utils_geometry/ear_clipping.hpp>
 namespace autoware_utils { using namespace autoware_utils_geometry; }
 
 // clang-format on
