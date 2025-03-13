@@ -9,3 +9,4 @@ It is extensively used in the Autoware project to handle common tasks such as ma
 ## Design
 
 - **`transform_listener.hpp`**: Manages transformation listeners.
+- **`self_pose_listener.hpp`**: Listens to the self-pose of the vehicle.

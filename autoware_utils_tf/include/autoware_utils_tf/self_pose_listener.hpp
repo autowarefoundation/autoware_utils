@@ -12,17 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
-#define AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
+#ifndef AUTOWARE_UTILS_TF__SELF_POSE_LISTENER_HPP_
+#define AUTOWARE_UTILS_TF__SELF_POSE_LISTENER_HPP_
 
-#include "autoware_utils/geometry/geometry.hpp"
-#include "autoware_utils/ros/transform_listener.hpp"
-
+#include <autoware_utils_geometry/geometry/geometry.hpp>
+#include <autoware_utils_tf/transform_listener.hpp>
 #include <rclcpp/rclcpp.hpp>
+
+#include <geometry_msgs/msg/pose_stamped.hpp>
 
 #include <memory>
 
-namespace autoware_utils
+namespace autoware_utils_tf
 {
 class SelfPoseListener
 {
@@ -47,12 +48,13 @@ public:
       return {};
     }
 
-    return std::make_shared<const geometry_msgs::msg::PoseStamped>(transform2pose(*tf));
+    return std::make_shared<const geometry_msgs::msg::PoseStamped>(
+      autoware_utils_geometry::transform2pose(*tf));
   }
 
 private:
   TransformListener transform_listener_;
 };
-}  // namespace autoware_utils
+}  // namespace autoware_utils_tf
 
-#endif  // AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
+#endif  // AUTOWARE_UTILS_TF__SELF_POSE_LISTENER_HPP_
