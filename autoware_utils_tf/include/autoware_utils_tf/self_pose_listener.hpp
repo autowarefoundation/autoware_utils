@@ -15,7 +15,7 @@
 #ifndef AUTOWARE_UTILS_TF__SELF_POSE_LISTENER_HPP_
 #define AUTOWARE_UTILS_TF__SELF_POSE_LISTENER_HPP_
 
-#include <autoware_utils_geometry/geometry/geometry.hpp>
+#include <autoware_utils_geometry/geometry.hpp>
 #include <autoware_utils_tf/transform_listener.hpp>
 #include <rclcpp/rclcpp.hpp>
 
