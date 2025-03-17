@@ -66,8 +66,8 @@ class ManagedTransformBuffer
 public:
   explicit ManagedTransformBuffer(
     rclcpp::Node * node, const bool & has_static_tf_only,
-    [[maybe_unused]] const rclcpp::Time & lookup_time = rclcpp::Time(0))
-  : node_(node)
+    const bool & use_pc_stamp_for_lookup = false)
+  : use_pc_stamp_for_lookup_(use_pc_stamp_for_lookup), node_(node)
   {
     if (has_static_tf_only) {
       get_transform_ = [this](
@@ -115,7 +115,10 @@ public:
       return true;
     }
     Eigen::Matrix4f eigen_transform;
-    rclcpp::Time lookup_time = rclcpp::Time(cloud_in.header.stamp);
+    rclcpp::Time lookup_time{rclcpp::Time(0)};
+    if (use_pc_stamp_for_lookup_) {
+      lookup_time = rclcpp::Time(cloud_in.header.stamp);
+    }
     if (!get_transform(target_frame, cloud_in.header.frame_id, lookup_time, eigen_transform)) {
       return false;
     }
@@ -221,6 +224,7 @@ private:
   }
 
   TFMap buffer_;
+  bool use_pc_stamp_for_lookup_;
   rclcpp::Node * const node_;
   std::unique_ptr<autoware_utils::TransformListener> tf_listener_;
   std::function<bool(
