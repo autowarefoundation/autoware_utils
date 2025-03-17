@@ -64,30 +64,32 @@ constexpr std::array<std::string_view, 3> warn_frames = {"map", "odom", "world"}
 class ManagedTransformBuffer
 {
 public:
-  explicit ManagedTransformBuffer(rclcpp::Node * node, const bool & has_static_tf_only)
+  explicit ManagedTransformBuffer(
+    rclcpp::Node * node, const bool & has_static_tf_only,
+    [[maybe_unused]] const rclcpp::Time & lookup_time = rclcpp::Time(0))
   : node_(node)
   {
     if (has_static_tf_only) {
       get_transform_ = [this](
                          const std::string & target_frame, const std::string & source_frame,
-                         Eigen::Matrix4f & eigen_transform) {
-        return get_static_transform(target_frame, source_frame, eigen_transform);
+                         const rclcpp::Time & lookup_time, Eigen::Matrix4f & eigen_transform) {
+        return get_static_transform(target_frame, source_frame, lookup_time, eigen_transform);
       };
     } else {
       tf_listener_ = std::make_unique<autoware_utils::TransformListener>(node);
       get_transform_ = [this](
                          const std::string & target_frame, const std::string & source_frame,
-                         Eigen::Matrix4f & eigen_transform) {
-        return get_dynamic_transform(target_frame, source_frame, eigen_transform);
+                         const rclcpp::Time & lookup_time, Eigen::Matrix4f & eigen_transform) {
+        return get_dynamic_transform(target_frame, source_frame, lookup_time, eigen_transform);
       };
     }
   }
 
   bool get_transform(
     const std::string & target_frame, const std::string & source_frame,
-    Eigen::Matrix4f & eigen_transform)
+    const rclcpp::Time & lookup_time, Eigen::Matrix4f & eigen_transform)
   {
-    return get_transform_(target_frame, source_frame, eigen_transform);
+    return get_transform_(target_frame, source_frame, lookup_time, eigen_transform);
   }
 
   /**
@@ -113,7 +115,8 @@ public:
       return true;
     }
     Eigen::Matrix4f eigen_transform;
-    if (!get_transform(target_frame, cloud_in.header.frame_id, eigen_transform)) {
+    rclcpp::Time lookup_time = rclcpp::Time(cloud_in.header.stamp);
+    if (!get_transform(target_frame, cloud_in.header.frame_id, lookup_time, eigen_transform)) {
       return false;
     }
     pcl_ros::transformPointCloud(eigen_transform, cloud_in, cloud_out);
@@ -138,7 +141,7 @@ private:
    */
   bool get_static_transform(
     const std::string & target_frame, const std::string & source_frame,
-    Eigen::Matrix4f & eigen_transform)
+    [[maybe_unused]] const rclcpp::Time & lookup_time, Eigen::Matrix4f & eigen_transform)
   {
     if (
       std::find(warn_frames.begin(), warn_frames.end(), target_frame) != warn_frames.end() ||
@@ -205,10 +208,10 @@ private:
    */
   bool get_dynamic_transform(
     const std::string & target_frame, const std::string & source_frame,
-    Eigen::Matrix4f & eigen_transform)
+    const rclcpp::Time & lookup_time, Eigen::Matrix4f & eigen_transform)
   {
     auto tf = tf_listener_->get_transform(
-      target_frame, source_frame, rclcpp::Time(0), rclcpp::Duration(1000ms));
+      target_frame, source_frame, lookup_time, rclcpp::Duration(1000ms));
     if (tf == nullptr) {
       eigen_transform = Eigen::Matrix4f::Identity();
       return false;
@@ -220,7 +223,9 @@ private:
   TFMap buffer_;
   rclcpp::Node * const node_;
   std::unique_ptr<autoware_utils::TransformListener> tf_listener_;
-  std::function<bool(const std::string &, const std::string &, Eigen::Matrix4f &)> get_transform_;
+  std::function<bool(
+    const std::string &, const std::string &, const rclcpp::Time &, Eigen::Matrix4f &)>
+    get_transform_;
 };
 
 }  // namespace autoware_utils
