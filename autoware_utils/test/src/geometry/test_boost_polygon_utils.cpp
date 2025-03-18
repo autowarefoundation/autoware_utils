@@ -23,7 +23,7 @@ using autoware_utils::Polygon2d;
 
 namespace
 {
-geometry_msgs::msg::Point32 createPoint32(const double x, const double y)
+geometry_msgs::msg::Point32 create_point32(const double x, const double y)
 {
   geometry_msgs::msg::Point32 p;
   p.x = x;
@@ -33,7 +33,7 @@ geometry_msgs::msg::Point32 createPoint32(const double x, const double y)
   return p;
 }
 
-geometry_msgs::msg::Pose createPose(const double x, const double y, const double yaw)
+geometry_msgs::msg::Pose create_pose(const double x, const double y, const double yaw)
 {
   geometry_msgs::msg::Pose p;
   p.position.x = x;
@@ -109,11 +109,11 @@ TEST(boost_geometry, boost_rotate_polygon)
 
   // normal case
   geometry_msgs::msg::Polygon clock_wise_polygon;
-  clock_wise_polygon.points.push_back(createPoint32(0.0, 0.0));
-  clock_wise_polygon.points.push_back(createPoint32(0.0, 1.0));
-  clock_wise_polygon.points.push_back(createPoint32(1.0, 1.0));
-  clock_wise_polygon.points.push_back(createPoint32(1.0, 0.0));
-  clock_wise_polygon.points.push_back(createPoint32(0.0, 0.0));
+  clock_wise_polygon.points.push_back(create_point32(0.0, 0.0));
+  clock_wise_polygon.points.push_back(create_point32(0.0, 1.0));
+  clock_wise_polygon.points.push_back(create_point32(1.0, 1.0));
+  clock_wise_polygon.points.push_back(create_point32(1.0, 0.0));
+  clock_wise_polygon.points.push_back(create_point32(0.0, 0.0));
   const auto rotated_clock_wise_polygon = rotate_polygon(clock_wise_polygon, M_PI_4);
 
   EXPECT_DOUBLE_EQ(rotated_clock_wise_polygon.points.at(0).x, 0.0);
@@ -136,7 +136,7 @@ TEST(boost_geometry, boost_to_polygon2d)
     const double x = 1.0;
     const double y = 1.0;
 
-    const auto pose = createPose(1.0, 1.0, M_PI_4);
+    const auto pose = create_pose(1.0, 1.0, M_PI_4);
     autoware_perception_msgs::msg::Shape shape;
     shape.type = autoware_perception_msgs::msg::Shape::BOUNDING_BOX;
     shape.dimensions.x = x;
@@ -158,7 +158,7 @@ TEST(boost_geometry, boost_to_polygon2d)
   {  // cylinder
     const double diameter = 1.0;
 
-    const auto pose = createPose(1.0, 1.0, M_PI_4);
+    const auto pose = create_pose(1.0, 1.0, M_PI_4);
     autoware_perception_msgs::msg::Shape shape;
     shape.type = autoware_perception_msgs::msg::Shape::CYLINDER;
     shape.dimensions.x = diameter;
@@ -182,13 +182,13 @@ TEST(boost_geometry, boost_to_polygon2d)
     const double x = 0.5;
     const double y = 0.5;
 
-    const auto pose = createPose(1.0, 1.0, M_PI_4);
+    const auto pose = create_pose(1.0, 1.0, M_PI_4);
     autoware_perception_msgs::msg::Shape shape;
     shape.type = autoware_perception_msgs::msg::Shape::POLYGON;
-    shape.footprint.points.push_back(createPoint32(-x, -y));
-    shape.footprint.points.push_back(createPoint32(-x, y));
-    shape.footprint.points.push_back(createPoint32(x, y));
-    shape.footprint.points.push_back(createPoint32(x, -y));
+    shape.footprint.points.push_back(create_point32(-x, -y));
+    shape.footprint.points.push_back(create_point32(-x, y));
+    shape.footprint.points.push_back(create_point32(x, y));
+    shape.footprint.points.push_back(create_point32(x, -y));
 
     const auto poly = to_polygon2d(pose, shape);
     EXPECT_DOUBLE_EQ(poly.outer().at(0).x(), 1.0);
@@ -213,7 +213,7 @@ TEST(boost_geometry, boost_to_footprint)
     const double x = 1.0;
     const double y = 1.0;
 
-    const auto base_link_pose = createPose(1.0, 1.0, M_PI_4);
+    const auto base_link_pose = create_pose(1.0, 1.0, M_PI_4);
     const double base_to_front = 4.0;
     const double base_to_back = 1.0;
     const double width = 2.0;
@@ -267,10 +267,10 @@ TEST(boost_geometry, boost_get_area)
     // clock wise
     autoware_perception_msgs::msg::Shape clock_wise_shape;
     clock_wise_shape.type = autoware_perception_msgs::msg::Shape::POLYGON;
-    clock_wise_shape.footprint.points.push_back(createPoint32(0.0, 0.0));
-    clock_wise_shape.footprint.points.push_back(createPoint32(0.0, y));
-    clock_wise_shape.footprint.points.push_back(createPoint32(x, y));
-    clock_wise_shape.footprint.points.push_back(createPoint32(x, 0.0));
+    clock_wise_shape.footprint.points.push_back(create_point32(0.0, 0.0));
+    clock_wise_shape.footprint.points.push_back(create_point32(0.0, y));
+    clock_wise_shape.footprint.points.push_back(create_point32(x, y));
+    clock_wise_shape.footprint.points.push_back(create_point32(x, 0.0));
 
     const double clock_wise_area = get_area(clock_wise_shape);
     EXPECT_DOUBLE_EQ(clock_wise_area, -x * y);
@@ -278,10 +278,10 @@ TEST(boost_geometry, boost_get_area)
     // anti clock wise
     autoware_perception_msgs::msg::Shape anti_clock_wise_shape;
     anti_clock_wise_shape.type = autoware_perception_msgs::msg::Shape::POLYGON;
-    anti_clock_wise_shape.footprint.points.push_back(createPoint32(0.0, 0.0));
-    anti_clock_wise_shape.footprint.points.push_back(createPoint32(x, 0.0));
-    anti_clock_wise_shape.footprint.points.push_back(createPoint32(x, y));
-    anti_clock_wise_shape.footprint.points.push_back(createPoint32(0.0, y));
+    anti_clock_wise_shape.footprint.points.push_back(create_point32(0.0, 0.0));
+    anti_clock_wise_shape.footprint.points.push_back(create_point32(x, 0.0));
+    anti_clock_wise_shape.footprint.points.push_back(create_point32(x, y));
+    anti_clock_wise_shape.footprint.points.push_back(create_point32(0.0, y));
 
     const double anti_clock_wise_area = get_area(anti_clock_wise_shape);
     EXPECT_DOUBLE_EQ(anti_clock_wise_area, x * y);
