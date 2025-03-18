@@ -1,5 +1,15 @@
-# autoware_utils Library
+# autoware_utils
 
-## Overview
+This package is deprecated and kept for compatibility. Use separate packages for each feature instead.
 
-The **autoware_utils** library is a comprehensive toolkit designed to facilitate the development of autonomous driving applications. This library provides essential utilities for geometry, mathematics, ROS (Robot Operating System) expansions, diagnostics, and more. It is extensively used in the Autoware project to handle common tasks such as geometric calculations, data normalization, message conversions, performance monitoring, and point cloud transformations.
+- [autoware_utils_debug](../autoware_utils_debug/README.md)
+- [autoware_utils_diagnostics](../autoware_utils_diagnostics/README.md)
+- [autoware_utils_geometry](../autoware_utils_geometry/README.md)
+- [autoware_utils_logging](../autoware_utils_logging/README.md)
+- [autoware_utils_math](../autoware_utils_math/README.md)
+- [autoware_utils_pcl](../autoware_utils_pcl/README.md)
+- [autoware_utils_rclcpp](../autoware_utils_rclcpp/README.md)
+- [autoware_utils_system](../autoware_utils_system/README.md)
+- [autoware_utils_tf](../autoware_utils_tf/README.md)
+- [autoware_utils_uuid](../autoware_utils_uuid/README.md)
+- [autoware_utils_visualization](../autoware_utils_visualization/README.md)
