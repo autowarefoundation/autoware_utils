@@ -18,4 +18,5 @@
 
 TEST(TestSelfPoseListener, Main)
 {
+  // TODO(Takagi, Isamu): Add test cases. Currently, we are only checking whether it can be built.
 }
