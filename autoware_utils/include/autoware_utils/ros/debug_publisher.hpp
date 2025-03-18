@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,63 +15,13 @@
 #ifndef AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
 #define AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_
 
-#include "autoware_utils/ros/debug_traits.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <rclcpp/publisher_base.hpp>
-#include <rclcpp/rclcpp.hpp>
-#include <rosidl_runtime_cpp/traits.hpp>
+#include <autoware_utils_debug/debug_publisher.hpp>
+namespace autoware_utils { using namespace autoware_utils_debug; }
 
-#include <memory>
-#include <string>
-#include <unordered_map>
-
-namespace autoware_utils
-{
-namespace debug_publisher
-{
-template <
-  class T_msg, class T,
-  std::enable_if_t<autoware_utils::debug_traits::is_debug_message<T_msg>::value, std::nullptr_t> =
-    nullptr>
-T_msg to_debug_msg(const T & data, const rclcpp::Time & stamp)
-{
-  T_msg msg;
-  msg.stamp = stamp;
-  msg.data = data;
-  return msg;
-}
-}  // namespace debug_publisher
-
-class DebugPublisher
-{
-public:
-  explicit DebugPublisher(rclcpp::Node * node, const char * ns) : node_(node), ns_(ns) {}
-
-  template <
-    class T,
-    std::enable_if_t<rosidl_generator_traits::is_message<T>::value, std::nullptr_t> = nullptr>
-  void publish(const std::string & name, const T & data, const rclcpp::QoS & qos = rclcpp::QoS(1))
-  {
-    if (pub_map_.count(name) == 0) {
-      pub_map_[name] = node_->create_publisher<T>(std::string(ns_) + "/" + name, qos);
-    }
-
-    std::dynamic_pointer_cast<rclcpp::Publisher<T>>(pub_map_.at(name))->publish(data);
-  }
-
-  template <
-    class T_msg, class T,
-    std::enable_if_t<!rosidl_generator_traits::is_message<T>::value, std::nullptr_t> = nullptr>
-  void publish(const std::string & name, const T & data, const rclcpp::QoS & qos = rclcpp::QoS(1))
-  {
-    publish(name, debug_publisher::to_debug_msg<T_msg>(data, node_->now()), qos);
-  }
-
-private:
-  rclcpp::Node * node_;
-  const char * ns_;
-  std::unordered_map<std::string, std::shared_ptr<rclcpp::PublisherBase>> pub_map_;
-};
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__DEBUG_PUBLISHER_HPP_

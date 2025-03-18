@@ -1,4 +1,4 @@
-// Copyright 2020 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,36 +15,13 @@
 #ifndef AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
 #define AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_
 
-#include "autoware_utils/math/constants.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <cmath>
+#include <autoware_utils_math/normalization.hpp>
+namespace autoware_utils { using namespace autoware_utils_math; }
 
-namespace autoware_utils
-{
-inline double normalize_degree(const double deg, const double min_deg = -180)
-{
-  const auto max_deg = min_deg + 360.0;
-
-  const auto value = std::fmod(deg, 360.0);
-  if (min_deg <= value && value < max_deg) {
-    return value;
-  }
-
-  return value - std::copysign(360.0, value);
-}
-
-inline double normalize_radian(const double rad, const double min_rad = -pi)
-{
-  const auto max_rad = min_rad + 2 * pi;
-
-  const auto value = std::fmod(rad, 2 * pi);
-  if (min_rad <= value && value < max_rad) {
-    return value;
-  }
-
-  return value - std::copysign(2 * pi, value);
-}
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__MATH__NORMALIZATION_HPP_

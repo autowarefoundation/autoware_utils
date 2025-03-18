@@ -1,4 +1,4 @@
-// Copyright 2024 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,16 +15,13 @@
 #ifndef AUTOWARE_UTILS__GEOMETRY__SAT_2D_HPP_
 #define AUTOWARE_UTILS__GEOMETRY__SAT_2D_HPP_
 
-#include "autoware_utils/geometry/boost_geometry.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils::sat
-{
-/**
- * @brief Check if 2 convex polygons intersect using the SAT algorithm
- * @details faster than boost::geometry::overlap() but speed decline sharply as vertices increase
- */
-bool intersects(const Polygon2d & convex_polygon1, const Polygon2d & convex_polygon2);
+#include <autoware_utils_geometry/sat_2d.hpp>
+namespace autoware_utils { using namespace autoware_utils_geometry; }
 
-}  // namespace autoware_utils::sat
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__SAT_2D_HPP_

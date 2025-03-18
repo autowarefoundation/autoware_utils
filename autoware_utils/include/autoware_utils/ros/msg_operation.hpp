@@ -1,4 +1,4 @@
-// Copyright 2022 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,17 +15,13 @@
 #ifndef AUTOWARE_UTILS__ROS__MSG_OPERATION_HPP_
 #define AUTOWARE_UTILS__ROS__MSG_OPERATION_HPP_
 
-#include "geometry_msgs/msg/quaternion.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-// NOTE: Do not use autoware_utils namespace
-namespace geometry_msgs
-{
-namespace msg
-{
-Quaternion operator+(Quaternion a, Quaternion b) noexcept;
-Quaternion operator-(Quaternion a) noexcept;
-Quaternion operator-(Quaternion a, Quaternion b) noexcept;
-}  // namespace msg
-}  // namespace geometry_msgs
+#include <autoware_utils_geometry/msg/operation.hpp>
+namespace autoware_utils { using namespace autoware_utils_geometry; }
+
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__MSG_OPERATION_HPP_

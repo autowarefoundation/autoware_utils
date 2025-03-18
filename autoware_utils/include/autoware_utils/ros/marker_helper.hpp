@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,67 +15,13 @@
 #ifndef AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
 #define AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_
 
-#include <rclcpp/time.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <visualization_msgs/msg/marker_array.hpp>
+#include <autoware_utils_visualization/marker_helper.hpp>
+namespace autoware_utils { using namespace autoware_utils_visualization; }
 
-#include <optional>
-#include <string>
-
-namespace autoware_utils
-{
-inline geometry_msgs::msg::Point create_marker_position(double x, double y, double z)
-{
-  geometry_msgs::msg::Point point;
-  point.x = x;
-  point.y = y;
-  point.z = z;
-  return point;
-}
-
-inline geometry_msgs::msg::Quaternion create_marker_orientation(
-  double x, double y, double z, double w)
-{
-  geometry_msgs::msg::Quaternion quaternion;
-  quaternion.x = x;
-  quaternion.y = y;
-  quaternion.z = z;
-  quaternion.w = w;
-  return quaternion;
-}
-
-inline geometry_msgs::msg::Vector3 create_marker_scale(double x, double y, double z)
-{
-  geometry_msgs::msg::Vector3 scale;
-  scale.x = x;
-  scale.y = y;
-  scale.z = z;
-  return scale;
-}
-
-inline std_msgs::msg::ColorRGBA create_marker_color(float r, float g, float b, float a)
-{
-  std_msgs::msg::ColorRGBA color;
-  color.r = r;
-  color.g = g;
-  color.b = b;
-  color.a = a;
-  return color;
-}
-
-visualization_msgs::msg::Marker create_default_marker(
-  const std::string & frame_id, const rclcpp::Time & now, const std::string & ns, const int32_t id,
-  const int32_t type, const geometry_msgs::msg::Vector3 & scale,
-  const std_msgs::msg::ColorRGBA & color);
-
-visualization_msgs::msg::Marker create_deleted_default_marker(
-  const rclcpp::Time & now, const std::string & ns, const int32_t id);
-
-void append_marker_array(
-  const visualization_msgs::msg::MarkerArray & additional_marker_array,
-  visualization_msgs::msg::MarkerArray * marker_array,
-  const std::optional<rclcpp::Time> & current_time = {});
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__MARKER_HELPER_HPP_

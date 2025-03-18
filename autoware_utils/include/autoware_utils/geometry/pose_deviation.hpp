@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,30 +15,13 @@
 #ifndef AUTOWARE_UTILS__GEOMETRY__POSE_DEVIATION_HPP_
 #define AUTOWARE_UTILS__GEOMETRY__POSE_DEVIATION_HPP_
 
-#include <geometry_msgs/msg/point.hpp>
-#include <geometry_msgs/msg/pose.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils
-{
-struct PoseDeviation
-{
-  double lateral{0.0};
-  double longitudinal{0.0};
-  double yaw{0.0};
-};
+#include <autoware_utils_geometry/pose_deviation.hpp>
+namespace autoware_utils { using namespace autoware_utils_geometry; }
 
-double calc_lateral_deviation(
-  const geometry_msgs::msg::Pose & base_pose, const geometry_msgs::msg::Point & target_point);
-
-double calc_longitudinal_deviation(
-  const geometry_msgs::msg::Pose & base_pose, const geometry_msgs::msg::Point & target_point);
-
-double calc_yaw_deviation(
-  const geometry_msgs::msg::Pose & base_pose, const geometry_msgs::msg::Pose & target_pose);
-
-PoseDeviation calc_pose_deviation(
-  const geometry_msgs::msg::Pose & base_pose, const geometry_msgs::msg::Pose & target_pose);
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__POSE_DEVIATION_HPP_
