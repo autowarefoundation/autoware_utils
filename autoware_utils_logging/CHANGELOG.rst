@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.3.0 (2025-03-21)
+------------------
 * unify version
 * update changelog
 * feat(autoware_utils_logging): split package (`#37 <https://github.com/autowarefoundation/autoware_utils/issues/37>`_)

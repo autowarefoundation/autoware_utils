@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_uuid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.3.0 (2025-03-21)
+------------------
 * unify version
 * update changelog
 * feat(autoware_utils_uuid): split package (`#39 <https://github.com/autowarefoundation/autoware_utils/issues/39>`_)
