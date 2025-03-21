@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/math/range.hpp"
+#include "autoware_utils_math/range.hpp"
 
 #include <gtest/gtest.h>
 
@@ -44,7 +44,7 @@ void expect_eq_vector(const std::vector<int> & input, const std::vector<int> & e
 
 TEST(range, arange_double)  // NOLINT for gtest
 {
-  using autoware_utils::arange;
+  using autoware_utils_math::arange;
 
   // general cases
   {
@@ -82,7 +82,7 @@ TEST(range, arange_double)  // NOLINT for gtest
 
 TEST(range, arange_float)  // NOLINT for gtest
 {
-  using autoware_utils::arange;
+  using autoware_utils_math::arange;
 
   // general cases
   {
@@ -121,7 +121,7 @@ TEST(range, arange_float)  // NOLINT for gtest
 
 TEST(range, arange_int)  // NOLINT for gtest
 {
-  using autoware_utils::arange;
+  using autoware_utils_math::arange;
 
   // general cases
   {
@@ -154,7 +154,7 @@ TEST(range, arange_int)  // NOLINT for gtest
 
 TEST(range, linspace_double)  // NOLINT for gtest
 {
-  using autoware_utils::linspace;
+  using autoware_utils_math::linspace;
 
   // general cases
   {
@@ -182,7 +182,7 @@ TEST(range, linspace_double)  // NOLINT for gtest
 
 TEST(range, linspace_float)  // NOLINT for gtest
 {
-  using autoware_utils::linspace;
+  using autoware_utils_math::linspace;
 
   // general cases
   {
@@ -211,7 +211,7 @@ TEST(range, linspace_float)  // NOLINT for gtest
 
 TEST(range, linspace_int)  // NOLINT for gtest
 {
-  using autoware_utils::linspace;
+  using autoware_utils_math::linspace;
 
   // general cases
   {

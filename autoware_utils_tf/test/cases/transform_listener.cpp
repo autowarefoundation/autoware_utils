@@ -1,4 +1,4 @@
-// Copyright 2020 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,20 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/math/constants.hpp"
+#include "autoware_utils_tf/transform_listener.hpp"
 
 #include <gtest/gtest.h>
 
-TEST(constants, pi)  // NOLINT for gtest
+TEST(TestTransformListener, Main)
 {
-  using autoware_utils::pi;
-
-  EXPECT_DOUBLE_EQ(pi, 3.14159265358979323846);
-}
-
-TEST(constants, gravity)  // NOLINT for gtest
-{
-  using autoware_utils::gravity;
-
-  EXPECT_DOUBLE_EQ(gravity, 9.80665);
+  // TODO(Takagi, Isamu): Add test cases. Currently, we are only checking whether it can be built.
 }

@@ -1,4 +1,4 @@
-// Copyright 2020 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,4 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/autoware_utils.hpp"
+#include "autoware_utils_tf/self_pose_listener.hpp"
+
+#include <gtest/gtest.h>
+
+TEST(TestSelfPoseListener, Main)
+{
+  // TODO(Takagi, Isamu): Add test cases. Currently, we are only checking whether it can be built.
+}

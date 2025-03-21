@@ -1,4 +1,4 @@
-// Copyright 2025 The Autoware Contributors
+// Copyright 2020 TIER IV, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,16 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
-#define AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
+#include "autoware_utils_math/constants.hpp"
 
-// NOLINTBEGIN(build/namespaces, whitespace/line_length)
-// clang-format off
+#include <gtest/gtest.h>
 
-#include <autoware_utils_tf/self_pose_listener.hpp>
-namespace autoware_utils { using namespace autoware_utils_tf; }
+TEST(constants, pi)  // NOLINT for gtest
+{
+  using autoware_utils_math::pi;
 
-// clang-format on
-// NOLINTEND
+  EXPECT_DOUBLE_EQ(pi, 3.14159265358979323846);
+}
 
-#endif  // AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
+TEST(constants, gravity)  // NOLINT for gtest
+{
+  using autoware_utils_math::gravity;
+
+  EXPECT_DOUBLE_EQ(gravity, 9.80665);
+}
