@@ -4,6 +4,15 @@ Changelog for package autoware_utils_system
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_system): split package (`#38 <https://github.com/autowarefoundation/autoware_utils/issues/38>`_)
+  * feat(autoware_utils_system): split package
+  * update for compatibility
+  ---------
+  Co-authored-by: Yutaka Kondo <yutaka.kondo@youtalk.jp>
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_system): split package (`#38 <https://github.com/autowarefoundation/autoware_utils/issues/38>`_)
   * feat(autoware_utils_system): split package
   * update for compatibility

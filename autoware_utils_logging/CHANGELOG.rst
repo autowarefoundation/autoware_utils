@@ -4,6 +4,14 @@ Changelog for package autoware_utils_logging
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_logging): split package (`#37 <https://github.com/autowarefoundation/autoware_utils/issues/37>`_)
+  * feat(autoware_utils_logging): split package
+  * add deprecated message
+  ---------
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_logging): split package (`#37 <https://github.com/autowarefoundation/autoware_utils/issues/37>`_)
   * feat(autoware_utils_logging): split package
   * add deprecated message

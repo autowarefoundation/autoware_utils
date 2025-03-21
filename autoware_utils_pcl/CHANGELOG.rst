@@ -4,6 +4,19 @@ Changelog for package autoware_utils_pcl
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_tf): rename package (`#46 <https://github.com/autowarefoundation/autoware_utils/issues/46>`_)
+* feat(autoware_utils_pcl): split package (`#29 <https://github.com/autowarefoundation/autoware_utils/issues/29>`_)
+  * feat(autoware_utils_pcl): split package
+  * add maintainer
+  * fix build error
+  * add compatibility
+  * rename package
+  * update readme
+  ---------
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_tf): rename package (`#46 <https://github.com/autowarefoundation/autoware_utils/issues/46>`_)
 * feat(autoware_utils_pcl): split package (`#29 <https://github.com/autowarefoundation/autoware_utils/issues/29>`_)
   * feat(autoware_utils_pcl): split package

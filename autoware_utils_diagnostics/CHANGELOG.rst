@@ -4,6 +4,11 @@ Changelog for package autoware_utils_diagnostics
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_diagnostics): split package (`#45 <https://github.com/autowarefoundation/autoware_utils/issues/45>`_)
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_diagnostics): split package (`#45 <https://github.com/autowarefoundation/autoware_utils/issues/45>`_)
 * Contributors: Takagi, Isamu
 

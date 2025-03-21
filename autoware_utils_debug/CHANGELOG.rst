@@ -4,6 +4,24 @@ Changelog for package autoware_utils_debug
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_debug): split package (`#44 <https://github.com/autowarefoundation/autoware_utils/issues/44>`_)
+  * feat(autoware_utils_system): split package
+  * update for compatibility
+  * feat(autoware_utils_debug): split package
+  * apply testing utils
+  * feat(autoware_utils_testing): create test utils
+  * update test
+  * add mock node
+  * add test
+  * update readme
+  * remove testing
+  * compatibility
+  * fix sample code namespace
+  ---------
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_debug): split package (`#44 <https://github.com/autowarefoundation/autoware_utils/issues/44>`_)
   * feat(autoware_utils_system): split package
   * update for compatibility

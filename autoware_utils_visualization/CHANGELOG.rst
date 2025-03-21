@@ -4,6 +4,15 @@ Changelog for package autoware_utils_visualization
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_visualization): split package (`#36 <https://github.com/autowarefoundation/autoware_utils/issues/36>`_)
+  * feat(autoware_utils_visualization): split package
+  * add deprecated message
+  * fix test file glob
+  ---------
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_visualization): split package (`#36 <https://github.com/autowarefoundation/autoware_utils/issues/36>`_)
   * feat(autoware_utils_visualization): split package
   * add deprecated message

@@ -4,6 +4,22 @@ Changelog for package autoware_utils_tf
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_tf): split package (`#49 <https://github.com/autowarefoundation/autoware_utils/issues/49>`_)
+  * feat(autoware_utils_geometry): split package
+  * compatibility header
+  * rename namespace
+  * fix namespace
+  * feat(autoware_utils_tf): split package
+  * fix path
+  * fix include path
+  * move header
+  * add todo comment for test
+  ---------
+* feat(autoware_utils_tf): rename package (`#46 <https://github.com/autowarefoundation/autoware_utils/issues/46>`_)
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_tf): split package (`#49 <https://github.com/autowarefoundation/autoware_utils/issues/49>`_)
   * feat(autoware_utils_geometry): split package
   * compatibility header

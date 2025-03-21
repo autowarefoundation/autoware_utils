@@ -4,6 +4,15 @@ Changelog for package autoware_utils_rclcpp
 
 Forthcoming
 -----------
+* unify version
+* update changelog
+* feat(autoware_utils_rclcpp): split package (`#40 <https://github.com/autowarefoundation/autoware_utils/issues/40>`_)
+  * feat(autoware_utils_rclcpp): split package
+  * update test
+  * update readme
+  ---------
+* Contributors: Takagi, Isamu, Yutaka Kondo
+
 * feat(autoware_utils_rclcpp): split package (`#40 <https://github.com/autowarefoundation/autoware_utils/issues/40>`_)
   * feat(autoware_utils_rclcpp): split package
   * update test
