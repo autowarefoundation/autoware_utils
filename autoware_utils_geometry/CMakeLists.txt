@@ -22,7 +22,7 @@ if(BUILD_TESTING)
 #   file(GLOB_RECURSE test_files test/cases/alt_geometry.cpp)
   file(GLOB_RECURSE test_files 
     # test/cases/alt_geometry.cpp
-    # test/cases/boost_geometry.cpp
+    test/cases/boost_geometry.cpp
     test/cases/boost_polygon_utils.cpp
     test/cases/pose_deviation.cpp
     test/cases/path_with_lane_id_geometry.cpp
