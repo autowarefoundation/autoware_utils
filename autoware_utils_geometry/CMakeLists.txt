@@ -20,7 +20,7 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
 if(BUILD_TESTING)
 #   file(GLOB_RECURSE test_files test/*.cpp)
 #   file(GLOB_RECURSE test_files test/cases/alt_geometry.cpp)
-  file(GLOB_RECURSE test_files 
+  file(GLOB_RECURSE test_files
     # test/cases/alt_geometry.cpp
     # test/cases/boost_geometry.cpp
     test/cases/boost_polygon_utils.cpp

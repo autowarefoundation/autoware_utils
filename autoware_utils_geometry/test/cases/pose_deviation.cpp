@@ -12,8 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils_geometry/geometry.hpp"
 #include "autoware_utils_geometry/pose_deviation.hpp"
+
+#include "autoware_utils_geometry/geometry.hpp"
 #include "autoware_utils_math/unit_conversion.hpp"
 
 #include <gtest/gtest.h>
