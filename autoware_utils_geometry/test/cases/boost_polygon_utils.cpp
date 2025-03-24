@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "autoware_utils_geometry/boost_polygon_utils.hpp"
+
 #include "autoware_utils_geometry/geometry.hpp"
 
 #include <boost/geometry/geometry.hpp>
@@ -49,8 +50,8 @@ TEST(boost_geometry, boost_is_clockwise)
 {
   using autoware_utils_geometry::is_clockwise;
   using autoware_utils_geometry::Polygon2d;
-  
-    // empty
+
+  // empty
   Polygon2d empty_polygon;
   EXPECT_THROW(is_clockwise(empty_polygon), std::out_of_range);
 
