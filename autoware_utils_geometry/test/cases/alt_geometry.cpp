@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "autoware_utils_geometry/alt_geometry.hpp"
+
 #include "autoware_utils_geometry/random_convex_polygon.hpp"
 #include "autoware_utils_system/stop_watch.hpp"
 
@@ -744,7 +745,8 @@ TEST(alt_geometry, areaRand)
       const auto ground_truth = boost::geometry::area(polygons[i]);
       ground_truth_area_ns += sw.toc();
 
-      const auto alt_poly = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
+      const auto alt_poly =
+        autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
       sw.tic();
       const auto alt = autoware_utils_geometry::area(alt_poly);
       alt_area_ns += sw.toc();
@@ -842,7 +844,8 @@ TEST(alt_geometry, coveredByRand)
           }
 
           const auto alt_point = autoware_utils_geometry::alt::Point2d(point);
-          const auto alt_poly = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
+          const auto alt_poly =
+            autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
           sw.tic();
           const auto alt = autoware_utils_geometry::covered_by(alt_point, alt_poly);
           if (alt) {
@@ -906,8 +909,10 @@ TEST(alt_geometry, disjointRand)
           ground_truth_not_disjoint_ns += sw.toc();
         }
 
-        const auto alt_poly1 = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
-        const auto alt_poly2 = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
+        const auto alt_poly1 =
+          autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
+        const auto alt_poly2 =
+          autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
         sw.tic();
         const auto alt = autoware_utils_geometry::disjoint(alt_poly1, alt_poly2);
         if (alt) {
@@ -970,8 +975,10 @@ TEST(alt_geometry, intersectsRand)
           ground_truth_no_intersect_ns += sw.toc();
         }
 
-        const auto alt_poly1 = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
-        const auto alt_poly2 = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
+        const auto alt_poly1 =
+          autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
+        const auto alt_poly2 =
+          autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
         sw.tic();
         const auto alt = autoware_utils_geometry::intersects(alt_poly1, alt_poly2);
         if (alt) {
@@ -1036,7 +1043,8 @@ TEST(alt_geometry, touchesRand)
           }
 
           const auto alt_point = autoware_utils_geometry::alt::Point2d(point);
-          const auto alt_poly = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
+          const auto alt_poly =
+            autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
           sw.tic();
           const auto alt = autoware_utils_geometry::touches(alt_point, alt_poly);
           if (alt) {
@@ -1100,8 +1108,10 @@ TEST(alt_geometry, withinPolygonRand)
           ground_truth_not_within_ns += sw.toc();
         }
 
-        const auto alt_poly1 = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
-        const auto alt_poly2 = autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
+        const auto alt_poly1 =
+          autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[i]).value();
+        const auto alt_poly2 =
+          autoware_utils_geometry::alt::ConvexPolygon2d::create(polygons[j]).value();
         sw.tic();
         const auto alt = autoware_utils_geometry::within(alt_poly1, alt_poly2);
         if (alt) {
