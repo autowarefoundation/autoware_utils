@@ -16,7 +16,7 @@
 
   <depend>autoware_internal_planning_msgs</depend>
   <depend>autoware_utils_math</depend>
-  <depend>autoware_utils_system</depend>
+  <test_depend>autoware_utils_system</test_depend>
   <depend>libboost-system-dev</depend>
   <depend>tf2</depend>
   <depend>tf2_eigen</depend>
