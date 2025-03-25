@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "autoware_utils/transform/transforms.hpp"
+#include "autoware_utils_pcl/transforms.hpp"
 
 #include <gtest/gtest.h>
 #include <pcl/point_cloud.h>
@@ -31,7 +31,7 @@ TEST(system, transform_point_cloud)
     42301.179688, -0.001429, -0.017543, 0.999845, -3.157415, 0.000000, 0.000000, 0.000000, 1.000000;
 
   pcl::PointCloud<pcl::PointXYZI> cloud_transformed;
-  autoware_utils::transform_pointcloud(cloud, cloud_transformed, transform);
+  autoware_utils_pcl::transform_pointcloud(cloud, cloud_transformed, transform);
 
   pcl::PointXYZI pt1_gt(89603.187500, 42270.878906, -13.056946, 4);
 
@@ -52,8 +52,8 @@ TEST(system, empty_point_cloud)
 
   pcl::PointCloud<pcl::PointXYZI> cloud_transformed;
 
-  EXPECT_NO_THROW(autoware_utils::transform_pointcloud(cloud, cloud_transformed, transform));
+  EXPECT_NO_THROW(autoware_utils_pcl::transform_pointcloud(cloud, cloud_transformed, transform));
   EXPECT_NO_FATAL_FAILURE(
-    autoware_utils::transform_pointcloud(cloud, cloud_transformed, transform));
+    autoware_utils_pcl::transform_pointcloud(cloud, cloud_transformed, transform));
   EXPECT_EQ(cloud_transformed.size(), 0ul);
 }
