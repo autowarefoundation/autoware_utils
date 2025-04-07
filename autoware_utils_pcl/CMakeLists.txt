@@ -5,6 +5,8 @@ find_package(autoware_cmake REQUIRED)
 autoware_package()
 
 if(BUILD_TESTING)
-endif()
+  file(GLOB_RECURSE test_files test/*.cpp)
 
+  ament_auto_add_gtest(test_${PROJECT_NAME} ${test_files})
+endif()
 ament_auto_package()
