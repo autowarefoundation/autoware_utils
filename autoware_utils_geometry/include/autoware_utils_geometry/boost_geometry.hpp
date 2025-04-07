@@ -19,6 +19,7 @@
 #include <boost/geometry/geometries/geometries.hpp>
 #include <boost/geometry/geometries/register/point.hpp>
 #include <boost/geometry/geometries/register/ring.hpp>
+#include <boost/version.hpp>
 
 #define EIGEN_MPL2_ONLY
 #include <Eigen/Core>
@@ -54,6 +55,10 @@ struct Point2d : public Eigen::Vector2d
 {
   Point2d() = default;
   Point2d(const double x, const double y) : Eigen::Vector2d(x, y) {}
+#if BOOST_VERSION >= 108400  // Cannot move safely in version 1.84.0 (Jazzy)
+  Point2d(Point2d &&) = delete;
+  Point2d & operator=(Point2d &&) = delete;
+#endif
 
   [[nodiscard]] Point3d to_3d(const double z = 0.0) const;
 };
@@ -62,6 +67,10 @@ struct Point3d : public Eigen::Vector3d
 {
   Point3d() = default;
   Point3d(const double x, const double y, const double z) : Eigen::Vector3d(x, y, z) {}
+#if BOOST_VERSION >= 108400  // Cannot move safely in version 1.84.0 (Jazzy)
+  Point3d(Point3d &&) = delete;
+  Point3d & operator=(Point3d &&) = delete;
+#endif
 
   [[nodiscard]] Point2d to_2d() const;
 };
