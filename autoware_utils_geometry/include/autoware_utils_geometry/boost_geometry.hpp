@@ -99,6 +99,6 @@ BOOST_GEOMETRY_REGISTER_POINT_2D(                                          // NO
   autoware_utils_geometry::Point2d, double, cs::cartesian, x(), y())       // NOLINT
 BOOST_GEOMETRY_REGISTER_POINT_3D(                                          // NOLINT
   autoware_utils_geometry::Point3d, double, cs::cartesian, x(), y(), z())  // NOLINT
-BOOST_GEOMETRY_REGISTER_RING(autoware_utils_geometry::LinearRing2d)        // NOLINT
+BOOST_GEOMETRY_REGISTER_RING(autoware_utils_geometry::LinearRing2d)  // NOLINT
 
 #endif  // AUTOWARE_UTILS_GEOMETRY__BOOST_GEOMETRY_HPP_
