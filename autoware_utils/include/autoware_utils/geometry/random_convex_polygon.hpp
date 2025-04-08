@@ -1,4 +1,4 @@
-// Copyright 2024 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,15 +15,13 @@
 #ifndef AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
 #define AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_
 
-#include <autoware_utils/geometry/geometry.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils
-{
-/// @brief generate a random convex polygon
-/// @param vertices number of vertices for the desired polygon
-/// @param max points will be generated in the range [-max,max]
-/// @details algorithm from https://cglab.ca/~sander/misc/ConvexGeneration/convex.html
-Polygon2d random_convex_polygon(const size_t vertices, const double max);
-}  // namespace autoware_utils
+#include <autoware_utils_geometry/random_convex_polygon.hpp>
+namespace autoware_utils { using namespace autoware_utils_geometry; }
+
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__RANDOM_CONVEX_POLYGON_HPP_

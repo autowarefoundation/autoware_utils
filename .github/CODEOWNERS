@@ -1,4 +1,15 @@
 ### Automatically generated from package.xml ###
-autoware_utils/** egon.kang@autocore.ai esteve.fernandez@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_debug/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_diagnostics/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_geometry/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_logging/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_math/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_pcl/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_rclcpp/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_system/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_tf/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_uuid/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
+autoware_utils_visualization/** egon.kang@autocore.ai esteve.fernandez@tier4.jp isamu.takagi@tier4.jp ryohsuke.mitsudome@tier4.jp yutaka.kondo@tier4.jp
 
 ### Copied from .github/CODEOWNERS-manual ###

@@ -1,4 +1,4 @@
-// Copyright 2023 Autoware Foundation
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,47 +15,13 @@
 #ifndef AUTOWARE_UTILS__ROS__DIAGNOSTICS_INTERFACE_HPP_
 #define AUTOWARE_UTILS__ROS__DIAGNOSTICS_INTERFACE_HPP_
 
-#include <rclcpp/rclcpp.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <diagnostic_msgs/msg/diagnostic_array.hpp>
+#include <autoware_utils_diagnostics/diagnostics_interface.hpp>
+namespace autoware_utils { using namespace autoware_utils_diagnostics; }
 
-#include <string>
-#include <vector>
-
-namespace autoware_utils
-{
-class DiagnosticsInterface
-{
-public:
-  DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name);
-  void clear();
-  void add_key_value(const diagnostic_msgs::msg::KeyValue & key_value_msg);
-  template <typename T>
-  void add_key_value(const std::string & key, const T & value);
-  void add_key_value(const std::string & key, const std::string & value);
-  void add_key_value(const std::string & key, bool value);
-  void update_level_and_message(const int8_t level, const std::string & message);
-  void publish(const rclcpp::Time & publish_time_stamp);
-
-private:
-  [[nodiscard]] diagnostic_msgs::msg::DiagnosticArray create_diagnostics_array(
-    const rclcpp::Time & publish_time_stamp) const;
-
-  rclcpp::Clock::SharedPtr clock_;
-  rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticArray>::SharedPtr diagnostics_pub_;
-
-  diagnostic_msgs::msg::DiagnosticStatus diagnostics_status_msg_;
-};
-
-template <typename T>
-void DiagnosticsInterface::add_key_value(const std::string & key, const T & value)
-{
-  diagnostic_msgs::msg::KeyValue key_value;
-  key_value.key = key;
-  key_value.value = std::to_string(value);
-  add_key_value(key_value);
-}
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__DIAGNOSTICS_INTERFACE_HPP_

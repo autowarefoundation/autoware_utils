@@ -1,4 +1,4 @@
-// Copyright 2024 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,33 +15,13 @@
 #ifndef AUTOWARE_UTILS__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
 #define AUTOWARE_UTILS__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_
 
-#include <autoware_utils/geometry/geometry.hpp>
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <optional>
-#include <vector>
+#include <autoware_utils_geometry/random_concave_polygon.hpp>
+namespace autoware_utils { using namespace autoware_utils_geometry; }
 
-namespace autoware_utils
-{
-/// @brief generate a random non-convex polygon
-/// @param vertices number of vertices for the desired polygon
-/// @param max points will be generated in the range [-max, max]
-/// @details algorithm from
-/// https://digitalscholarship.unlv.edu/cgi/viewcontent.cgi?article=3183&context=thesesdissertations
-std::optional<Polygon2d> random_concave_polygon(const size_t vertices, const double max);
-
-/// @brief checks for collisions between two vectors of convex polygons using a specified collision
-/// detection algorithm
-/// @param polygons1 A vector of convex polygons to check for collisions.
-/// @param polygons2 A vector of convex polygons to check for collisions.
-/// @param intersection_func A function that takes two polygons and returns true if they intersect,
-/// otherwise false.
-/// @return True if at least one pair of polygons intersects, otherwise false.
-bool test_intersection(
-  const std::vector<autoware_utils::Polygon2d> & polygons1,
-  const std::vector<autoware_utils::Polygon2d> & polygons2,
-  const std::function<
-    bool(const autoware_utils::Polygon2d &, const autoware_utils::Polygon2d &)> &);
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__RANDOM_CONCAVE_POLYGON_HPP_

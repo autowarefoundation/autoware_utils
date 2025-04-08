@@ -15,13 +15,13 @@
 #ifndef AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
 #define AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_
 
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
+
 #include <autoware_utils_pcl/transforms.hpp>
+namespace autoware_utils { using namespace autoware_utils_pcl; }
 
-namespace autoware_utils
-{
-
-using namespace autoware_utils_pcl;  // NOLINT(build/namespaces)
-
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__TRANSFORM__TRANSFORMS_HPP_

@@ -1,4 +1,4 @@
-// Copyright 2022 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,38 +15,13 @@
 #ifndef AUTOWARE_UTILS__GEOMETRY__BOOST_POLYGON_UTILS_HPP_
 #define AUTOWARE_UTILS__GEOMETRY__BOOST_POLYGON_UTILS_HPP_
 
-#include "autoware_utils/geometry/boost_geometry.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <autoware_perception_msgs/msg/detected_object.hpp>
-#include <autoware_perception_msgs/msg/predicted_object.hpp>
-#include <autoware_perception_msgs/msg/tracked_object.hpp>
-#include <geometry_msgs/msg/pose.hpp>
+#include <autoware_utils_geometry/boost_polygon_utils.hpp>
+namespace autoware_utils { using namespace autoware_utils_geometry; }
 
-#include <vector>
-
-namespace autoware_utils
-{
-bool is_clockwise(const Polygon2d & polygon);
-Polygon2d inverse_clockwise(const Polygon2d & polygon);
-geometry_msgs::msg::Polygon rotate_polygon(
-  const geometry_msgs::msg::Polygon & polygon, const double & angle);
-/// @brief rotate a polygon by some angle around the origin
-/// @param[in] polygon input polygon
-/// @param[in] angle angle of rotation [rad]
-/// @return rotated polygon
-Polygon2d rotate_polygon(const Polygon2d & polygon, const double angle);
-Polygon2d to_polygon2d(
-  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape);
-Polygon2d to_polygon2d(
-  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape);
-Polygon2d to_polygon2d(const autoware_perception_msgs::msg::DetectedObject & object);
-Polygon2d to_polygon2d(const autoware_perception_msgs::msg::TrackedObject & object);
-Polygon2d to_polygon2d(const autoware_perception_msgs::msg::PredictedObject & object);
-Polygon2d to_footprint(
-  const geometry_msgs::msg::Pose & base_link_pose, const double base_to_front,
-  const double base_to_rear, const double width);
-double get_area(const autoware_perception_msgs::msg::Shape & shape);
-Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset);
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__GEOMETRY__BOOST_POLYGON_UTILS_HPP_

@@ -1,4 +1,4 @@
-// Copyright 2020 TIER IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,29 +15,13 @@
 #ifndef AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_
 #define AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_
 
-#include "autoware_utils/math/constants.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-namespace autoware_utils
-{
-constexpr double deg2rad(const double deg)
-{
-  return deg * pi / 180.0;
-}
+#include <autoware_utils_math/unit_conversion.hpp>
+namespace autoware_utils { using namespace autoware_utils_math; }
 
-constexpr double rad2deg(const double rad)
-{
-  return rad * 180.0 / pi;
-}
-
-constexpr double kmph2mps(const double kmph)
-{
-  return kmph * 1000.0 / 3600.0;
-}
-
-constexpr double mps2kmph(const double mps)
-{
-  return mps * 3600.0 / 1000.0;
-}
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__MATH__UNIT_CONVERSION_HPP_

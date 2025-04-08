@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,44 +15,13 @@
 #ifndef AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
 #define AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
 
-#include "autoware_utils/geometry/geometry.hpp"
-#include "autoware_utils/ros/transform_listener.hpp"
+// NOLINTBEGIN(build/namespaces, whitespace/line_length)
+// clang-format off
 
-#include <rclcpp/rclcpp.hpp>
+#include <autoware_utils_tf/self_pose_listener.hpp>
+namespace autoware_utils { using namespace autoware_utils_tf; }
 
-#include <memory>
-
-namespace autoware_utils
-{
-class SelfPoseListener
-{
-public:
-  explicit SelfPoseListener(rclcpp::Node * node) : transform_listener_(node) {}
-
-  void wait_for_first_pose()
-  {
-    while (rclcpp::ok()) {
-      if (get_current_pose()) {
-        return;
-      }
-      RCLCPP_INFO(transform_listener_.get_logger(), "waiting for self pose...");
-      rclcpp::Rate(0.2).sleep();
-    }
-  }
-
-  geometry_msgs::msg::PoseStamped::ConstSharedPtr get_current_pose()
-  {
-    const auto tf = transform_listener_.get_latest_transform("map", "base_link");
-    if (!tf) {
-      return {};
-    }
-
-    return std::make_shared<const geometry_msgs::msg::PoseStamped>(transform2pose(*tf));
-  }
-
-private:
-  TransformListener transform_listener_;
-};
-}  // namespace autoware_utils
+// clang-format on
+// NOLINTEND
 
 #endif  // AUTOWARE_UTILS__ROS__SELF_POSE_LISTENER_HPP_
