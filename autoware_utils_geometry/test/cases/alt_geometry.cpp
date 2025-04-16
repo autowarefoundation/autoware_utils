@@ -21,7 +21,9 @@
 #include <boost/geometry/algorithms/correct.hpp>
 #include <boost/geometry/algorithms/touches.hpp>
 #include <boost/geometry/io/wkt/write.hpp>
+#if BOOST_VERSION < 107600  // Header removed in version 1.76.0 (Humble)
 #include <boost/geometry/strategies/agnostic/hull_graham_andrew.hpp>
+#endif
 
 #include <gtest/gtest.h>
 
