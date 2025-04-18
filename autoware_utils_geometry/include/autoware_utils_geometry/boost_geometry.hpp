@@ -52,7 +52,7 @@ using MultiPolygon3d = boost::geometry::model::multi_polygon<Polygon3d>;
 
 struct Point2d : public Eigen::Vector2d
 {
-  Point2d() = default;
+  Point2d() : Eigen::Vector2d(0.0, 0.0) {}
   Point2d(const double x, const double y) : Eigen::Vector2d(x, y) {}
 
   [[nodiscard]] Point3d to_3d(const double z = 0.0) const;
@@ -60,7 +60,7 @@ struct Point2d : public Eigen::Vector2d
 
 struct Point3d : public Eigen::Vector3d
 {
-  Point3d() = default;
+  Point3d() : Eigen::Vector3d(0.0, 0.0, 0.0) {}
   Point3d(const double x, const double y, const double z) : Eigen::Vector3d(x, y, z) {}
 
   [[nodiscard]] Point2d to_2d() const;
