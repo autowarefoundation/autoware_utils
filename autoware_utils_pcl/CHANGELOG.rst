@@ -2,6 +2,12 @@
 Changelog for package autoware_utils_pcl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* test(autoware_utils): port unit tests from autoware.universe (`#28 <https://github.com/autowarefoundation/autoware_utils/issues/28>`_)
+* feat: remove managed transform buffer (`#41 <https://github.com/autowarefoundation/autoware_utils/issues/41>`_)
+* Contributors: Amadeusz Szymko, storrrrrrrrm
+
 1.3.0 (2025-03-21)
 ------------------
 * unify version
