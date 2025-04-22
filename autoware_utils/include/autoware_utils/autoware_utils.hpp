@@ -35,7 +35,6 @@
 #include "autoware_utils/ros/debug_traits.hpp"
 #include "autoware_utils/ros/diagnostics_interface.hpp"
 #include "autoware_utils/ros/logger_level_configure.hpp"
-#include "autoware_utils/ros/managed_transform_buffer.hpp"
 #include "autoware_utils/ros/marker_helper.hpp"
 #include "autoware_utils/ros/msg_covariance.hpp"
 #include "autoware_utils/ros/msg_operation.hpp"
