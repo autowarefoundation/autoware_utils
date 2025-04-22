@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.4.0 (2025-04-22)
+------------------
 * chore: sync files (`#61 <https://github.com/autowarefoundation/autoware_utils/issues/61>`_)
   * chore: sync files
   * style(pre-commit): autofix
