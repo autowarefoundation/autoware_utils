@@ -2,6 +2,11 @@
 Changelog for package autoware_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.4.0 (2025-04-22)
+------------------
+* feat: remove managed transform buffer (`#41 <https://github.com/autowarefoundation/autoware_utils/issues/41>`_)
+* Contributors: Amadeusz Szymko
+
 1.3.0 (2025-03-21)
 ------------------
 * feat(autoware_utils): update readme as deprecated  (`#51 <https://github.com/autowarefoundation/autoware_utils/issues/51>`_)
