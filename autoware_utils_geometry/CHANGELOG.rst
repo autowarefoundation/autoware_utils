@@ -2,6 +2,15 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.4.1 (2025-05-15)
+------------------
+* fix: include `tf2/utils.hpp` instead of `tf2/utils.h` (`#65 <https://github.com/autowarefoundation/autoware_utils/issues/65>`_)
+  * include tf2/utils.hpp
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Yutaka Kondo
+
 1.4.0 (2025-04-22)
 ------------------
 * chore: sync files (`#61 <https://github.com/autowarefoundation/autoware_utils/issues/61>`_)

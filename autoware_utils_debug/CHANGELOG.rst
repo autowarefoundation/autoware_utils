@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.4.1 (2025-05-15)
+------------------
+
 1.4.0 (2025-04-22)
 ------------------
 * chore: sync files (`#61 <https://github.com/autowarefoundation/autoware_utils/issues/61>`_)
