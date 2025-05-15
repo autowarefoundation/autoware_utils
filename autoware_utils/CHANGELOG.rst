@@ -2,6 +2,9 @@
 Changelog for package autoware_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.4.0 (2025-04-22)
 ------------------
 * feat: remove managed transform buffer (`#41 <https://github.com/autowarefoundation/autoware_utils/issues/41>`_)
