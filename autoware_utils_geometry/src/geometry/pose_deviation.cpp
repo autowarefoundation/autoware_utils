@@ -16,7 +16,7 @@
 
 #include "autoware_utils_math/normalization.hpp"
 
-#include <tf2/utils.h>
+#include <tf2/utils.hpp>
 
 #define EIGEN_MPL2_ONLY
 #include <Eigen/Core>
