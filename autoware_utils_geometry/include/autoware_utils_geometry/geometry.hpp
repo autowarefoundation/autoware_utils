@@ -40,7 +40,7 @@
 #include <geometry_msgs/msg/vector3.hpp>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.hpp>
 
-#include <tf2/utils.h>
+#include <tf2/utils.hpp>
 
 // TODO(wep21): Remove these apis
 //              after they are implemented in ros2 geometry2.

@@ -18,7 +18,7 @@
 
 #include <boost/geometry/geometry.hpp>
 
-#include <tf2/utils.h>
+#include <tf2/utils.hpp>
 
 namespace
 {
