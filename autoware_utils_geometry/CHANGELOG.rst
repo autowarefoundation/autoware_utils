@@ -2,6 +2,11 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.4.2 (2025-05-21)
+------------------
+* fix: include tf2/convert.hpp instead of tf2/convert.h (`#67 <https://github.com/autowarefoundation/autoware_utils/issues/67>`_)
+* Contributors: Takagi, Isamu
+
 1.4.1 (2025-05-15)
 ------------------
 * fix: include `tf2/utils.hpp` instead of `tf2/utils.h` (`#65 <https://github.com/autowarefoundation/autoware_utils/issues/65>`_)
