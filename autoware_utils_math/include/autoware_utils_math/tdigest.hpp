@@ -18,18 +18,6 @@
  *
  * A modern C++ implementation of a merging t-digest data structure.
  * Original implementation licensed under Apache License, Version 2.0.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
  */
 
 #ifndef AUTOWARE_UTILS_MATH__TDIGEST_HPP_
@@ -41,6 +29,7 @@
 #include <functional>
 #include <limits>
 #include <stdexcept>
+#include <utility>
 #include <vector>
 
 namespace autoware_utils_math
@@ -106,10 +95,6 @@ class tdigest
   tdigest_impl one;
   tdigest_impl two;
 
-  // XXX: buffer multiplier must be > 0. BUT how much greater
-  // will affect size vs speed balance. The effects of which
-  // have not been studied. Set to 2 to favor size. Informal
-  // benchmarks for this value yielded acceptable results.
   static constexpr size_t buffer_multiplier = 2;
   tdigest_impl buffer;
 
@@ -334,33 +319,16 @@ std::vector<std::pair<Values, Weight>> tdigest<Values, Weight>::get() const
   return (to_return);
 }
 
-/**
- * When taken together the following 4 functions (Z, normalizer_fn, k, q)
- * comprise the scaling function for t-digests.
- */
-
-/**
- * C++ translation of the "k_2" version found in the reference implementation
- * available here: https://github.com/tdunning/t-digest
- */
 inline double Z(double compression, double n)
 {
   return (4 * log(n / compression) + 24);
 }
 
-/**
- * C++ translation of the "k_2" version found in the reference implementation
- * available here: https://github.com/tdunning/t-digest
- */
 inline double normalizer_fn(double compression, double n)
 {
   return (compression / Z(compression, n));
 }
 
-/**
- * C++ translation of the "k_2" version found in the reference implementation
- * available here: https://github.com/tdunning/t-digest
- */
 inline double k(double q, double normalizer)
 {
   const double q_min = 1e-15;
@@ -374,20 +342,12 @@ inline double k(double q, double normalizer)
   return (log(q / (1 - q)) * normalizer);
 }
 
-/**
- * C++ translation of the "k_2" version found in the reference implementation
- * available here: https://github.com/tdunning/t-digest
- */
 inline double q(double k, double normalizer)
 {
   double w = exp(k / normalizer);
   return (w / (1 + w));
 }
 
-/**
- * Based on the equivalent function in the reference implementation available here:
- * https://github.com/tdunning/t-digest
- */
 template <typename Values, typename Weight>
 void tdigest<Values, Weight>::merge()
 {
@@ -476,12 +436,6 @@ void tdigest<Values, Weight>::merge()
   new_inactive->reset();
 }
 
-/**
- * XXX: replace with std::lerp when C++20 support becomes available.
- * This version adapted from libcxx, which is part of the LLVM project
- * under an "Apache 2.0 license with LLVM Exceptions." The project can be
- * found at https://github.com/llvm-mirror/libcxx
- */
 inline double lerp(double a, double b, double t) noexcept
 {
   if ((a <= 0 && b >= 0) || (a >= 0 && b <= 0)) return t * b + (1 - t) * a;
@@ -494,10 +448,6 @@ inline double lerp(double a, double b, double t) noexcept
     return x < b ? x : b;
 }
 
-/**
- * Based on the equivalent function in the reference implementation available here:
- * https://github.com/tdunning/t-digest
- */
 template <typename Values, typename Weight>
 double tdigest<Values, Weight>::quantile(double p) const
 {
@@ -569,10 +519,6 @@ double tdigest<Values, Weight>::quantile(double p) const
   return (quantile);
 }
 
-/**
- * Based on the equivalent function in the reference implementation available here:
- * https://github.com/tdunning/t-digest
- */
 template <typename Values, typename Weight>
 double tdigest<Values, Weight>::cumulative_distribution(Values x) const
 {
