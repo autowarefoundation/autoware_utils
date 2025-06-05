@@ -2,11 +2,13 @@ cmake_minimum_required(VERSION 3.14)
 project(autoware_utils_debug)
 
 find_package(autoware_cmake REQUIRED)
+find_package(fmt REQUIRED)
 autoware_package()
 
 ament_auto_add_library(${PROJECT_NAME} SHARED
   "src/time_keeper.cpp"
 )
+target_link_libraries(${PROJECT_NAME} fmt::fmt)
 
 if(BUILD_TESTING)
   file(GLOB_RECURSE test_files test/*.cpp)
