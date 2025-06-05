@@ -467,10 +467,8 @@ double tdigest<Values, Weight>::quantile(double p) const
     return (min_val);
   }
 
-  // For smaller quantiles, interpolate between minimum value and the first
-  // centroid.
-  const auto & first = active->values.front();
-  if (first.weight > 1 && index < (first.weight / 2)) {
+  const auto & first = active->values.front() if (first.weight > 1 && index < (first.weight / 2))
+  {
     return (lerp(min_val, first.mean, static_cast<double>(index - 1) / (first.weight / 2 - 1)));
   }
 
@@ -478,8 +476,6 @@ double tdigest<Values, Weight>::quantile(double p) const
     return (max_val);
   }
 
-  // For larger quantiles, interpolate between maximum value and the last
-  // centroid.
   const auto & last = active->values.back();
   if (last.weight > 1 && active->total_weight - index <= last.weight / 2) {
     return (
