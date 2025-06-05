@@ -19,6 +19,7 @@
   <depend>autoware_utils_system</depend>
   <depend>diagnostic_msgs</depend>
   <depend>rclcpp</depend>
+  <depend>fmt</depend>
 
   <test_depend>ament_cmake_ros</test_depend>
   <test_depend>ament_lint_auto</test_depend>
