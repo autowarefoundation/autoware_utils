@@ -26,7 +26,6 @@ namespace autoware_utils_math
  * @brief class to accumulate statistical data, supporting min, max and mean.
  * @typedef T type of the values (default to double)
  */
-
 template <typename T = double>
 class Accumulator
 {
