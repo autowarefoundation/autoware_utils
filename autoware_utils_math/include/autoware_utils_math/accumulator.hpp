@@ -17,6 +17,7 @@
 
 #include <iostream>
 #include <limits>
+#include "autoware_utils_math/tdigest.hpp"
 
 namespace autoware_utils_math
 {
@@ -24,10 +25,22 @@ namespace autoware_utils_math
  * @brief class to accumulate statistical data, supporting min, max and mean.
  * @typedef T type of the values (default to double)
  */
+
 template <typename T = double>
 class Accumulator
 {
 public:
+  /**
+   * @brief Constructor
+   * @param enable_quantile If true, enables quantile calculation using t-digest
+   * @param digest_size Size of t-digest data structure (default: 100)
+   */
+  explicit Accumulator(bool enable_quantile = false, size_t digest_size = 100)
+  : enable_quantile_(enable_quantile),
+    digest_(tdigest<T>(digest_size))
+  {
+  }
+
   /**
    * @brief add a value
    * @param value value to add
@@ -42,6 +55,10 @@ public:
     }
     ++count_;
     mean_ = mean_ + (value - mean_) / count_;
+
+    if (enable_quantile_) {
+      digest_.insert(value);
+    }
   }
 
   /**
@@ -64,6 +81,21 @@ public:
    */
   unsigned int count() const { return count_; }
 
+  /**
+   * @brief get the quantile value
+   * @param p quantile value (0 to 100)
+   */
+  T quantile(double p)
+  {
+    digest_.merge(); 
+    return digest_.quantile(p);
+  }
+
+  /**
+   * @brief Check if quantile calculation is enabled
+   */
+  bool is_quantile_enabled() const { return enable_quantile_; }
+
   template <typename U>
   friend std::ostream & operator<<(std::ostream & os, const Accumulator<U> & accumulator);
 
@@ -72,6 +104,8 @@ private:
   T max_ = std::numeric_limits<T>::lowest();
   long double mean_ = 0.0;
   unsigned int count_ = 0;
+  bool enable_quantile_ = false;
+  tdigest<T> digest_;
 };
 
 /**
