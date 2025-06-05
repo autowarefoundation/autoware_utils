@@ -1,4 +1,4 @@
-// Copyright 2021-2024 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,9 +15,10 @@
 #ifndef AUTOWARE_UTILS_MATH__ACCUMULATOR_HPP_
 #define AUTOWARE_UTILS_MATH__ACCUMULATOR_HPP_
 
+#include "autoware_utils_math/tdigest.hpp"
+
 #include <iostream>
 #include <limits>
-#include "autoware_utils_math/tdigest.hpp"
 
 namespace autoware_utils_math
 {
@@ -36,8 +37,7 @@ public:
    * @param digest_size Size of t-digest data structure (default: 100)
    */
   explicit Accumulator(bool enable_quantile = false, size_t digest_size = 100)
-  : enable_quantile_(enable_quantile),
-    digest_(tdigest<T>(digest_size))
+  : enable_quantile_(enable_quantile), digest_(tdigest<T>(digest_size))
   {
   }
 
@@ -87,7 +87,7 @@ public:
    */
   T quantile(double p)
   {
-    digest_.merge(); 
+    digest_.merge();
     return digest_.quantile(p);
   }
 
