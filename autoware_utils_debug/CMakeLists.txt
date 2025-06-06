@@ -8,6 +8,10 @@ ament_auto_add_library(${PROJECT_NAME} SHARED
   "src/time_keeper.cpp"
 )
 
+target_link_libraries(${PROJECT_NAME}
+  fmt::fmt
+)
+
 if(BUILD_TESTING)
   file(GLOB_RECURSE test_files test/*.cpp)
   ament_add_ros_isolated_gtest(test_${PROJECT_NAME} ${test_files})
