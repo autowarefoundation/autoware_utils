@@ -42,7 +42,7 @@ TEST_P(TestLruCache, Main)
   }
 }
 
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
   TestLruCache, TestLruCache,
   testing::Values(
     ParamLruCache{3, {1, 2, 3, 4, 5, 6}, {4, 5, 6}},
