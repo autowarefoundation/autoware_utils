@@ -39,3 +39,19 @@ TEST(TestAccumulator, Case2)
   EXPECT_DOUBLE_EQ(a.max(), 10.0);
   EXPECT_DOUBLE_EQ(a.mean(), 5.5);
 }
+
+TEST(accumulator, quantile)
+{
+  static constexpr double max_value = 1000.0;
+  static constexpr double epsilon = 0.02 * max_value;  // 2% error margin
+  autoware_utils_math::Accumulator<double> acc(true);
+  for (double i = 1.0; i <= max_value; i += 1.0) {
+    acc.add(i);
+  }
+
+  EXPECT_NEAR(acc.quantile(0.0), 1.0, epsilon);
+  EXPECT_NEAR(acc.quantile(100.0), max_value, epsilon);
+  EXPECT_NEAR(acc.quantile(99.0), max_value * 0.99, epsilon);
+  EXPECT_NEAR(acc.quantile(50.0), max_value * 0.5, epsilon);
+  EXPECT_NEAR(acc.quantile(90.0), max_value * 0.9, epsilon);
+}
