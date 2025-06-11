@@ -7,3 +7,7 @@ repositories:
     type: git
     url: https://github.com/autowarefoundation/autoware_internal_msgs.git
     version: main
+  digestible:
+    type: git
+    url: https://github.com/tier4/digestible.git
+    version: 0.1.0
