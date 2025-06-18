@@ -23,7 +23,9 @@
 
 namespace autoware_utils_diagnostics
 {
-DiagnosticsInterface::DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name, const std::string & diagnostic_topic_name)
+DiagnosticsInterface::DiagnosticsInterface(
+  rclcpp::Node * node, const std::string & diagnostic_name,
+  const std::string & diagnostic_topic_name)
 : clock_(node->get_clock())
 {
   diagnostics_pub_ =
