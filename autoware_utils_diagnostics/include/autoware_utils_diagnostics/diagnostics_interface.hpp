@@ -27,7 +27,7 @@ namespace autoware_utils_diagnostics
 class DiagnosticsInterface
 {
 public:
-  DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name);
+  DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name, const std::string & diagnostic_topic_name = "/diagnostics");
   void clear();
   void add_key_value(const diagnostic_msgs::msg::KeyValue & key_value_msg);
   template <typename T>
