@@ -31,7 +31,7 @@ visualization_msgs::msg::Marker create_default_marker(
   marker.id = id;
   marker.type = type;
   marker.action = visualization_msgs::msg::Marker::ADD;
-  marker.lifetime = rclcpp::Duration::from_seconds(0.5);
+  marker.lifetime = rclcpp::Duration::from_seconds(MARKER_LIFETIME);
 
   marker.pose.position = create_marker_position(0.0, 0.0, 0.0);
   marker.pose.orientation = create_marker_orientation(0.0, 0.0, 0.0, 1.0);
