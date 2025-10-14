@@ -14,11 +14,14 @@
 
 #include "autoware_utils_diagnostics/timeout_diagnostics.hpp"
 
-#include <gtest/gtest.h>
-#include <memory>
 #include <rclcpp/rclcpp.hpp>
 
-TEST(TimeoutDiagTest, Instantiation) {
+#include <gtest/gtest.h>
+
+#include <memory>
+
+TEST(TimeoutDiagTest, Instantiation)
+{
   const auto node = std::make_shared<rclcpp::Node>("test_node");
   autoware_utils_diagnostics::TimeoutDiag::Params params{1.0, 2.0};
   autoware_utils_diagnostics::TimeoutDiag timeout_diag(params, *node->get_clock(), "test_diag");
