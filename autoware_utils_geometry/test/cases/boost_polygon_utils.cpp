@@ -53,7 +53,7 @@ TEST(boost_geometry, boost_is_clockwise)
 
   // empty
   Polygon2d empty_polygon;
-  EXPECT_THROW(is_clockwise(empty_polygon), std::out_of_range);
+  EXPECT_FALSE(is_clockwise(empty_polygon));
 
   // normal case
   Polygon2d clock_wise_polygon{{{0.0, 0.0}, {0.0, 1.0}, {1.0, 1.0}, {1.0, 0.0}, {0.0, 0.0}}};
