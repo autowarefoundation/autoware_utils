@@ -48,6 +48,13 @@ TEST(TestPollingSubscriber, PubSub)
   EXPECT_NE(sub_msg, nullptr);
   EXPECT_EQ(sub_msg->data, pub_msg.data);
 
+  rclcpp::Time timestamp = sub->latest_timestamp();
+  rclcpp::Time zero_stamp = rclcpp::Time{0, 0, RCL_ROS_TIME};
+  EXPECT_NE(timestamp, zero_stamp);
+
+  rclcpp::Duration duration = sub_node->now() - timestamp;
+  EXPECT_LE(duration.seconds(), 1.0);
+
   executor.cancel();
   thread.join();
 }

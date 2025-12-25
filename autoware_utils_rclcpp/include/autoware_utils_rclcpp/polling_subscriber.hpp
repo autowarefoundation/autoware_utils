@@ -51,6 +51,7 @@ class Latest
 {
 private:
   typename MessageT::ConstSharedPtr data_{nullptr};  ///< Data pointer to store the latest data
+  rclcpp::Time timestamp_ {0, 0, RCL_ROS_TIME};
 
 protected:
   /**
@@ -75,6 +76,14 @@ public:
    * @return typename MessageT::ConstSharedPtr The latest data.
    */
   typename MessageT::ConstSharedPtr take_data();
+
+  /**
+   * @brief Getter for timestamp of the last message
+   *
+   * @return rclcpp::Time The last timestamp.
+   */
+
+  rclcpp::Time latest_timestamp() const { return timestamp_; }
 };
 
 /**
@@ -85,6 +94,9 @@ public:
 template <typename MessageT>
 class Newest
 {
+  private:
+    rclcpp::Time timestamp_ {0, 0, RCL_ROS_TIME};
+
 protected:
   /**
    * @brief Check the QoS settings for the subscription.
@@ -108,6 +120,13 @@ public:
    * @return typename MessageT::ConstSharedPtr The newest data.
    */
   typename MessageT::ConstSharedPtr take_data();
+
+  /**
+   * @brief Getter for timestamp of the last message
+   *
+   * @return rclcpp::Time The last timestamp.
+   */
+  rclcpp::Time latest_timestamp() const { return timestamp_; }
 };
 
 /**
@@ -118,6 +137,9 @@ public:
 template <typename MessageT>
 class All
 {
+private:
+  rclcpp::Time timestamp_ {0, 0, RCL_ROS_TIME};
+
 protected:
   /**
    * @brief Check the QoS settings for the subscription.
@@ -133,6 +155,14 @@ public:
    * @return std::vector<typename MessageT::ConstSharedPtr> The list of all received data.
    */
   std::vector<typename MessageT::ConstSharedPtr> take_data();
+
+  /**
+   * @brief Getter for timestamp of the last message
+   *
+   * @return rclcpp::Time The last timestamp.
+   */
+  rclcpp::Time latest_timestamp() const { return timestamp_; }
+
 };
 
 }  // namespace polling_policy
@@ -209,6 +239,7 @@ typename MessageT::ConstSharedPtr Latest<MessageT>::take_data()
   const bool success = subscriber->take(*new_data, message_info);
   if (success) {
     data_ = new_data;
+    timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
   }
 
   return data_;
@@ -224,6 +255,7 @@ typename MessageT::ConstSharedPtr Newest<MessageT>::take_data()
   const bool success = subscriber->take(*new_data, message_info);
   if (success) {
     return new_data;
+    timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
   }
   return nullptr;
 }
@@ -239,6 +271,7 @@ std::vector<typename MessageT::ConstSharedPtr> All<MessageT>::take_data()
     auto datum = std::make_shared<MessageT>();
     if (subscriber->take(*datum, message_info)) {
       data.push_back(datum);
+      timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
     } else {
       break;
     }
