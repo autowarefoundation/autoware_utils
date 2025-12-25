@@ -254,8 +254,8 @@ typename MessageT::ConstSharedPtr Newest<MessageT>::take_data()
   rclcpp::MessageInfo message_info;
   const bool success = subscriber->take(*new_data, message_info);
   if (success) {
-    return new_data;
     timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
+    return new_data;
   }
   return nullptr;
 }
