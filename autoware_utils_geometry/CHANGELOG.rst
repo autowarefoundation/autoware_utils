@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.5.0 (2025-12-30)
+------------------
 * fix(autoware_utils_geometry): handle floating-point errors in segment collision detection (`#86 <https://github.com/autowarefoundation/autoware_utils/issues/86>`_)
   fix(arc_lane_utils): handle floating-point errors in segment collision detection
 * ci(pre-commit): autoupdate (`#77 <https://github.com/autowarefoundation/autoware_utils/issues/77>`_)

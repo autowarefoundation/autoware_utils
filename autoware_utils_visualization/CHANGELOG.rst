@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.5.0 (2025-12-30)
+------------------
 * refactor: set constant value for marker lifetime (`#76 <https://github.com/autowarefoundation/autoware_utils/issues/76>`_)
   refactor: set constant value for marker lifetime, and use it in create_default_marker
 * Contributors: Sarun MUKDAPITAK
