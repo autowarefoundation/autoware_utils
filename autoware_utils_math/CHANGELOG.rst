@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_math
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.4.2 (2025-05-21)
 ------------------
 
