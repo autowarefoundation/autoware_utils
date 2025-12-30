@@ -2,6 +2,18 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.5.0 (2025-12-30)
+------------------
+* fix(autoware_utils_geometry): handle floating-point errors in segment collision detection (`#86 <https://github.com/autowarefoundation/autoware_utils/issues/86>`_)
+  fix(arc_lane_utils): handle floating-point errors in segment collision detection
+* ci(pre-commit): autoupdate (`#77 <https://github.com/autowarefoundation/autoware_utils/issues/77>`_)
+  * ci(pre-commit): autoupdate
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: github-actions <github-actions@github.com>
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Jakub Zeifert, awf-autoware-bot[bot]
+
 1.4.2 (2025-05-21)
 ------------------
 * fix: include tf2/convert.hpp instead of tf2/convert.h (`#67 <https://github.com/autowarefoundation/autoware_utils/issues/67>`_)
