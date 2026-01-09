@@ -132,6 +132,15 @@ void TimeKeeper::add_reporter(rclcpp::Publisher<ProcessingTimeDetail>::SharedPtr
   });
 }
 
+void TimeKeeper::add_reporter(agnocast::Publisher<ProcessingTimeDetail>::SharedPtr publisher)
+{
+  reporters_.emplace_back([publisher](const std::shared_ptr<ProcessingTimeNode> & node) {
+    auto msg = publisher->borrow_loaned_message();
+    *msg = node->to_msg();
+    publisher->publish(std::move(msg));
+  });
+}
+
 void TimeKeeper::start_track(const std::string & func_name)
 {
   if (current_time_node_ == nullptr) {

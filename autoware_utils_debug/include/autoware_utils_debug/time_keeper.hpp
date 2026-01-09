@@ -15,6 +15,7 @@
 #ifndef AUTOWARE_UTILS_DEBUG__TIME_KEEPER_HPP_
 #define AUTOWARE_UTILS_DEBUG__TIME_KEEPER_HPP_
 
+#include <agnocast/agnocast.hpp>
 #include <autoware_utils_system/stop_watch.hpp>
 #include <rclcpp/publisher.hpp>
 
@@ -141,6 +142,13 @@ public:
    * @param publisher Shared pointer to the rclcpp publisher
    */
   void add_reporter(rclcpp::Publisher<ProcessingTimeDetail>::SharedPtr publisher);
+
+  /**
+   * @brief Add a reporter to publish processing times to an agnocast publisher
+   *
+   * @param publisher Shared pointer to the agnocast publisher
+   */
+  void add_reporter(agnocast::Publisher<ProcessingTimeDetail>::SharedPtr publisher);
 
   /**
    * @brief Start tracking the processing time of a function
