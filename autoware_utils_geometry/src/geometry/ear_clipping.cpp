@@ -624,6 +624,10 @@ std::vector<alt::ConvexPolygon2d> triangulate(const alt::Polygon2d & poly)
 std::vector<Polygon2d> triangulate(const Polygon2d & poly)
 {
   const auto alt_poly = alt::Polygon2d::create(poly);
+  if (!alt_poly) {
+    return {};
+  }
+
   const auto alt_triangles = triangulate(alt_poly.value());
   std::vector<Polygon2d> triangles;
   for (const auto & alt_triangle : alt_triangles) {
