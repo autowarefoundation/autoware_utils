@@ -71,4 +71,4 @@ int main(int argc, char * argv[]) {
 }
 ```
 
-The `latest_timestamp()` method returns the source timestamp of the last received message. With the default `Latest` policy, if `latest_timestamp()` equals `rclcpp::Time{0, 0}`, the return value of `take_data()` is `nullptr`.
+The `latest_timestamp()` method returns the source timestamp of the last received message. If `latest_timestamp()` equals `rclcpp::Time{0, 0}`, the return value of `take_data()` is `nullptr`.
