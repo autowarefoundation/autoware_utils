@@ -22,6 +22,33 @@
 #include <memory>
 #include <thread>
 
+
+
+
+TEST(TestPollingSubscriber, InitialValues)
+{
+  const auto node = std::make_shared<rclcpp::Node>("test_initial_values");
+  const rclcpp::Time zero_stamp{0, 0, RCL_ROS_TIME};
+
+  const auto latest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Latest>::
+    create_subscription(node.get(), "/test/initial_latest", 1);
+  EXPECT_EQ(latest_sub->latest_timestamp(), zero_stamp);
+  EXPECT_EQ(latest_sub->take_data(), nullptr);
+
+  const auto newest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Newest>::
+    create_subscription(node.get(), "/test/initial_newest", 1);
+  EXPECT_EQ(newest_sub->latest_timestamp(), zero_stamp);
+  EXPECT_EQ(newest_sub->take_data(), nullptr);
+
+  const auto all_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::All>::
+    create_subscription(node.get(), "/test/initial_all", 1);
+  EXPECT_EQ(all_sub->latest_timestamp(), zero_stamp);
+  EXPECT_TRUE(all_sub->take_data().empty());
+}
+
 TEST(TestPollingSubscriber, PubSub)
 {
   const auto pub_node = std::make_shared<rclcpp::Node>("pub_node");
