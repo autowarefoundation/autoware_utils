@@ -2,6 +2,17 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.5.0 (2025-12-30)
+------------------
+* ci(pre-commit): autoupdate (`#77 <https://github.com/autowarefoundation/autoware_utils/issues/77>`_)
+  * ci(pre-commit): autoupdate
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: github-actions <github-actions@github.com>
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* fix: add missing fmt dependency (`#74 <https://github.com/autowarefoundation/autoware_utils/issues/74>`_)
+* Contributors: Daisuke Nishimatsu, awf-autoware-bot[bot]
+
 1.4.2 (2025-05-21)
 ------------------
 

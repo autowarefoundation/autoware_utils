@@ -24,6 +24,10 @@
 
 namespace autoware_utils_visualization
 {
+
+// Constant value for marker lifetime
+inline constexpr double MARKER_LIFETIME = 0.5;
+
 inline geometry_msgs::msg::Point create_marker_position(double x, double y, double z)
 {
   geometry_msgs::msg::Point point;
