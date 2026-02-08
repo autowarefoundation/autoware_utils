@@ -369,15 +369,35 @@ std::optional<geometry_msgs::msg::Point> intersect(
   const geometry_msgs::msg::Point & p1, const geometry_msgs::msg::Point & p2,
   const geometry_msgs::msg::Point & p3, const geometry_msgs::msg::Point & p4)
 {
-  // calculate intersection point
+  // Compute the determinant to check if the two lines are parallel.
+  // If det is close to zero, the lines are nearly parallel and there's
+  // no unique intersection point.
   const double det = (p1.x - p2.x) * (p4.y - p3.y) - (p4.x - p3.x) * (p1.y - p2.y);
-  if (det == 0.0) {
+
+  // A small tolerance factor for geometric computations.
+  // Used to make the intersection detection more robust against
+  // floating-point precision errors and to handle borderline cases consistently.
+  constexpr double geometric_epsilon = 1e-9;
+
+  if (std::abs(det) < geometric_epsilon) {
+    // Lines are nearly parallel — treat this as no single intersection point.
     return std::nullopt;
   }
 
   const double t = ((p4.y - p3.y) * (p4.x - p2.x) + (p3.x - p4.x) * (p4.y - p2.y)) / det;
   const double s = ((p2.y - p1.y) * (p4.x - p2.x) + (p1.x - p2.x) * (p4.y - p2.y)) / det;
-  if (t < 0 || 1 < t || s < 0 || 1 < s) {
+
+  // Helper function to check whether the intersection parameter is slightly
+  // outside the [0, 1] range, considering a small tolerance margin.
+  const auto is_outside_interval = [&](const double t) {
+    return t < -geometric_epsilon || (1.0 + geometric_epsilon) < t;
+  };
+
+  // check collision is outside the segment line
+  // Check if the computed intersection lies outside the segment boundaries.
+  // The tolerance helps to avoid jitter or inconsistent results for
+  // near-boundary cases caused by floating-point errors.
+  if (is_outside_interval(t) || is_outside_interval(s)) {
     return std::nullopt;
   }
 
