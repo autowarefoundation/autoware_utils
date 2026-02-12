@@ -22,9 +22,6 @@
 #include <memory>
 #include <thread>
 
-
-
-
 TEST(TestPollingSubscriber, InitialValues)
 {
   const auto node = std::make_shared<rclcpp::Node>("test_initial_values");

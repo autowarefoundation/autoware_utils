@@ -51,7 +51,7 @@ class Latest
 {
 private:
   typename MessageT::ConstSharedPtr data_{nullptr};  ///< Data pointer to store the latest data
-  rclcpp::Time timestamp_ {0, 0, RCL_ROS_TIME};
+  rclcpp::Time timestamp_{0, 0, RCL_ROS_TIME};
 
 protected:
   /**
@@ -94,8 +94,8 @@ public:
 template <typename MessageT>
 class Newest
 {
-  private:
-    rclcpp::Time timestamp_ {0, 0, RCL_ROS_TIME};
+private:
+  rclcpp::Time timestamp_{0, 0, RCL_ROS_TIME};
 
 protected:
   /**
@@ -138,7 +138,7 @@ template <typename MessageT>
 class All
 {
 private:
-  rclcpp::Time timestamp_ {0, 0, RCL_ROS_TIME};
+  rclcpp::Time timestamp_{0, 0, RCL_ROS_TIME};
 
 protected:
   /**
@@ -162,7 +162,6 @@ public:
    * @return rclcpp::Time The last timestamp.
    */
   rclcpp::Time latest_timestamp() const { return timestamp_; }
-
 };
 
 }  // namespace polling_policy
