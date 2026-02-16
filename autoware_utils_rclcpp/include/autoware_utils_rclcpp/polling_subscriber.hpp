@@ -17,6 +17,7 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -51,7 +52,7 @@ class Latest
 {
 private:
   typename MessageT::ConstSharedPtr data_{nullptr};  ///< Data pointer to store the latest data
-  rclcpp::Time timestamp_{0, 0, RCL_ROS_TIME};
+  std::optional<rclcpp::Time> timestamp_{std::nullopt};
 
 protected:
   /**
@@ -80,10 +81,11 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
-   * @return rclcpp::Time The last timestamp.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
+   * received.
    */
 
-  rclcpp::Time latest_timestamp() const { return timestamp_; }
+  std::optional<rclcpp::Time> latest_timestamp() const { return timestamp_; }
 };
 
 /**
@@ -95,7 +97,7 @@ template <typename MessageT>
 class Newest
 {
 private:
-  rclcpp::Time timestamp_{0, 0, RCL_ROS_TIME};
+  std::optional<rclcpp::Time> timestamp_{std::nullopt};
 
 protected:
   /**
@@ -124,9 +126,10 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
-   * @return rclcpp::Time The last timestamp.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
+   * received.
    */
-  rclcpp::Time latest_timestamp() const { return timestamp_; }
+  std::optional<rclcpp::Time> latest_timestamp() const { return timestamp_; }
 };
 
 /**
@@ -138,7 +141,7 @@ template <typename MessageT>
 class All
 {
 private:
-  rclcpp::Time timestamp_{0, 0, RCL_ROS_TIME};
+  std::optional<rclcpp::Time> timestamp_{std::nullopt};
 
 protected:
   /**
@@ -159,9 +162,10 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
-   * @return rclcpp::Time The last timestamp.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
+   * received.
    */
-  rclcpp::Time latest_timestamp() const { return timestamp_; }
+  std::optional<rclcpp::Time> latest_timestamp() const { return timestamp_; }
 };
 
 }  // namespace polling_policy

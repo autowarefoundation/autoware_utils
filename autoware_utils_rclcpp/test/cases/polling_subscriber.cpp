@@ -25,24 +25,23 @@
 TEST(TestPollingSubscriber, InitialValues)
 {
   const auto node = std::make_shared<rclcpp::Node>("test_initial_values");
-  const rclcpp::Time zero_stamp{0, 0, RCL_ROS_TIME};
 
   const auto latest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
     std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Latest>::
     create_subscription(node.get(), "/test/initial_latest", 1);
-  EXPECT_EQ(latest_sub->latest_timestamp(), zero_stamp);
+  EXPECT_EQ(latest_sub->latest_timestamp(), std::nullopt);
   EXPECT_EQ(latest_sub->take_data(), nullptr);
 
   const auto newest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
     std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Newest>::
     create_subscription(node.get(), "/test/initial_newest", 1);
-  EXPECT_EQ(newest_sub->latest_timestamp(), zero_stamp);
+  EXPECT_EQ(newest_sub->latest_timestamp(), std::nullopt);
   EXPECT_EQ(newest_sub->take_data(), nullptr);
 
   const auto all_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
     std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::All>::
     create_subscription(node.get(), "/test/initial_all", 1);
-  EXPECT_EQ(all_sub->latest_timestamp(), zero_stamp);
+  EXPECT_EQ(all_sub->latest_timestamp(), std::nullopt);
   EXPECT_TRUE(all_sub->take_data().empty());
 }
 
@@ -72,11 +71,10 @@ TEST(TestPollingSubscriber, PubSub)
   EXPECT_NE(sub_msg, nullptr);
   EXPECT_EQ(sub_msg->data, pub_msg.data);
 
-  rclcpp::Time timestamp = sub->latest_timestamp();
-  rclcpp::Time zero_stamp = rclcpp::Time{0, 0, RCL_ROS_TIME};
-  EXPECT_NE(timestamp, zero_stamp);
+  const auto timestamp = sub->latest_timestamp();
+  EXPECT_TRUE(timestamp.has_value());
 
-  rclcpp::Duration duration = sub_node->now() - timestamp;
+  rclcpp::Duration duration = sub_node->now() - timestamp.value();
   EXPECT_LE(duration.seconds(), 1.0);
 
   executor.cancel();
