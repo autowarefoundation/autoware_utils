@@ -64,11 +64,11 @@ int main(int argc, char * argv[]) {
 
   // Retrieve data and timestamp.
   auto msg = latest_sub->take_data();          // std_msgs::msg::String::ConstSharedPtr
-  auto stamp = latest_sub->latest_timestamp(); // rclcpp::Time
+  auto stamp = latest_sub->latest_timestamp(); // std::optional<rclcpp::Time>
 
   rclcpp::shutdown();
   return 0;
 }
 ```
 
-The `latest_timestamp()` method returns the source timestamp of the last received message. If `latest_timestamp()` equals `rclcpp::Time{0, 0}`, the return value of `take_data()` is `nullptr`.
+The `latest_timestamp()` method returns the source timestamp of the last received message as `std::optional<rclcpp::Time>`. If no message has been received, it returns `std::nullopt`.
