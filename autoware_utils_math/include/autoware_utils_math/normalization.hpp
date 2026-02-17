@@ -21,6 +21,35 @@
 
 namespace autoware_utils_math
 {
+
+namespace detail
+{
+constexpr double kDoublePi = 2.0 * pi;
+}  // namespace detail
+
+/*
+ * @brief Wraps an angle to the range [-pi, pi].
+ *
+ * This function takes an angle in radians and wraps it to the range [-pi, pi]. It uses the
+ * remainder function for efficient wrapping and handles both positive and negative angles.
+ *
+ * @tparam T A floating-point type (e.g., float, double).
+ * @param angle The input angle in radians to be wrapped.
+ * @return The wrapped angle in the range [-pi, pi].
+ */
+template <typename T>
+constexpr T wrap_angle(T angle) noexcept
+{
+  static_assert(std::is_floating_point<T>::value, "wrap_angle requires floating point type");
+
+  // Use remainder for efficient wrapping to [-pi, pi]
+  T wrapped = std::fmod(angle + T(pi), T(detail::kDoublePi));
+  if (wrapped < T{}) {
+    wrapped += T(detail::kDoublePi);
+  }
+  return wrapped - T(pi);
+}
+
 inline double normalize_degree(const double deg, const double min_deg = -180)
 {
   const auto max_deg = min_deg + 360.0;
