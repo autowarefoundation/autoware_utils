@@ -72,7 +72,8 @@ protected:
 
 public:
   /**
-   * @brief Retrieve the latest data. If no new data has been received, the previously received data
+   *
+   *  @brief Retrieve the latest data. If no new data has been received, the previously received data
    *
    * @return typename MessageT::ConstSharedPtr The latest data.
    */
@@ -81,6 +82,7 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
+   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received.
    */
@@ -126,6 +128,7 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
+   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received.
    */
@@ -162,6 +165,7 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
+   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received.
    */
