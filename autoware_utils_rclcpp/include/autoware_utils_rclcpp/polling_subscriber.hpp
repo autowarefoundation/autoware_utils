@@ -83,6 +83,7 @@ public:
    * @brief Getter for timestamp of the last message
    *
    * @pre To receive a valid timestamp, at least one message must have been received via take_data().
+   *      The timestamp is retained until a new message is received.
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received.
    */
@@ -128,9 +129,10 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
-   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
+   * @pre To receive a valid timestamp, the most recent take_data() call must have successfully
+   *      received a message. The timestamp is cleared when no data is returned.
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
-   * received.
+   * received in the most recent take_data() call.
    */
   std::optional<rclcpp::Time> latest_timestamp() const { return timestamp_; }
 };
@@ -165,9 +167,10 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
-   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
-   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
-   * received.
+   * @pre To receive a valid timestamp, the most recent take_data() call must have successfully
+   *      received at least one message. The timestamp is cleared when an empty vector is returned.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no messages have been
+   * received in the most recent take_data() call.
    */
   std::optional<rclcpp::Time> latest_timestamp() const { return timestamp_; }
 };
@@ -264,6 +267,7 @@ typename MessageT::ConstSharedPtr Newest<MessageT>::take_data()
     timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
     return new_data;
   }
+  timestamp_ = std::nullopt;
   return nullptr;
 }
 
@@ -282,6 +286,9 @@ std::vector<typename MessageT::ConstSharedPtr> All<MessageT>::take_data()
     } else {
       break;
     }
+  }
+  if (data.empty()) {
+    timestamp_ = std::nullopt;
   }
   return data;
 }

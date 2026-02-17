@@ -72,4 +72,7 @@ int main(int argc, char * argv[]) {
 ```
 
 The `latest_timestamp()` method returns the source timestamp of the last received message as `std::optional<rclcpp::Time>`.
-**Note**: To receive a valid timestamp, `take_data()` must be called at least once to retrieve a message. If no message has been received, it returns `std::nullopt`.
+
+**Note**: The timestamp behavior differs depending on the polling policy:
+- **Latest policy**: The timestamp is retained until a new message is received. To get a valid timestamp, `take_data()` must be called at least once to retrieve a message.
+- **Newest/All policies**: The timestamp is cleared when `take_data()` returns no data (nullptr or empty vector). To get a valid timestamp, the most recent `take_data()` call must have successfully received a message.
