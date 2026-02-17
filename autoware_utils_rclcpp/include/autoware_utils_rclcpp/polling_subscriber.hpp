@@ -83,8 +83,8 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
-   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
-   *      The timestamp is retained until a new message is received.
+   * @pre To receive a valid timestamp, at least one message must have been received via
+   * take_data(). The timestamp is retained until a new message is received.
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received.
    */
