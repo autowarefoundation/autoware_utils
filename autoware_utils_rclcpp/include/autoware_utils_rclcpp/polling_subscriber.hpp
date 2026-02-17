@@ -84,7 +84,8 @@ public:
    * @brief Getter for timestamp of the last message
    *
 <<<<<<< HEAD
-   * @pre To receive a valid timestamp, at least one message must have been received via take_data().
+   * @pre To receive a valid timestamp, at least one message must have been received via
+take_data().
    *      The timestamp is retained until a new message is received.
 =======
    * @pre To receive a valid timestamp, at least one message must have been received via
