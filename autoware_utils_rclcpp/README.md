@@ -63,15 +63,15 @@ int main(int argc, char * argv[]) {
     create_subscription(node.get(), "/topic", rclcpp::QoS{10});
 
   // Retrieve data and timestamp.
-  auto msg = latest_sub->take_data();          // std_msgs::msg::String::ConstSharedPtr
-  auto stamp = latest_sub->latest_timestamp(); // std::optional<rclcpp::Time>
+  auto msg = latest_sub->take_data();                         // std_msgs::msg::String::ConstSharedPtr
+  auto stamp = latest_sub->last_taken_data_timestamp();       // std::optional<rclcpp::Time>
 
   rclcpp::shutdown();
   return 0;
 }
 ```
 
-The `latest_timestamp()` method returns the source timestamp of the last received message as `std::optional<rclcpp::Time>`.
+The `last_taken_data_timestamp()` method returns the source timestamp of the last message retrieved by `take_data()` as `std::optional<rclcpp::Time>`.
 
 **Note**: The timestamp behavior differs depending on the polling policy:
 - **Latest policy**: The timestamp is retained until a new message is received. To get a valid timestamp, `take_data()` must be called at least once to retrieve a message.
