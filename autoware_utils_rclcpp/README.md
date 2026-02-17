@@ -36,3 +36,44 @@ int main(int argc, char * argv[]) {
   return 0;
 }
 ```
+
+### Subscribe to Topics with polling_subscriber.hpp
+
+```cpp
+#include <autoware_utils_rclcpp/polling_subscriber.hpp>
+#include <std_msgs/msg/string.hpp>
+#include <rclcpp/rclcpp.hpp>
+
+int main(int argc, char * argv[]) {
+  rclcpp::init(argc, argv);
+  auto node = rclcpp::Node::make_shared("polling_node");
+
+  // Latest policy (default): returns the last received message, or the previous one if no new data.
+  auto latest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String>::create_subscription(node.get(), "/topic", 1);
+
+  // Newest policy: returns the new message only, or nullptr if no new data.
+  auto newest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Newest>::
+    create_subscription(node.get(), "/topic", 1);
+
+  // All policy: returns all received messages as a vector.
+  auto all_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::All>::
+    create_subscription(node.get(), "/topic", rclcpp::QoS{10});
+
+  // Retrieve data and timestamp.
+  auto msg = latest_sub->take_data();                         // std_msgs::msg::String::ConstSharedPtr
+  auto stamp = latest_sub->last_taken_data_timestamp();       // std::optional<rclcpp::Time>
+
+  rclcpp::shutdown();
+  return 0;
+}
+```
+
+The `last_taken_data_timestamp()` method returns the source timestamp of the last message retrieved by `take_data()` as `std::optional<rclcpp::Time>`.
+
+**Note**: The timestamp behavior differs depending on the polling policy:
+
+- **Latest policy**: The timestamp is retained until a new message is received. To get a valid timestamp, `take_data()` must be called at least once to retrieve a message.
+- **Newest/All policies**: The timestamp is cleared when `take_data()` returns no data (nullptr or empty vector). To get a valid timestamp, the most recent `take_data()` call must have successfully received a message.

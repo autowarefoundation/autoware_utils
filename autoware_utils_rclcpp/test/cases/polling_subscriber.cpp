@@ -22,6 +22,29 @@
 #include <memory>
 #include <thread>
 
+TEST(TestPollingSubscriber, InitialValues)
+{
+  const auto node = std::make_shared<rclcpp::Node>("test_initial_values");
+
+  const auto latest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Latest>::
+    create_subscription(node.get(), "/test/initial_latest", 1);
+  EXPECT_EQ(latest_sub->last_taken_data_timestamp(), std::nullopt);
+  EXPECT_EQ(latest_sub->take_data(), nullptr);
+
+  const auto newest_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Newest>::
+    create_subscription(node.get(), "/test/initial_newest", 1);
+  EXPECT_EQ(newest_sub->last_taken_data_timestamp(), std::nullopt);
+  EXPECT_EQ(newest_sub->take_data(), nullptr);
+
+  const auto all_sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::All>::
+    create_subscription(node.get(), "/test/initial_all", 1);
+  EXPECT_EQ(all_sub->last_taken_data_timestamp(), std::nullopt);
+  EXPECT_TRUE(all_sub->take_data().empty());
+}
+
 TEST(TestPollingSubscriber, PubSub)
 {
   const auto pub_node = std::make_shared<rclcpp::Node>("pub_node");
@@ -47,6 +70,136 @@ TEST(TestPollingSubscriber, PubSub)
   const auto sub_msg = sub->take_data();
   EXPECT_NE(sub_msg, nullptr);
   EXPECT_EQ(sub_msg->data, pub_msg.data);
+
+  const auto timestamp = sub->last_taken_data_timestamp();
+  EXPECT_TRUE(timestamp.has_value());
+
+  rclcpp::Duration duration = sub_node->now() - timestamp.value();
+  EXPECT_LE(duration.seconds(), 1.0);
+
+  executor.cancel();
+  thread.join();
+}
+
+TEST(TestPollingSubscriber, LatestTimestampRetention)
+{
+  const auto pub_node = std::make_shared<rclcpp::Node>("pub_node_latest");
+  const auto sub_node = std::make_shared<rclcpp::Node>("sub_node_latest");
+
+  const auto pub = pub_node->create_publisher<std_msgs::msg::String>("/test/latest_retention", 1);
+  const auto sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Latest>::
+    create_subscription(sub_node.get(), "/test/latest_retention", 1);
+
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_node(pub_node);
+  executor.add_node(sub_node);
+
+  std::thread thread([&executor] { executor.spin(); });
+  while (rclcpp::ok() && !executor.is_spinning()) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  // Publish a message
+  std_msgs::msg::String pub_msg;
+  pub_msg.data = "test-message";
+  pub->publish(pub_msg);
+  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+  // First take_data: message received, timestamp set
+  const auto msg1 = sub->take_data();
+  EXPECT_NE(msg1, nullptr);
+  const auto ts1 = sub->last_taken_data_timestamp();
+  EXPECT_TRUE(ts1.has_value());
+
+  // Second take_data: no new message, but Latest policy retains previous data and timestamp
+  const auto msg2 = sub->take_data();
+  EXPECT_EQ(msg2, msg1);  // Same message as before
+  const auto ts2 = sub->last_taken_data_timestamp();
+  EXPECT_TRUE(ts2.has_value());
+  EXPECT_EQ(ts2, ts1);  // Timestamp is retained
+
+  executor.cancel();
+  thread.join();
+}
+
+TEST(TestPollingSubscriber, NewestTimestampClear)
+{
+  const auto pub_node = std::make_shared<rclcpp::Node>("pub_node_newest");
+  const auto sub_node = std::make_shared<rclcpp::Node>("sub_node_newest");
+
+  const auto pub = pub_node->create_publisher<std_msgs::msg::String>("/test/newest_clear", 1);
+  const auto sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Newest>::
+    create_subscription(sub_node.get(), "/test/newest_clear", 1);
+
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_node(pub_node);
+  executor.add_node(sub_node);
+
+  std::thread thread([&executor] { executor.spin(); });
+  while (rclcpp::ok() && !executor.is_spinning()) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  // Publish a message
+  std_msgs::msg::String pub_msg;
+  pub_msg.data = "test-message";
+  pub->publish(pub_msg);
+  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+  // First take_data: message received, timestamp set
+  const auto msg1 = sub->take_data();
+  EXPECT_NE(msg1, nullptr);
+  const auto ts1 = sub->last_taken_data_timestamp();
+  EXPECT_TRUE(ts1.has_value());
+
+  // Second take_data: no new message, Newest policy returns nullptr and clears timestamp
+  const auto msg2 = sub->take_data();
+  EXPECT_EQ(msg2, nullptr);
+  const auto ts2 = sub->last_taken_data_timestamp();
+  EXPECT_EQ(ts2, std::nullopt);  // Timestamp is cleared
+
+  executor.cancel();
+  thread.join();
+}
+
+TEST(TestPollingSubscriber, AllTimestampClear)
+{
+  const auto pub_node = std::make_shared<rclcpp::Node>("pub_node_all");
+  const auto sub_node = std::make_shared<rclcpp::Node>("sub_node_all");
+
+  const auto pub = pub_node->create_publisher<std_msgs::msg::String>("/test/all_clear", 1);
+  const auto sub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+    std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::All>::
+    create_subscription(sub_node.get(), "/test/all_clear", rclcpp::QoS{10});
+
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_node(pub_node);
+  executor.add_node(sub_node);
+
+  std::thread thread([&executor] { executor.spin(); });
+  while (rclcpp::ok() && !executor.is_spinning()) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+
+  // Publish a message
+  std_msgs::msg::String pub_msg;
+  pub_msg.data = "test-message";
+  pub->publish(pub_msg);
+  std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+  // First take_data: message received, timestamp set
+  const auto msgs1 = sub->take_data();
+  EXPECT_FALSE(msgs1.empty());
+  const auto ts1 = sub->last_taken_data_timestamp();
+  EXPECT_TRUE(ts1.has_value());
+
+  // Second take_data: no new message, All policy returns empty vector and clears timestamp
+  const auto msgs2 = sub->take_data();
+  EXPECT_TRUE(msgs2.empty());
+  const auto ts2 = sub->last_taken_data_timestamp();
+  EXPECT_EQ(ts2, std::nullopt);  // Timestamp is cleared
 
   executor.cancel();
   thread.join();
