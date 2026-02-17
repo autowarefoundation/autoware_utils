@@ -73,7 +73,8 @@ protected:
 public:
   /**
    *
-   *  @brief Retrieve the latest data. If no new data has been received, the previously received data
+   *  @brief Retrieve the latest data. If no new data has been received, the previously received
+   * data
    *
    * @return typename MessageT::ConstSharedPtr The latest data.
    */
@@ -82,8 +83,13 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
+<<<<<<< HEAD
    * @pre To receive a valid timestamp, at least one message must have been received via take_data().
    *      The timestamp is retained until a new message is received.
+=======
+   * @pre To receive a valid timestamp, at least one message must have been received via
+   * take_data().
+>>>>>>> 0788981d1cf789140ce0bb159835ad09c9b9b685
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received.
    */
@@ -129,8 +135,13 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
+<<<<<<< HEAD
    * @pre To receive a valid timestamp, the most recent take_data() call must have successfully
    *      received a message. The timestamp is cleared when no data is returned.
+=======
+   * @pre To receive a valid timestamp, at least one message must have been received via
+   * take_data().
+>>>>>>> 0788981d1cf789140ce0bb159835ad09c9b9b685
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
    * received in the most recent take_data() call.
    */
@@ -167,10 +178,17 @@ public:
   /**
    * @brief Getter for timestamp of the last message
    *
+<<<<<<< HEAD
    * @pre To receive a valid timestamp, the most recent take_data() call must have successfully
    *      received at least one message. The timestamp is cleared when an empty vector is returned.
    * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no messages have been
    * received in the most recent take_data() call.
+=======
+   * @pre To receive a valid timestamp, at least one message must have been received via
+   * take_data().
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
+   * received.
+>>>>>>> 0788981d1cf789140ce0bb159835ad09c9b9b685
    */
   std::optional<rclcpp::Time> latest_timestamp() const { return timestamp_; }
 };
