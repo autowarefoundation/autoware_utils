@@ -2,6 +2,9 @@
 Changelog for package autoware_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.5.0 (2025-12-30)
 ------------------
 

@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.5.0 (2025-12-30)
 ------------------
 * feat: add `timeout_diagnostics` (`#84 <https://github.com/autowarefoundation/autoware_utils/issues/84>`_)

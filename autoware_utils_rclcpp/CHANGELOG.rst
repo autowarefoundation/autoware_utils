@@ -2,6 +2,27 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat(autoware_utils_rclcpp): add function to get the timestamp of the latest message (`#91 <https://github.com/autowarefoundation/autoware_utils/issues/91>`_)
+  * feat(polling_subscriber): add getter of latest_timestamp.
+  * fix(rclcpp): fixed dead code.
+  * add explanation of PollingSubscriber in README.md
+  * update explanation of PollingSubscriber in README.md
+  * add testcase to check initial value of PollingSubscriber
+  * style(pre-commit): autofix
+  * use std::optional instead of the magic number.
+  * updated README.md for the previous commit
+  * chore(autoware_utils_rclcpp): add precondition of latest_timestamp() method
+  * style(pre-commit): autofix
+  * change latest_timestamp() to return std::nullopt if there is no valid data received
+  * style(pre-commit): autofix
+  * chore(polling_subscriber): rename method name
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Takayuki AKAMINE
+
 1.5.0 (2025-12-30)
 ------------------
 
