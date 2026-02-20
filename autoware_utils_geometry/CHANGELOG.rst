@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.6.0 (2026-02-20)
+------------------
+
 1.5.0 (2025-12-30)
 ------------------
 * fix(autoware_utils_geometry): handle floating-point errors in segment collision detection (`#86 <https://github.com/autowarefoundation/autoware_utils/issues/86>`_)

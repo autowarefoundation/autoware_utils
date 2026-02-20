@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.6.0 (2026-02-20)
+------------------
+
 1.5.0 (2025-12-30)
 ------------------
 * chore: replace INSTANTIATE_TEST_CASE_P with INSTANTIATE_TEST_SUITE_P (`#73 <https://github.com/autowarefoundation/autoware_utils/issues/73>`_)

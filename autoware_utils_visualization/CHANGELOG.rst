@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.6.0 (2026-02-20)
+------------------
+
 1.5.0 (2025-12-30)
 ------------------
 * refactor: set constant value for marker lifetime (`#76 <https://github.com/autowarefoundation/autoware_utils/issues/76>`_)

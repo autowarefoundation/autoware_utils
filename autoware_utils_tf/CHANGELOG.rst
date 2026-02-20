@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_tf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.6.0 (2026-02-20)
+------------------
+
 1.5.0 (2025-12-30)
 ------------------
 * Replace ament_target_dependencies with target_link_libraries (`#69 <https://github.com/autowarefoundation/autoware_utils/issues/69>`_)
