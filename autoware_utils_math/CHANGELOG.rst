@@ -2,6 +2,14 @@
 Changelog for package autoware_utils_math
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* revert(autoware_utils_math): revert "feat(autoware_utils_math): add wrap_angle function `#92 <https://github.com/autowarefoundation/autoware_utils/issues/92>`_" (`#93 <https://github.com/autowarefoundation/autoware_utils/issues/93>`_)
+  Revert "feat(autoware_utils_math): add wrap_angle function (`#92 <https://github.com/autowarefoundation/autoware_utils/issues/92>`_)"
+  This reverts commit 99e412fcc9e6b9c77c16cb33ad36f09d887e7853.
+* feat(autoware_utils_math): add wrap_angle function (`#92 <https://github.com/autowarefoundation/autoware_utils/issues/92>`_)
+* Contributors: Mert Yavuz, Ryohsuke Mitsudome
+
 1.5.0 (2025-12-30)
 ------------------
 

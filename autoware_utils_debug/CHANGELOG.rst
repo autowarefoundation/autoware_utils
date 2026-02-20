@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.5.0 (2025-12-30)
 ------------------
 * ci(pre-commit): autoupdate (`#77 <https://github.com/autowarefoundation/autoware_utils/issues/77>`_)
