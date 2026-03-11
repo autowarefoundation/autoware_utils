@@ -35,8 +35,8 @@ template <typename NodeT = rclcpp::Node>
 class BasicPublishedTimePublisher
 {
 public:
-  using PublishedTimePubPtr = decltype(
-    std::declval<NodeT *>()->template create_publisher<PublishedTime>(
+  using PublishedTimePubPtr =
+    decltype(std::declval<NodeT *>()->template create_publisher<PublishedTime>(
       std::string{}, rclcpp::QoS(1)));
 
   explicit BasicPublishedTimePublisher(
@@ -107,8 +107,7 @@ private:
   {
     if (publishers_.find(gid_key) == publishers_.end()) {
       publishers_[gid_key] =
-        node_->template create_publisher<PublishedTime>(
-          topic_name + publisher_topic_suffix_, qos_);
+        node_->template create_publisher<PublishedTime>(topic_name + publisher_topic_suffix_, qos_);
     }
   }
 
