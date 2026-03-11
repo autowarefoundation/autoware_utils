@@ -54,12 +54,10 @@ public:
     std::enable_if_t<rosidl_generator_traits::is_message<T>::value, std::nullptr_t> = nullptr>
   void publish(const std::string & name, const T & data, const rclcpp::QoS & qos = rclcpp::QoS(1))
   {
-    using PubPtr =
-      decltype(node_->template create_publisher<T>(std::string{}, rclcpp::QoS(1)));
+    using PubPtr = decltype(node_->template create_publisher<T>(std::string{}, rclcpp::QoS(1)));
 
     if (pub_map_.count(name) == 0) {
-      pub_map_[name] =
-        node_->template create_publisher<T>(std::string(ns_) + "/" + name, qos);
+      pub_map_[name] = node_->template create_publisher<T>(std::string(ns_) + "/" + name, qos);
     }
 
     std::any_cast<PubPtr &>(pub_map_.at(name))->publish(data);
