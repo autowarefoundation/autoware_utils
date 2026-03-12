@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_uuid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.6.0 (2026-02-20)
 ------------------
 

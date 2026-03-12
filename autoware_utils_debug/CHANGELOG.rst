@@ -2,6 +2,20 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat: make PublishedTimePublisher's node argument as template node (`#96 <https://github.com/autowarefoundation/autoware_utils/issues/96>`_)
+  * make PublishedTimePublisher's node argument as template node
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat: make DebugPublisher's node argument as template type (`#97 <https://github.com/autowarefoundation/autoware_utils/issues/97>`_)
+  * Make DebugPublisher's node argument as template type
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
 1.6.0 (2026-02-20)
 ------------------
 
