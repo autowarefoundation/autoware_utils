@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_math
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.7.0 (2026-03-12)
+------------------
+
 1.6.0 (2026-02-20)
 ------------------
 * revert(autoware_utils_math): revert "feat(autoware_utils_math): add wrap_angle function `#92 <https://github.com/autowarefoundation/autoware_utils/issues/92>`_" (`#93 <https://github.com/autowarefoundation/autoware_utils/issues/93>`_)

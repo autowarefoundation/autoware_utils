@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.7.0 (2026-03-12)
+------------------
+
 1.6.0 (2026-02-20)
 ------------------
 * feat(autoware_utils_rclcpp): add function to get the timestamp of the latest message (`#91 <https://github.com/autowarefoundation/autoware_utils/issues/91>`_)
