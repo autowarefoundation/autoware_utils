@@ -2,8 +2,8 @@
 Changelog for package autoware_utils
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.7.2 (2026-05-01)
+------------------
 * fix: to be consistent version in all package.xml(s)
 * Contributors: github-actions
 

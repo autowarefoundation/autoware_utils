@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.7.2 (2026-05-01)
+------------------
 * fix: to be consistent version in all package.xml(s)
 * Contributors: github-actions
 

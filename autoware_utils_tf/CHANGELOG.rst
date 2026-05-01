@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_tf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.7.2 (2026-05-01)
+------------------
 * fix: to be consistent version in all package.xml(s)
 * fix(autoware_utils_tf): update tf2 ros header (`#90 <https://github.com/autowarefoundation/autoware_utils/issues/90>`_)
   * fix(autoware_utils_tf): update tf2 ros header
