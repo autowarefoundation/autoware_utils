@@ -2,6 +2,11 @@
 Changelog for package autoware_utils_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix: to be consistent version in all package.xml(s)
+* Contributors: github-actions
+
 1.7.0 (2026-03-12)
 ------------------
 

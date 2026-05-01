@@ -2,6 +2,11 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix: to be consistent version in all package.xml(s)
+* Contributors: github-actions
+
 1.7.0 (2026-03-12)
 ------------------
 * feat: make PublishedTimePublisher's node argument as template node (`#96 <https://github.com/autowarefoundation/autoware_utils/issues/96>`_)
