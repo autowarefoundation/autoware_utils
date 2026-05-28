@@ -143,6 +143,23 @@ public:
   void add_reporter(rclcpp::Publisher<ProcessingTimeDetail>::SharedPtr publisher);
 
   /**
+   * @brief Add a reporter that publishes through any publisher-like handle.
+   * Accepts custom publishers (e.g. autoware::agnocast_wrapper::Publisher) that expose a
+   * compatible publish(ProcessingTimeDetail) method. Enabled only when the handle is not the
+   * rclcpp publisher SharedPtr handled by the non-template overload above.
+   */
+  template <typename PublisherT>
+  auto add_reporter(std::shared_ptr<PublisherT> publisher) -> std::enable_if_t<
+    !std::is_same_v<
+      std::shared_ptr<PublisherT>, rclcpp::Publisher<ProcessingTimeDetail>::SharedPtr>>
+  {
+    reporters_.emplace_back(
+      [publisher = std::move(publisher)](const std::shared_ptr<ProcessingTimeNode> & node) {
+        publisher->publish(node->to_msg());
+      });
+  }
+
+  /**
    * @brief Start tracking the processing time of a function
    *
    * @param func_name Name of the function to be tracked
