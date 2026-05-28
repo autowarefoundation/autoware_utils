@@ -37,9 +37,8 @@ public:
   BasicDiagnosticsInterface(NodeT * node, const std::string & diagnostic_name)
   : clock_(node->get_clock())
   {
-    diagnostics_pub_ =
-      node->template create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
-        "/diagnostics", rclcpp::QoS(10));
+    diagnostics_pub_ = node->template create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
+      "/diagnostics", rclcpp::QoS(10));
 
     diagnostics_status_msg_.name =
       std::string(node->get_name()) + std::string(": ") + diagnostic_name;
