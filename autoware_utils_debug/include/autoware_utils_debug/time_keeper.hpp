@@ -151,9 +151,8 @@ public:
    * rclcpp publisher SharedPtr handled by the non-template overload above.
    */
   template <typename PublisherT>
-  auto add_reporter(std::shared_ptr<PublisherT> publisher) -> std::enable_if_t<
-    !std::is_same_v<
-      std::shared_ptr<PublisherT>, rclcpp::Publisher<ProcessingTimeDetail>::SharedPtr>>
+  auto add_reporter(std::shared_ptr<PublisherT> publisher) -> std::enable_if_t<!std::is_same_v<
+    std::shared_ptr<PublisherT>, rclcpp::Publisher<ProcessingTimeDetail>::SharedPtr>>
   {
     reporters_.emplace_back(
       [publisher = std::move(publisher)](const std::shared_ptr<ProcessingTimeNode> & node) {
