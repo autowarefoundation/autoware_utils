@@ -20,7 +20,53 @@
 
 #include <chrono>
 #include <memory>
+#include <stdexcept>
 #include <thread>
+
+// Type aliases keep the template comma out of the gtest macro argument list.
+using LatestStringSub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+  std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Latest>;
+using NewestStringSub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+  std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::Newest>;
+using AllStringSub = autoware_utils_rclcpp::InterProcessPollingSubscriber<
+  std_msgs::msg::String, autoware_utils_rclcpp::polling_policy::All>;
+
+TEST(TestPollingSubscriber, CheckQosDepthGreaterThanOneThrows)
+{
+  const auto node = std::make_shared<rclcpp::Node>("test_check_qos_throw");
+
+  // Latest/Newest reject QoS depth > 1: polling needs a single-depth queue, so a deeper
+  // queue is rejected at construction.
+  EXPECT_THROW(
+    LatestStringSub::create_subscription(node.get(), "/test/latest_deep", rclcpp::QoS{10}),
+    std::invalid_argument);
+
+  // Newest policy rejects QoS depth > 1 for the same reason.
+  EXPECT_THROW(
+    NewestStringSub::create_subscription(node.get(), "/test/newest_deep", rclcpp::QoS{10}),
+    std::invalid_argument);
+}
+
+TEST(TestPollingSubscriber, CheckQosDepthOneDoesNotThrow)
+{
+  const auto node = std::make_shared<rclcpp::Node>("test_check_qos_no_throw");
+
+  // QoS depth == 1 is the allowed boundary for Latest.
+  EXPECT_NO_THROW(
+    LatestStringSub::create_subscription(node.get(), "/test/latest_shallow", rclcpp::QoS{1}));
+
+  // QoS depth == 1 is the allowed boundary for Newest.
+  EXPECT_NO_THROW(
+    NewestStringSub::create_subscription(node.get(), "/test/newest_shallow", rclcpp::QoS{1}));
+}
+
+TEST(TestPollingSubscriber, CheckQosAllPolicyIgnoresDepth)
+{
+  const auto node = std::make_shared<rclcpp::Node>("test_check_qos_all");
+
+  // All policy's check_qos is a no-op, so a deep QoS must not throw.
+  EXPECT_NO_THROW(AllStringSub::create_subscription(node.get(), "/test/all_deep", rclcpp::QoS{10}));
+}
 
 TEST(TestPollingSubscriber, InitialValues)
 {
