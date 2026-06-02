@@ -48,7 +48,6 @@ public:
   void clear()
   {
     diagnostics_status_msg_.values.clear();
-    diagnostics_status_msg_.values.shrink_to_fit();
 
     diagnostics_status_msg_.level = diagnostic_msgs::msg::DiagnosticStatus::OK;
     diagnostics_status_msg_.message = "";
