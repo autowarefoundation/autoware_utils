@@ -81,6 +81,42 @@ private:
   std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 };
+
+template <class BufferT>
+geometry_msgs::msg::TransformStamped::ConstSharedPtr get_transform(
+  BufferT & buffer, const rclcpp::Logger & logger, rclcpp::Clock & clock, const std::string & from,
+  const std::string & to, const rclcpp::Time & time, const rclcpp::Duration & duration)
+{
+  geometry_msgs::msg::TransformStamped tf;
+  try {
+    tf = buffer.lookupTransform(from, to, time, duration);
+  } catch (tf2::TransformException & ex) {
+    RCLCPP_WARN_THROTTLE(
+      logger, clock, 5000, "failed to get transform from %s to %s: %s", from.c_str(), to.c_str(),
+      ex.what());
+    return {};
+  }
+
+  return std::make_shared<const geometry_msgs::msg::TransformStamped>(tf);
+}
+
+template <class BufferT>
+geometry_msgs::msg::TransformStamped::ConstSharedPtr get_latest_transform(
+  BufferT & buffer, const rclcpp::Logger & logger, rclcpp::Clock & clock, const std::string & from,
+  const std::string & to)
+{
+  geometry_msgs::msg::TransformStamped tf;
+  try {
+    tf = buffer.lookupTransform(from, to, tf2::TimePointZero);
+  } catch (tf2::TransformException & ex) {
+    RCLCPP_WARN_THROTTLE(
+      logger, clock, 5000, "failed to get transform from %s to %s: %s", from.c_str(), to.c_str(),
+      ex.what());
+    return {};
+  }
+
+  return std::make_shared<const geometry_msgs::msg::TransformStamped>(tf);
+}
 }  // namespace autoware_utils_tf
 
 #endif  // AUTOWARE_UTILS_TF__TRANSFORM_LISTENER_HPP_
