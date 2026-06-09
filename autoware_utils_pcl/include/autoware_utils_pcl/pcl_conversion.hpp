@@ -50,6 +50,9 @@ void transform_point_cloud_from_ros_msg(
   // transform point data
   std::uint32_t num_points = cloud.width * cloud.height;
   pcl_cloud.points.resize(num_points);
+  if (num_points == 0) {
+    return;
+  }
   std::uint8_t * cloud_data = reinterpret_cast<std::uint8_t *>(&pcl_cloud.points[0]);
   pcl::detail::Transformer<Scalar> tf(transform);
 
