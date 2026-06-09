@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.8.0 (2026-06-09)
+------------------
 * test(autoware_utils_rclcpp): cover check_qos depth>1 throw for Latest/Newest (`#107 <https://github.com/autowarefoundation/autoware_utils/issues/107>`_)
   The QoS-validation branch InterProcessPollingSubscriber's check_qos() was
   uncovered: existing tests only construct subscribers with depth==1 (or the
