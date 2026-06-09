@@ -89,11 +89,10 @@ class WrapperTransformListener
 {
 public:
   explicit WrapperTransformListener(autoware::agnocast_wrapper::Node & node)
-  : clock_(node.get_clock()),
-    logger_(node.get_logger()),
-    buffer_(node.get_clock()),
-    listener_(buffer_, node)
+  : clock_(node.get_clock()), logger_(node.get_logger())
   {
+    buffer_ = std::make_shared<autoware::agnocast_wrapper::Buffer>(clock_);
+    listener_ = std::make_shared<autoware::agnocast_wrapper::TransformListener>(*buffer_, node);
   }
 
   geometry_msgs::msg::TransformStamped::ConstSharedPtr get_latest_transform(
@@ -101,7 +100,7 @@ public:
   {
     geometry_msgs::msg::TransformStamped tf;
     try {
-      tf = buffer_.lookupTransform(from, to, tf2::TimePointZero);
+      tf = buffer_->lookupTransform(from, to, tf2::TimePointZero);
     } catch (tf2::TransformException & ex) {
       RCLCPP_WARN_THROTTLE(
         logger_, *clock_, 5000, "failed to get transform from %s to %s: %s", from.c_str(),
@@ -118,7 +117,7 @@ public:
   {
     geometry_msgs::msg::TransformStamped tf;
     try {
-      tf = buffer_.lookupTransform(from, to, time, duration);
+      tf = buffer_->lookupTransform(from, to, time, duration);
     } catch (tf2::TransformException & ex) {
       RCLCPP_WARN_THROTTLE(
         logger_, *clock_, 5000, "failed to get transform from %s to %s: %s", from.c_str(),
@@ -131,18 +130,11 @@ public:
 
   rclcpp::Logger get_logger() { return logger_; }
 
-  // Non-copyable and non-movable: holds an agnocast_wrapper::TransformListener, which owns a
-  // subscription bound to the node and is itself non-movable.
-  WrapperTransformListener(const WrapperTransformListener &) = delete;
-  WrapperTransformListener & operator=(const WrapperTransformListener &) = delete;
-  WrapperTransformListener(WrapperTransformListener &&) = delete;
-  WrapperTransformListener & operator=(WrapperTransformListener &&) = delete;
-
 private:
   rclcpp::Clock::SharedPtr clock_;
   rclcpp::Logger logger_;
-  autoware::agnocast_wrapper::Buffer buffer_;
-  autoware::agnocast_wrapper::TransformListener listener_;
+  std::shared_ptr<autoware::agnocast_wrapper::Buffer> buffer_;
+  std::shared_ptr<autoware::agnocast_wrapper::TransformListener> listener_;
 };
 }  // namespace autoware_utils_tf
 

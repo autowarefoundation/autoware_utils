@@ -11,6 +11,7 @@ if(BUILD_TESTING)
   target_link_libraries(test_${PROJECT_NAME}
     rclcpp::rclcpp ${geometry_msgs_TARGETS} tf2_ros::tf2_ros ${autoware_utils_geometry_LIBRARIES}
   )
+  ament_target_dependencies(test_${PROJECT_NAME} autoware_agnocast_wrapper)
   target_include_directories(test_${PROJECT_NAME} PRIVATE include)
 endif()
 
