@@ -15,6 +15,7 @@
 #ifndef AUTOWARE_UTILS_TF__TRANSFORM_LISTENER_HPP_
 #define AUTOWARE_UTILS_TF__TRANSFORM_LISTENER_HPP_
 
+#include <autoware/agnocast_wrapper/tf2.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/buffer.hpp>
 #include <tf2_ros/create_timer_ros.hpp>
@@ -82,41 +83,67 @@ private:
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 };
 
-template <class BufferT>
-geometry_msgs::msg::TransformStamped::ConstSharedPtr get_transform(
-  BufferT & buffer, const rclcpp::Logger & logger, rclcpp::Clock & clock, const std::string & from,
-  const std::string & to, const rclcpp::Time & time, const rclcpp::Duration & duration)
+// Same API as TransformListener above, but for autoware::agnocast_wrapper::Node and backed by the
+// agnocast_wrapper Buffer/listener, so /tf keeps firing under an AgnocastOnly executor.
+class WrapperTransformListener
 {
-  geometry_msgs::msg::TransformStamped tf;
-  try {
-    tf = buffer.lookupTransform(from, to, time, duration);
-  } catch (tf2::TransformException & ex) {
-    RCLCPP_WARN_THROTTLE(
-      logger, clock, 5000, "failed to get transform from %s to %s: %s", from.c_str(), to.c_str(),
-      ex.what());
-    return {};
+public:
+  explicit WrapperTransformListener(autoware::agnocast_wrapper::Node & node)
+  : clock_(node.get_clock()),
+    logger_(node.get_logger()),
+    buffer_(node.get_clock()),
+    listener_(buffer_, node)
+  {
   }
 
-  return std::make_shared<const geometry_msgs::msg::TransformStamped>(tf);
-}
+  geometry_msgs::msg::TransformStamped::ConstSharedPtr get_latest_transform(
+    const std::string & from, const std::string & to)
+  {
+    geometry_msgs::msg::TransformStamped tf;
+    try {
+      tf = buffer_.lookupTransform(from, to, tf2::TimePointZero);
+    } catch (tf2::TransformException & ex) {
+      RCLCPP_WARN_THROTTLE(
+        logger_, *clock_, 5000, "failed to get transform from %s to %s: %s", from.c_str(),
+        to.c_str(), ex.what());
+      return {};
+    }
 
-template <class BufferT>
-geometry_msgs::msg::TransformStamped::ConstSharedPtr get_latest_transform(
-  BufferT & buffer, const rclcpp::Logger & logger, rclcpp::Clock & clock, const std::string & from,
-  const std::string & to)
-{
-  geometry_msgs::msg::TransformStamped tf;
-  try {
-    tf = buffer.lookupTransform(from, to, tf2::TimePointZero);
-  } catch (tf2::TransformException & ex) {
-    RCLCPP_WARN_THROTTLE(
-      logger, clock, 5000, "failed to get transform from %s to %s: %s", from.c_str(), to.c_str(),
-      ex.what());
-    return {};
+    return std::make_shared<const geometry_msgs::msg::TransformStamped>(tf);
   }
 
-  return std::make_shared<const geometry_msgs::msg::TransformStamped>(tf);
-}
+  geometry_msgs::msg::TransformStamped::ConstSharedPtr get_transform(
+    const std::string & from, const std::string & to, const rclcpp::Time & time,
+    const rclcpp::Duration & duration)
+  {
+    geometry_msgs::msg::TransformStamped tf;
+    try {
+      tf = buffer_.lookupTransform(from, to, time, duration);
+    } catch (tf2::TransformException & ex) {
+      RCLCPP_WARN_THROTTLE(
+        logger_, *clock_, 5000, "failed to get transform from %s to %s: %s", from.c_str(),
+        to.c_str(), ex.what());
+      return {};
+    }
+
+    return std::make_shared<const geometry_msgs::msg::TransformStamped>(tf);
+  }
+
+  rclcpp::Logger get_logger() { return logger_; }
+
+  // Non-copyable and non-movable: holds an agnocast_wrapper::TransformListener, which owns a
+  // subscription bound to the node and is itself non-movable.
+  WrapperTransformListener(const WrapperTransformListener &) = delete;
+  WrapperTransformListener & operator=(const WrapperTransformListener &) = delete;
+  WrapperTransformListener(WrapperTransformListener &&) = delete;
+  WrapperTransformListener & operator=(WrapperTransformListener &&) = delete;
+
+private:
+  rclcpp::Clock::SharedPtr clock_;
+  rclcpp::Logger logger_;
+  autoware::agnocast_wrapper::Buffer buffer_;
+  autoware::agnocast_wrapper::TransformListener listener_;
+};
 }  // namespace autoware_utils_tf
 
 #endif  // AUTOWARE_UTILS_TF__TRANSFORM_LISTENER_HPP_
