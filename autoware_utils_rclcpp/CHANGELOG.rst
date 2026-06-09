@@ -2,6 +2,21 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* test(autoware_utils_rclcpp): cover check_qos depth>1 throw for Latest/Newest (`#107 <https://github.com/autowarefoundation/autoware_utils/issues/107>`_)
+  The QoS-validation branch InterProcessPollingSubscriber's check_qos() was
+  uncovered: existing tests only construct subscribers with depth==1 (or the
+  All policy with QoS{10}, whose check_qos is a no-op). The throw path for the
+  Latest and Newest policies and the All-deep-qos no-throw path were dark.
+  Add gtest cases that assert:
+  - Latest/Newest construction with rclcpp::QoS{10} throws std::invalid_argument.
+  - Latest/Newest construction with rclcpp::QoS{1} (depth==1) does not throw.
+  - All construction with rclcpp::QoS{10} does not throw (check_qos ignores depth).
+  Type aliases keep the subscriber template comma out of the gtest macro
+  argument lists. Tests only; no production-code change.
+* Contributors: Yutaka Kondo
+
 1.7.2 (2026-05-01)
 ------------------
 * fix: to be consistent version in all package.xml(s)

@@ -2,6 +2,17 @@
 Changelog for package autoware_utils_system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* test(autoware_utils_system): cover LRUCache get/clear/size/empty/capacity and LRU reorder (`#104 <https://github.com/autowarefoundation/autoware_utils/issues/104>`_)
+  The existing parameterized test only exercised put() and contains(). Add
+  gtest cases that assert concrete values and branches for the previously
+  untested API: get() hit/miss, the splice-to-front recency refresh on get(),
+  put() overwriting an existing key while refreshing recency, clear(), and the
+  size()/empty()/capacity() invariants (size never exceeds capacity).
+  Tests only; no production-code change.
+* Contributors: Yutaka Kondo
+
 1.7.2 (2026-05-01)
 ------------------
 * fix: to be consistent version in all package.xml(s)
