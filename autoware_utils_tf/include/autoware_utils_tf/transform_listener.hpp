@@ -24,20 +24,27 @@
 
 #include <memory>
 #include <string>
+#include <type_traits>
 
 namespace autoware_utils_tf
 {
-class TransformListener
+template <class NodeT, class BufferT, class ListenerT>
+class TransformListenerT
 {
 public:
-  explicit TransformListener(rclcpp::Node * node)
-  : clock_(node->get_clock()), logger_(node->get_logger())
+  explicit TransformListenerT(NodeT * node) : clock_(node->get_clock()), logger_(node->get_logger())
   {
-    tf_buffer_ = std::make_shared<tf2_ros::Buffer>(clock_);
-    auto timer_interface = std::make_shared<tf2_ros::CreateTimerROS>(
-      node->get_node_base_interface(), node->get_node_timers_interface());
-    tf_buffer_->setCreateTimerInterface(timer_interface);
-    tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_);
+    tf_buffer_ = std::make_shared<BufferT>(clock_);
+    // tf2_ros only: agnocast's tf2 buffer has no async API (setCreateTimerInterface) yet.
+    // Remove this branch once it does.
+    if constexpr (std::is_same_v<BufferT, tf2_ros::Buffer>) {
+      auto timer_interface = std::make_shared<tf2_ros::CreateTimerROS>(
+        node->get_node_base_interface(), node->get_node_timers_interface());
+      tf_buffer_->setCreateTimerInterface(timer_interface);
+      tf_listener_ = std::make_shared<ListenerT>(*tf_buffer_);
+    } else {
+      tf_listener_ = std::make_shared<ListenerT>(*tf_buffer_, *node);
+    }
   }
 
   geometry_msgs::msg::TransformStamped::ConstSharedPtr get_latest_transform(
@@ -78,9 +85,12 @@ public:
 private:
   rclcpp::Clock::SharedPtr clock_;
   rclcpp::Logger logger_;
-  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
-  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+  std::shared_ptr<BufferT> tf_buffer_;
+  std::shared_ptr<ListenerT> tf_listener_;
 };
+
+using TransformListener =
+  TransformListenerT<rclcpp::Node, tf2_ros::Buffer, tf2_ros::TransformListener>;
 }  // namespace autoware_utils_tf
 
 #endif  // AUTOWARE_UTILS_TF__TRANSFORM_LISTENER_HPP_
