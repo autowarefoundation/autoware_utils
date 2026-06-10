@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.8.0 (2026-06-10)
+------------------
+
 1.7.2 (2026-05-01)
 ------------------
 * fix: to be consistent version in all package.xml(s)
