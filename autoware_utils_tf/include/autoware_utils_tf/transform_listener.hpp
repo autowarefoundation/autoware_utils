@@ -32,8 +32,7 @@ template <class NodeT, class BufferT, class ListenerT>
 class TransformListenerT
 {
 public:
-  explicit TransformListenerT(NodeT * node)
-  : clock_(node->get_clock()), logger_(node->get_logger())
+  explicit TransformListenerT(NodeT * node) : clock_(node->get_clock()), logger_(node->get_logger())
   {
     tf_buffer_ = std::make_shared<BufferT>(clock_);
     // tf2_ros only: agnocast's tf2 buffer has no async API (setCreateTimerInterface) yet.
