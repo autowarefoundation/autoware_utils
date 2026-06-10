@@ -2,6 +2,16 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat: support template publisher for TimeKeeper (`#103 <https://github.com/autowarefoundation/autoware_utils/issues/103>`_)
+  * support template publisher for TimeKeeper
+  * style(pre-commit): autofix
+  * add include dependency
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
 1.7.2 (2026-05-01)
 ------------------
 * fix: to be consistent version in all package.xml(s)

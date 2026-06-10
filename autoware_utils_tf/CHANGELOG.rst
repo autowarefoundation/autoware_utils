@@ -2,6 +2,18 @@
 Changelog for package autoware_utils_tf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat(transform_listener): templatize `TransformListener` for both `rclcpp::Node` and `agnocast_wrapper::Node` (`#109 <https://github.com/autowarefoundation/autoware_utils/issues/109>`_)
+  * templatize buffer
+  * define another class
+  * fix to use shared_ptr
+  * templatize TransformListener
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
 1.7.2 (2026-05-01)
 ------------------
 * fix: to be consistent version in all package.xml(s)

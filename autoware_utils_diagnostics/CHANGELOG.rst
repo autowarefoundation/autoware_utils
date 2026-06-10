@@ -2,6 +2,25 @@
 Changelog for package autoware_utils_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* perf(autoware_utils_diagnostics): drop per-cycle shrink_to_fit in clear() (`#106 <https://github.com/autowarefoundation/autoware_utils/issues/106>`_)
+  clear() called values.shrink_to_fit() right after values.clear(), releasing
+  the underlying buffer every cycle and forcing the next add_key_value() push_backs
+  to reallocate on hot localization callbacks. Drop the shrink_to_fit() call so the
+  buffer capacity is retained across cycles; .clear() and the level/message resets
+  are unchanged, so published messages are output-identical.
+  Add a pub/sub characterization test that pins the observable behavior across
+  clear() cycles (value contents/order, level, message, dedup), proving the removal
+  is behavior-preserving.
+* feat: make DiagnosticsInterface's node argument as template type (`#102 <https://github.com/autowarefoundation/autoware_utils/issues/102>`_)
+  * templatize DiagnosticsInterface
+  * copilot review
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai, Yutaka Kondo
+
 1.7.2 (2026-05-01)
 ------------------
 * fix: to be consistent version in all package.xml(s)
