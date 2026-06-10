@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_tf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.8.0 (2026-06-10)
+------------------
 * feat(transform_listener): templatize `TransformListener` for both `rclcpp::Node` and `agnocast_wrapper::Node` (`#109 <https://github.com/autowarefoundation/autoware_utils/issues/109>`_)
   * templatize buffer
   * define another class
