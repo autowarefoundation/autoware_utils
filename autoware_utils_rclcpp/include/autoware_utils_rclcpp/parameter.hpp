@@ -26,8 +26,8 @@ namespace autoware_utils_rclcpp
 {
 
 // Templated on the node type so it also accepts non-rclcpp::Node nodes that expose the same
-// parameter API (e.g. autoware::agnocast_wrapper::Node). NodeT defaults to rclcpp::Node, so existing
-// callers (get_or_declare_parameter<T>(node, name)) are unchanged.
+// parameter API (e.g. autoware::agnocast_wrapper::Node). NodeT defaults to rclcpp::Node, so
+// existing callers (get_or_declare_parameter<T>(node, name)) are unchanged.
 template <class T, class NodeT = rclcpp::Node>
 T get_or_declare_parameter(NodeT & node, const std::string & name)
 {
