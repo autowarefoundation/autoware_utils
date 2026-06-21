@@ -58,8 +58,8 @@ class BasicLoggerLevelConfigure
 {
 private:
   using ConfigLogger = logging_demo::srv::ConfigLogger;
-  using CallbackT = std::function<void(
-    ConfigLogger::Request::SharedPtr, ConfigLogger::Response::SharedPtr)>;
+  using CallbackT =
+    std::function<void(ConfigLogger::Request::SharedPtr, ConfigLogger::Response::SharedPtr)>;
   using ServicePtr = decltype(std::declval<NodeT *>()->template create_service<ConfigLogger>(
     std::declval<std::string>(), std::declval<CallbackT>()));
 
