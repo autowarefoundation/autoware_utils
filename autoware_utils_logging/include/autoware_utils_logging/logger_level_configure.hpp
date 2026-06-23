@@ -44,6 +44,7 @@
 #include <logging_demo/srv/config_logger.hpp>
 #include <rclcpp/rclcpp.hpp>
 
+#include <rcutils/allocator.h>
 #include <rcutils/logging.h>
 
 #include <functional>
@@ -84,7 +85,7 @@ private:
   {
     int logging_severity;
     const auto ret_level = rcutils_logging_severity_level_from_string(
-      request->level.c_str(), rcl_get_default_allocator(), &logging_severity);
+      request->level.c_str(), rcutils_get_default_allocator(), &logging_severity);
 
     if (ret_level != RCUTILS_RET_OK) {
       response->success = false;
