@@ -2,6 +2,20 @@
 Changelog for package autoware_utils_uuid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.8.0 (2026-06-10)
+------------------
+
+1.7.2 (2026-05-01)
+------------------
+* fix: to be consistent version in all package.xml(s)
+* Contributors: github-actions
+
+1.7.0 (2026-03-12)
+------------------
+
+1.6.0 (2026-02-20)
+------------------
+
 1.5.0 (2025-12-30)
 ------------------
 * fix(autoware_utils_uuid): include cstdint as uint8_t is used (`#79 <https://github.com/autowarefoundation/autoware_utils/issues/79>`_)

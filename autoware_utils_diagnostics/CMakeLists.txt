@@ -5,7 +5,6 @@ find_package(autoware_cmake REQUIRED)
 autoware_package()
 
 ament_auto_add_library(${PROJECT_NAME} SHARED
-  "src/diagnostics_interface.cpp"
   "src/timeout_diagnostics.cpp"
 )
 

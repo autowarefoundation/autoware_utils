@@ -15,10 +15,25 @@
 #ifndef AUTOWARE_UTILS_GEOMETRY__BOOST_GEOMETRY_HPP_
 #define AUTOWARE_UTILS_GEOMETRY__BOOST_GEOMETRY_HPP_
 
+// Suppress boost geometry uninitialized variable warnings
+// This is a known issue in boost geometry library where internal template code
+// may trigger maybe-uninitialized warnings that are false positives.
+// Related:
+// https://www.boost.org/doc/libs/latest/libs/utility/doc/html/utility/utilities/value_init.html and
+// https://www.boost.org/doc/libs/1_89_0/libs/optional/doc/html/boost_optional/design/gotchas/false_positive_with__wmaybe_uninitialized.html
+#ifdef __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
+
 #include <boost/geometry/core/cs.hpp>
 #include <boost/geometry/geometries/geometries.hpp>
 #include <boost/geometry/geometries/register/point.hpp>
 #include <boost/geometry/geometries/register/ring.hpp>
+
+#ifdef __GNUC__
+#pragma GCC diagnostic pop
+#endif
 
 #define EIGEN_MPL2_ONLY
 #include <Eigen/Core>

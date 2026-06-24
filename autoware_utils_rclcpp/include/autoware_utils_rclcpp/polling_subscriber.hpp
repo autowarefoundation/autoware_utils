@@ -17,6 +17,7 @@
 #include <rclcpp/rclcpp.hpp>
 
 #include <memory>
+#include <optional>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -51,6 +52,7 @@ class Latest
 {
 private:
   typename MessageT::ConstSharedPtr data_{nullptr};  ///< Data pointer to store the latest data
+  std::optional<rclcpp::Time> timestamp_{std::nullopt};
 
 protected:
   /**
@@ -70,11 +72,24 @@ protected:
 
 public:
   /**
-   * @brief Retrieve the latest data. If no new data has been received, the previously received data
+   *
+   *  @brief Retrieve the latest data. If no new data has been received, the previously received
+   * data
    *
    * @return typename MessageT::ConstSharedPtr The latest data.
    */
   typename MessageT::ConstSharedPtr take_data();
+
+  /**
+   * @brief Getter for timestamp of the last message
+   *
+   * @pre To receive a valid timestamp, at least one message must have been received via
+   * take_data(). The timestamp is retained until a new message is received.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
+   * received.
+   */
+
+  std::optional<rclcpp::Time> last_taken_data_timestamp() const { return timestamp_; }
 };
 
 /**
@@ -85,6 +100,9 @@ public:
 template <typename MessageT>
 class Newest
 {
+private:
+  std::optional<rclcpp::Time> timestamp_{std::nullopt};
+
 protected:
   /**
    * @brief Check the QoS settings for the subscription.
@@ -108,6 +126,16 @@ public:
    * @return typename MessageT::ConstSharedPtr The newest data.
    */
   typename MessageT::ConstSharedPtr take_data();
+
+  /**
+   * @brief Getter for timestamp of the last message
+   *
+   * @pre To receive a valid timestamp, the most recent take_data() call must have successfully
+   *      received a message. The timestamp is cleared when no data is returned.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no message has been
+   * received in the most recent take_data() call.
+   */
+  std::optional<rclcpp::Time> last_taken_data_timestamp() const { return timestamp_; }
 };
 
 /**
@@ -118,6 +146,9 @@ public:
 template <typename MessageT>
 class All
 {
+private:
+  std::optional<rclcpp::Time> timestamp_{std::nullopt};
+
 protected:
   /**
    * @brief Check the QoS settings for the subscription.
@@ -133,6 +164,16 @@ public:
    * @return std::vector<typename MessageT::ConstSharedPtr> The list of all received data.
    */
   std::vector<typename MessageT::ConstSharedPtr> take_data();
+
+  /**
+   * @brief Getter for timestamp of the last message
+   *
+   * @pre To receive a valid timestamp, the most recent take_data() call must have successfully
+   *      received at least one message. The timestamp is cleared when an empty vector is returned.
+   * @return std::optional<rclcpp::Time> The last timestamp. std::nullopt if no messages have been
+   * received in the most recent take_data() call.
+   */
+  std::optional<rclcpp::Time> last_taken_data_timestamp() const { return timestamp_; }
 };
 
 }  // namespace polling_policy
@@ -209,6 +250,7 @@ typename MessageT::ConstSharedPtr Latest<MessageT>::take_data()
   const bool success = subscriber->take(*new_data, message_info);
   if (success) {
     data_ = new_data;
+    timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
   }
 
   return data_;
@@ -223,8 +265,10 @@ typename MessageT::ConstSharedPtr Newest<MessageT>::take_data()
   rclcpp::MessageInfo message_info;
   const bool success = subscriber->take(*new_data, message_info);
   if (success) {
+    timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
     return new_data;
   }
+  timestamp_ = std::nullopt;
   return nullptr;
 }
 
@@ -239,9 +283,13 @@ std::vector<typename MessageT::ConstSharedPtr> All<MessageT>::take_data()
     auto datum = std::make_shared<MessageT>();
     if (subscriber->take(*datum, message_info)) {
       data.push_back(datum);
+      timestamp_ = rclcpp::Time(message_info.get_rmw_message_info().source_timestamp, RCL_ROS_TIME);
     } else {
       break;
     }
+  }
+  if (data.empty()) {
+    timestamp_ = std::nullopt;
   }
   return data;
 }

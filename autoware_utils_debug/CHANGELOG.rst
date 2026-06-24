@@ -2,6 +2,38 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.8.0 (2026-06-10)
+------------------
+* feat: support template publisher for TimeKeeper (`#103 <https://github.com/autowarefoundation/autoware_utils/issues/103>`_)
+  * support template publisher for TimeKeeper
+  * style(pre-commit): autofix
+  * add include dependency
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
+1.7.2 (2026-05-01)
+------------------
+* fix: to be consistent version in all package.xml(s)
+* Contributors: github-actions
+
+1.7.0 (2026-03-12)
+------------------
+* feat: make PublishedTimePublisher's node argument as template node (`#96 <https://github.com/autowarefoundation/autoware_utils/issues/96>`_)
+  * make PublishedTimePublisher's node argument as template node
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* feat: make DebugPublisher's node argument as template type (`#97 <https://github.com/autowarefoundation/autoware_utils/issues/97>`_)
+  * Make DebugPublisher's node argument as template type
+  * style(pre-commit): autofix
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
+1.6.0 (2026-02-20)
+------------------
+
 1.5.0 (2025-12-30)
 ------------------
 * ci(pre-commit): autoupdate (`#77 <https://github.com/autowarefoundation/autoware_utils/issues/77>`_)

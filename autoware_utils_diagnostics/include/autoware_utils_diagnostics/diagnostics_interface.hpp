@@ -19,42 +19,118 @@
 
 #include <diagnostic_msgs/msg/diagnostic_array.hpp>
 
+#include <algorithm>
 #include <string>
-#include <vector>
+#include <utility>
 
 namespace autoware_utils_diagnostics
 {
-class DiagnosticsInterface
+template <typename NodeT = rclcpp::Node>
+class BasicDiagnosticsInterface
 {
 public:
-  DiagnosticsInterface(rclcpp::Node * node, const std::string & diagnostic_name);
-  void clear();
-  void add_key_value(const diagnostic_msgs::msg::KeyValue & key_value_msg);
+  using DiagnosticsArrayPubPtr =
+    decltype(std::declval<NodeT *>()
+               ->template create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
+                 std::string{}, rclcpp::QoS(1)));
+
+  BasicDiagnosticsInterface(NodeT * node, const std::string & diagnostic_name)
+  : clock_(node->get_clock())
+  {
+    diagnostics_pub_ = node->template create_publisher<diagnostic_msgs::msg::DiagnosticArray>(
+      "/diagnostics", rclcpp::QoS(10));
+
+    diagnostics_status_msg_.name =
+      std::string(node->get_name()) + std::string(": ") + diagnostic_name;
+    diagnostics_status_msg_.hardware_id = node->get_name();
+  }
+
+  void clear()
+  {
+    diagnostics_status_msg_.values.clear();
+
+    diagnostics_status_msg_.level = diagnostic_msgs::msg::DiagnosticStatus::OK;
+    diagnostics_status_msg_.message = "";
+  }
+
+  void add_key_value(const diagnostic_msgs::msg::KeyValue & key_value_msg)
+  {
+    auto it = std::find_if(
+      std::begin(diagnostics_status_msg_.values), std::end(diagnostics_status_msg_.values),
+      [key_value_msg](const auto & arg) { return arg.key == key_value_msg.key; });
+
+    if (it != std::cend(diagnostics_status_msg_.values)) {
+      it->value = key_value_msg.value;
+    } else {
+      diagnostics_status_msg_.values.push_back(key_value_msg);
+    }
+  }
+
   template <typename T>
-  void add_key_value(const std::string & key, const T & value);
-  void add_key_value(const std::string & key, const std::string & value);
-  void add_key_value(const std::string & key, bool value);
-  void update_level_and_message(const int8_t level, const std::string & message);
-  void publish(const rclcpp::Time & publish_time_stamp);
+  void add_key_value(const std::string & key, const T & value)
+  {
+    diagnostic_msgs::msg::KeyValue key_value;
+    key_value.key = key;
+    key_value.value = std::to_string(value);
+    add_key_value(key_value);
+  }
+
+  void add_key_value(const std::string & key, const std::string & value)
+  {
+    diagnostic_msgs::msg::KeyValue key_value;
+    key_value.key = key;
+    key_value.value = value;
+    add_key_value(key_value);
+  }
+
+  void add_key_value(const std::string & key, bool value)
+  {
+    diagnostic_msgs::msg::KeyValue key_value;
+    key_value.key = key;
+    key_value.value = value ? "True" : "False";
+    add_key_value(key_value);
+  }
+
+  void update_level_and_message(const int8_t level, const std::string & message)
+  {
+    if ((level > diagnostic_msgs::msg::DiagnosticStatus::OK)) {
+      if (!diagnostics_status_msg_.message.empty()) {
+        diagnostics_status_msg_.message += "; ";
+      }
+      diagnostics_status_msg_.message += message;
+    }
+    if (level > diagnostics_status_msg_.level) {
+      diagnostics_status_msg_.level = level;
+    }
+  }
+
+  void publish(const rclcpp::Time & publish_time_stamp)
+  {
+    diagnostics_pub_->publish(create_diagnostics_array(publish_time_stamp));
+  }
 
 private:
   [[nodiscard]] diagnostic_msgs::msg::DiagnosticArray create_diagnostics_array(
-    const rclcpp::Time & publish_time_stamp) const;
+    const rclcpp::Time & publish_time_stamp) const
+  {
+    diagnostic_msgs::msg::DiagnosticArray diagnostics_msg;
+    diagnostics_msg.header.stamp = publish_time_stamp;
+    diagnostics_msg.status.push_back(diagnostics_status_msg_);
+
+    if (diagnostics_msg.status.at(0).level == diagnostic_msgs::msg::DiagnosticStatus::OK) {
+      diagnostics_msg.status.at(0).message = "OK";
+    }
+
+    return diagnostics_msg;
+  }
 
   rclcpp::Clock::SharedPtr clock_;
-  rclcpp::Publisher<diagnostic_msgs::msg::DiagnosticArray>::SharedPtr diagnostics_pub_;
+  DiagnosticsArrayPubPtr diagnostics_pub_;
 
   diagnostic_msgs::msg::DiagnosticStatus diagnostics_status_msg_;
 };
 
-template <typename T>
-void DiagnosticsInterface::add_key_value(const std::string & key, const T & value)
-{
-  diagnostic_msgs::msg::KeyValue key_value;
-  key_value.key = key;
-  key_value.value = std::to_string(value);
-  add_key_value(key_value);
-}
+using DiagnosticsInterface = BasicDiagnosticsInterface<rclcpp::Node>;
 
 }  // namespace autoware_utils_diagnostics
 

@@ -21,6 +21,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rosidl_runtime_cpp/traits.hpp>
 
+#include <any>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -42,21 +43,24 @@ T_msg to_debug_msg(const T & data, const rclcpp::Time & stamp)
 }
 }  // namespace debug_publisher
 
-class DebugPublisher
+template <typename NodeT = rclcpp::Node>
+class BasicDebugPublisher
 {
 public:
-  explicit DebugPublisher(rclcpp::Node * node, const char * ns) : node_(node), ns_(ns) {}
+  explicit BasicDebugPublisher(NodeT * node, const char * ns) : node_(node), ns_(ns) {}
 
   template <
     class T,
     std::enable_if_t<rosidl_generator_traits::is_message<T>::value, std::nullptr_t> = nullptr>
   void publish(const std::string & name, const T & data, const rclcpp::QoS & qos = rclcpp::QoS(1))
   {
+    using PubPtr = decltype(node_->template create_publisher<T>(std::string{}, rclcpp::QoS(1)));
+
     if (pub_map_.count(name) == 0) {
-      pub_map_[name] = node_->create_publisher<T>(std::string(ns_) + "/" + name, qos);
+      pub_map_[name] = node_->template create_publisher<T>(std::string(ns_) + "/" + name, qos);
     }
 
-    std::dynamic_pointer_cast<rclcpp::Publisher<T>>(pub_map_.at(name))->publish(data);
+    std::any_cast<PubPtr &>(pub_map_.at(name))->publish(data);
   }
 
   template <
@@ -68,10 +72,12 @@ public:
   }
 
 private:
-  rclcpp::Node * node_;
+  NodeT * node_;
   const char * ns_;
-  std::unordered_map<std::string, std::shared_ptr<rclcpp::PublisherBase>> pub_map_;
+  std::unordered_map<std::string, std::any> pub_map_;
 };
+
+using DebugPublisher = BasicDebugPublisher<rclcpp::Node>;
 }  // namespace autoware_utils_debug
 
 #endif  // AUTOWARE_UTILS_DEBUG__DEBUG_PUBLISHER_HPP_

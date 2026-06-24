@@ -29,18 +29,25 @@
 namespace autoware_utils_debug
 {
 
-class PublishedTimePublisher
+using PublishedTime = autoware_internal_msgs::msg::PublishedTime;
+
+template <typename NodeT = rclcpp::Node>
+class BasicPublishedTimePublisher
 {
 public:
-  explicit PublishedTimePublisher(
-    rclcpp::Node * node, std::string publisher_topic_suffix = "/debug/published_time",
+  using PublishedTimePubPtr =
+    decltype(std::declval<NodeT *>()->template create_publisher<PublishedTime>(
+      std::string{}, rclcpp::QoS(1)));
+
+  explicit BasicPublishedTimePublisher(
+    NodeT * node, std::string publisher_topic_suffix = "/debug/published_time",
     const rclcpp::QoS & qos = rclcpp::QoS(1))
   : node_(node), publisher_topic_suffix_(std::move(publisher_topic_suffix)), qos_(qos)
   {
   }
 
-  void publish_if_subscribed(
-    const rclcpp::PublisherBase::ConstSharedPtr & publisher, const rclcpp::Time & stamp)
+  template <typename PubT>
+  void publish_if_subscribed(const PubT & publisher, const rclcpp::Time & stamp)
   {
     const auto & gid_key = publisher->get_gid();
 
@@ -60,8 +67,8 @@ public:
     }
   }
 
-  void publish_if_subscribed(
-    const rclcpp::PublisherBase::ConstSharedPtr & publisher, const std_msgs::msg::Header & header)
+  template <typename PubT>
+  void publish_if_subscribed(const PubT & publisher, const std_msgs::msg::Header & header)
   {
     const auto & gid_key = publisher->get_gid();
 
@@ -82,11 +89,9 @@ public:
   }
 
 private:
-  rclcpp::Node * node_;
+  NodeT * node_;
   std::string publisher_topic_suffix_;
   rclcpp::QoS qos_;
-
-  using PublishedTime = autoware_internal_msgs::msg::PublishedTime;
 
   // Custom comparison struct for rmw_gid_t
   struct GidCompare
@@ -102,13 +107,15 @@ private:
   {
     if (publishers_.find(gid_key) == publishers_.end()) {
       publishers_[gid_key] =
-        node_->create_publisher<PublishedTime>(topic_name + publisher_topic_suffix_, qos_);
+        node_->template create_publisher<PublishedTime>(topic_name + publisher_topic_suffix_, qos_);
     }
   }
 
   // store them for each different publisher of the node
-  std::map<rmw_gid_t, rclcpp::Publisher<PublishedTime>::SharedPtr, GidCompare> publishers_;
+  std::map<rmw_gid_t, PublishedTimePubPtr, GidCompare> publishers_;
 };
+
+using PublishedTimePublisher = BasicPublishedTimePublisher<rclcpp::Node>;
 }  // namespace autoware_utils_debug
 
 #endif  // AUTOWARE_UTILS_DEBUG__PUBLISHED_TIME_PUBLISHER_HPP_
