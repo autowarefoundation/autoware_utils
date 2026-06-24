@@ -25,14 +25,14 @@
 namespace autoware_utils_rclcpp
 {
 
-template <class T>
-T get_or_declare_parameter(rclcpp::Node & node, const std::string & name)
+template <class T, class NodeT = rclcpp::Node>
+T get_or_declare_parameter(NodeT & node, const std::string & name)
 {
   if (node.has_parameter(name)) {
-    return node.get_parameter(name).get_value<T>();
+    return node.get_parameter(name).template get_value<T>();
   }
 
-  return node.declare_parameter<T>(name);
+  return node.template declare_parameter<T>(name);
 }
 
 template <class T>
