@@ -73,8 +73,8 @@ namespace autoware_utils_geometry
 bool is_clockwise(const Polygon2d & polygon)
 {
   const int n = polygon.outer().size();
-  const double x_offset = polygon.outer().at(0).x();
-  const double y_offset = polygon.outer().at(0).y();
+  const double x_offset = n > 0 ? polygon.outer().at(0).x() : 0.0;
+  const double y_offset = n > 0 ? polygon.outer().at(0).y() : 0.0;
   double sum = 0.0;
   for (std::size_t i = 0; i < polygon.outer().size(); ++i) {
     sum +=
