@@ -17,7 +17,6 @@
 
 #include <rclcpp/rclcpp.hpp>
 #include <tf2_ros/buffer.hpp>
-#include <tf2_ros/create_timer_ros.hpp>
 #include <tf2_ros/transform_listener.hpp>
 
 #include <geometry_msgs/msg/transform_stamped.hpp>
@@ -35,12 +34,8 @@ public:
   explicit TransformListenerT(NodeT * node) : clock_(node->get_clock()), logger_(node->get_logger())
   {
     tf_buffer_ = std::make_shared<BufferT>(clock_);
-    // tf2_ros only: agnocast's tf2 buffer has no async API (setCreateTimerInterface) yet.
-    // Remove this branch once it does.
+    // The two buffer backends take different TransformListener constructors.
     if constexpr (std::is_same_v<BufferT, tf2_ros::Buffer>) {
-      auto timer_interface = std::make_shared<tf2_ros::CreateTimerROS>(
-        node->get_node_base_interface(), node->get_node_timers_interface());
-      tf_buffer_->setCreateTimerInterface(timer_interface);
       tf_listener_ = std::make_shared<ListenerT>(*tf_buffer_);
     } else {
       tf_listener_ = std::make_shared<ListenerT>(*tf_buffer_, *node);
