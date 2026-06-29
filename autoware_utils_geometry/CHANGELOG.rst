@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.9.0 (2026-06-29)
+------------------
 * fix(autoware_utils_geometry): avoid to raise exception if the polygon is empty (`#85 <https://github.com/autowarefoundation/autoware_utils/issues/85>`_)
   * fix: avoid to raise exception if the number of vertices is zero
   * test: fix test not to throw exception
