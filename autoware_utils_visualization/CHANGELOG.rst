@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.8.0 (2026-06-10)
 ------------------
 

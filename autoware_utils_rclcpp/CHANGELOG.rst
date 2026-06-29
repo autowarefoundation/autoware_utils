@@ -2,6 +2,16 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat(autoware_utils_rclcpp): templatize NodeT for `get_or_declare_parameter` (`#112 <https://github.com/autowarefoundation/autoware_utils/issues/112>`_)
+  * templatize NodeT for get_or_declare_parameter
+  * style(pre-commit): autofix
+  * delete unnecessary comments
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
 1.8.0 (2026-06-10)
 ------------------
 * test(autoware_utils_rclcpp): cover check_qos depth>1 throw for Latest/Newest (`#107 <https://github.com/autowarefoundation/autoware_utils/issues/107>`_)

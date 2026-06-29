@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_pcl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.8.0 (2026-06-10)
 ------------------
 * test(autoware_utils_pcl): cover transform_point_cloud_from_ros_msg with hand-computed assertions (`#105 <https://github.com/autowarefoundation/autoware_utils/issues/105>`_)

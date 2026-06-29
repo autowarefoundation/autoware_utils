@@ -2,6 +2,17 @@
 Changelog for package autoware_utils_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat(autoware_utils_logging): templatize LoggerLevelConfigure (`#113 <https://github.com/autowarefoundation/autoware_utils/issues/113>`_)
+  * templatize loggerlevelconfigure
+  * style(pre-commit): autofix
+  * fix copilot review
+  * fix to include rcutils
+  ---------
+  Co-authored-by: pre-commit-ci[bot] <66853113+pre-commit-ci[bot]@users.noreply.github.com>
+* Contributors: Koichi Imai
+
 1.8.0 (2026-06-10)
 ------------------
 

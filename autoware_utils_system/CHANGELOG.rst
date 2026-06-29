@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.8.0 (2026-06-10)
 ------------------
 * test(autoware_utils_system): cover LRUCache get/clear/size/empty/capacity and LRU reorder (`#104 <https://github.com/autowarefoundation/autoware_utils/issues/104>`_)

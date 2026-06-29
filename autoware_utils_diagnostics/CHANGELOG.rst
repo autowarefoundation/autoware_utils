@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.8.0 (2026-06-10)
 ------------------
 * perf(autoware_utils_diagnostics): drop per-cycle shrink_to_fit in clear() (`#106 <https://github.com/autowarefoundation/autoware_utils/issues/106>`_)
