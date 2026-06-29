@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_debug
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.9.0 (2026-06-29)
+------------------
+
 1.8.0 (2026-06-10)
 ------------------
 * feat: support template publisher for TimeKeeper (`#103 <https://github.com/autowarefoundation/autoware_utils/issues/103>`_)
