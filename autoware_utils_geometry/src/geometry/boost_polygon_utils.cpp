@@ -171,12 +171,39 @@ Polygon2d to_polygon2d(
     throw std::logic_error("The shape type is not supported in autoware_utils.");
   }
 
+  // Guard against degenerate footprints that cannot form a valid area.
+  constexpr double dummy_offset = 0.05;
+  auto & outer = polygon.outer();
+  if (outer.size() == 1) {
+    const auto p = outer.front();
+    append_point_to_polygon(polygon, Point2d(p.x() + dummy_offset, p.y()));
+    append_point_to_polygon(polygon, Point2d(p.x(), p.y() - dummy_offset));
+  } else if (outer.size() == 2) {
+    const auto & p0 = outer.at(0);
+    const auto & p1 = outer.at(1);
+    const double dx = p1.x() - p0.x();
+    const double dy = p1.y() - p0.y();
+    const double len = std::hypot(dx, dy);
+    const double mx = 0.5 * (p0.x() + p1.x());
+    const double my = 0.5 * (p0.y() + p1.y());
+    append_point_to_polygon(
+      polygon, Point2d(mx + dy / len * dummy_offset, my - dx / len * dummy_offset));
+  }
+
   // NOTE: push back the first point in order to close polygon
   if (!polygon.outer().empty()) {
     append_point_to_polygon(polygon, polygon.outer().front());
   }
 
   return is_clockwise(polygon) ? polygon : inverse_clockwise(polygon);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d(
+  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape,
+  const double buffer)
+{
+  auto polygon = to_polygon2d(pose, shape);
+  return expand_polygon(polygon, buffer);
 }
 
 autoware_utils_geometry::Polygon2d to_polygon2d(
@@ -187,6 +214,13 @@ autoware_utils_geometry::Polygon2d to_polygon2d(
 }
 
 autoware_utils_geometry::Polygon2d to_polygon2d(
+  const autoware_perception_msgs::msg::DetectedObject & object, const double buffer)
+{
+  return autoware_utils_geometry::to_polygon2d(
+    object.kinematics.pose_with_covariance.pose, object.shape, buffer);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d(
   const autoware_perception_msgs::msg::TrackedObject & object)
 {
   return autoware_utils_geometry::to_polygon2d(
@@ -194,10 +228,24 @@ autoware_utils_geometry::Polygon2d to_polygon2d(
 }
 
 autoware_utils_geometry::Polygon2d to_polygon2d(
+  const autoware_perception_msgs::msg::TrackedObject & object, const double buffer)
+{
+  return autoware_utils_geometry::to_polygon2d(
+    object.kinematics.pose_with_covariance.pose, object.shape, buffer);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d(
   const autoware_perception_msgs::msg::PredictedObject & object)
 {
   return autoware_utils_geometry::to_polygon2d(
     object.kinematics.initial_pose_with_covariance.pose, object.shape);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d(
+  const autoware_perception_msgs::msg::PredictedObject & object, const double buffer)
+{
+  return autoware_utils_geometry::to_polygon2d(
+    object.kinematics.initial_pose_with_covariance.pose, object.shape, buffer);
 }
 
 Polygon2d to_footprint(
@@ -238,22 +286,66 @@ double get_area(const autoware_perception_msgs::msg::Shape & shape)
 //       This function fixes the issue.
 Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset)
 {
-  // NOTE: input_polygon is supposed to have a duplicated point.
-  const size_t num_points = input_polygon.outer().size() - 1;
+  static constexpr double eps = 1e-2;
 
-  Polygon2d expanded_polygon;
-  for (size_t i = 0; i < num_points; ++i) {
-    const auto & curr_p = input_polygon.outer().at(i);
-    const auto & next_p = input_polygon.outer().at(i + 1);
-    const auto & prev_p =
-      i == 0 ? input_polygon.outer().at(num_points - 1) : input_polygon.outer().at(i - 1);
+  if (input_polygon.outer().size() < 3 || offset < eps) return input_polygon;
+
+  auto filtered_polygon = input_polygon.outer();
+  filtered_polygon.pop_back();
+
+  // NOTE: Remove invalid points from the polygon.
+  auto it = filtered_polygon.begin();
+  while (it != filtered_polygon.end()) {
+    const auto & curr_p = *it;
+    const auto & next_p =
+      it == std::prev(filtered_polygon.end()) ? filtered_polygon.front() : *(it + 1);
+    const auto & prev_p = it == filtered_polygon.begin() ? filtered_polygon.back() : *(it - 1);
 
     Eigen::Vector2d current_to_next(next_p.x() - curr_p.x(), next_p.y() - curr_p.y());
     Eigen::Vector2d current_to_prev(prev_p.x() - curr_p.x(), prev_p.y() - curr_p.y());
+
+    if (current_to_next.norm() < eps || current_to_prev.norm() < eps) {
+      it = filtered_polygon.erase(it);
+      continue;
+    }
+
+    current_to_next.normalize();
+    current_to_prev.normalize();
+    if (std::abs(current_to_next.dot(current_to_prev)) > (1.0 - eps)) {
+      it = filtered_polygon.erase(it);
+      continue;
+    }
+    it++;
+  }
+
+  if (filtered_polygon.size() < 3) return input_polygon;
+
+  filtered_polygon.push_back(filtered_polygon.front());
+  const size_t num_points = filtered_polygon.size() - 1;
+
+  Polygon2d expanded_polygon;
+  for (size_t i = 0; i < num_points; ++i) {
+    const auto & curr_p = filtered_polygon.at(i);
+    const auto & next_p = filtered_polygon.at(i + 1);
+    const auto & prev_p = i == 0 ? filtered_polygon.at(num_points - 1) : filtered_polygon.at(i - 1);
+
+    Eigen::Vector2d current_to_next(next_p.x() - curr_p.x(), next_p.y() - curr_p.y());
+    Eigen::Vector2d current_to_prev(prev_p.x() - curr_p.x(), prev_p.y() - curr_p.y());
+
+    // NOTE: If the current point is too close to the previous or next point, the polygon will be
+    // degenerate.
+    if (current_to_prev.norm() < eps || current_to_next.norm() < eps) {
+      return input_polygon;
+    }
     current_to_next.normalize();
     current_to_prev.normalize();
 
-    const Eigen::Vector2d offset_vector = (-current_to_next - current_to_prev).normalized();
+    Eigen::Vector2d offset_vector = (-current_to_next - current_to_prev);
+    // NOTE: If the offset vector is too small, the polygon will be degenerate.
+    if (offset_vector.norm() < eps) {
+      return input_polygon;
+    }
+    offset_vector.normalize();
     const double theta = std::acos(offset_vector.dot(current_to_next));
     const double scaled_offset = offset / std::sin(theta);
     const Eigen::Vector2d offset_point =
