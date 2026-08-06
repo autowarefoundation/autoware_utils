@@ -174,20 +174,28 @@ Polygon2d to_polygon2d(
   // Guard against degenerate footprints that cannot form a valid area.
   constexpr double dummy_offset = 0.05;
   auto & outer = polygon.outer();
-  if (outer.size() == 1) {
+  auto add_2_dummy_points = [&]() {
     const auto p = outer.front();
     append_point_to_polygon(polygon, Point2d(p.x() + dummy_offset, p.y()));
     append_point_to_polygon(polygon, Point2d(p.x(), p.y() - dummy_offset));
+  };
+  if (outer.size() == 1) {
+    add_2_dummy_points();
   } else if (outer.size() == 2) {
     const auto & p0 = outer.at(0);
     const auto & p1 = outer.at(1);
     const double dx = p1.x() - p0.x();
     const double dy = p1.y() - p0.y();
-    const double len = std::hypot(dx, dy);
-    const double mx = 0.5 * (p0.x() + p1.x());
-    const double my = 0.5 * (p0.y() + p1.y());
-    append_point_to_polygon(
-      polygon, Point2d(mx + dy / len * dummy_offset, my - dx / len * dummy_offset));
+    const double len = std::sqrt(dx * dx + dy * dy);
+    if (len < dummy_offset) {
+      outer.pop_back();
+      add_2_dummy_points();
+    } else {
+      const double mx = 0.5 * (p0.x() + p1.x());
+      const double my = 0.5 * (p0.y() + p1.y());
+      const double inv_length = dummy_offset / len;
+      append_point_to_polygon(polygon, Point2d(mx + dy * inv_length, my - dx * inv_length));
+    }
   }
 
   // NOTE: push back the first point in order to close polygon
