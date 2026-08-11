@@ -117,61 +117,67 @@ Polygon2d rotate_polygon(const Polygon2d & polygon, const double angle)
   return rotated_polygon;
 }
 
-Polygon2d to_polygon2d(
-  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape)
+Polygon2d bbox_to_polygon2d(
+  const geometry_msgs::msg::Pose & pose, const geometry_msgs::msg::Vector3 & dimensions)
 {
   Polygon2d polygon;
+  const auto point0 =
+    autoware_utils_geometry::calc_offset_pose(pose, dimensions.x / 2.0, dimensions.y / 2.0, 0.0)
+      .position;
+  const auto point1 =
+    autoware_utils_geometry::calc_offset_pose(pose, -dimensions.x / 2.0, dimensions.y / 2.0, 0.0)
+      .position;
+  const auto point2 =
+    autoware_utils_geometry::calc_offset_pose(pose, -dimensions.x / 2.0, -dimensions.y / 2.0, 0.0)
+      .position;
+  const auto point3 =
+    autoware_utils_geometry::calc_offset_pose(pose, dimensions.x / 2.0, -dimensions.y / 2.0, 0.0)
+      .position;
+  append_point_to_polygon(polygon, point0);
+  append_point_to_polygon(polygon, point1);
+  append_point_to_polygon(polygon, point2);
+  append_point_to_polygon(polygon, point3);
+  return polygon;
+}
 
-  if (shape.type == autoware_perception_msgs::msg::Shape::BOUNDING_BOX) {
-    const auto point0 = autoware_utils_geometry::calc_offset_pose(
-                          pose, shape.dimensions.x / 2.0, shape.dimensions.y / 2.0, 0.0)
-                          .position;
-    const auto point1 = autoware_utils_geometry::calc_offset_pose(
-                          pose, -shape.dimensions.x / 2.0, shape.dimensions.y / 2.0, 0.0)
-                          .position;
-    const auto point2 = autoware_utils_geometry::calc_offset_pose(
-                          pose, -shape.dimensions.x / 2.0, -shape.dimensions.y / 2.0, 0.0)
-                          .position;
-    const auto point3 = autoware_utils_geometry::calc_offset_pose(
-                          pose, shape.dimensions.x / 2.0, -shape.dimensions.y / 2.0, 0.0)
-                          .position;
-
-    append_point_to_polygon(polygon, point0);
-    append_point_to_polygon(polygon, point1);
-    append_point_to_polygon(polygon, point2);
-    append_point_to_polygon(polygon, point3);
-  } else if (shape.type == autoware_perception_msgs::msg::Shape::CYLINDER) {
-    const double radius = shape.dimensions.x / 2.0;
-    constexpr int circle_discrete_num = 6;
-    for (int i = 0; i < circle_discrete_num; ++i) {
-      geometry_msgs::msg::Point point;
-      point.x = std::cos(
-                  (static_cast<double>(i) / static_cast<double>(circle_discrete_num)) * 2.0 * M_PI +
-                  M_PI / static_cast<double>(circle_discrete_num)) *
-                  radius +
-                pose.position.x;
-      point.y = std::sin(
-                  (static_cast<double>(i) / static_cast<double>(circle_discrete_num)) * 2.0 * M_PI +
-                  M_PI / static_cast<double>(circle_discrete_num)) *
-                  radius +
-                pose.position.y;
-      append_point_to_polygon(polygon, point);
-    }
-  } else if (shape.type == autoware_perception_msgs::msg::Shape::POLYGON) {
-    const double poly_yaw = tf2::getYaw(pose.orientation);
-    const auto rotated_footprint = rotate_polygon(shape.footprint, poly_yaw);
-    for (const auto rel_point : rotated_footprint.points) {
-      geometry_msgs::msg::Point abs_point;
-      abs_point.x = pose.position.x + rel_point.x;
-      abs_point.y = pose.position.y + rel_point.y;
-
-      append_point_to_polygon(polygon, abs_point);
-    }
-  } else {
-    throw std::logic_error("The shape type is not supported in autoware_utils.");
+Polygon2d cylinder_to_polygon2d(const geometry_msgs::msg::Pose & pose, const double radius)
+{
+  Polygon2d polygon;
+  constexpr int circle_discrete_num = 6;
+  for (int i = 0; i < circle_discrete_num; ++i) {
+    geometry_msgs::msg::Point point;
+    point.x = std::cos(
+                (static_cast<double>(i) / static_cast<double>(circle_discrete_num)) * 2.0 * M_PI +
+                M_PI / static_cast<double>(circle_discrete_num)) *
+                radius +
+              pose.position.x;
+    point.y = std::sin(
+                (static_cast<double>(i) / static_cast<double>(circle_discrete_num)) * 2.0 * M_PI +
+                M_PI / static_cast<double>(circle_discrete_num)) *
+                radius +
+              pose.position.y;
+    append_point_to_polygon(polygon, point);
   }
+  return polygon;
+}
 
-  // Guard against degenerate footprints that cannot form a valid area.
+Polygon2d footprint_to_polygon2d(
+  const geometry_msgs::msg::Pose & pose, const geometry_msgs::msg::Polygon & footprint)
+{
+  Polygon2d polygon;
+  const double poly_yaw = tf2::getYaw(pose.orientation);
+  const auto rotated_footprint = rotate_polygon(footprint, poly_yaw);
+  for (const auto rel_point : rotated_footprint.points) {
+    geometry_msgs::msg::Point abs_point;
+    abs_point.x = pose.position.x + rel_point.x;
+    abs_point.y = pose.position.y + rel_point.y;
+    append_point_to_polygon(polygon, abs_point);
+  }
+  return polygon;
+}
+
+void fix_if_invalid(Polygon2d & polygon)
+{
   constexpr double dummy_offset = 0.05;
   auto & outer = polygon.outer();
   auto add_2_dummy_points = [&]() {
@@ -197,6 +203,48 @@ Polygon2d to_polygon2d(
       append_point_to_polygon(polygon, Point2d(mx + dy * inv_length, my - dx * inv_length));
     }
   }
+}
+
+Polygon2d to_polygon2d(
+  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape)
+{
+  Polygon2d polygon;
+
+  if (shape.type == autoware_perception_msgs::msg::Shape::BOUNDING_BOX) {
+    polygon = bbox_to_polygon2d(pose, shape.dimensions);
+  } else if (shape.type == autoware_perception_msgs::msg::Shape::CYLINDER) {
+    polygon = cylinder_to_polygon2d(pose, shape.dimensions.x / 2.0);
+  } else if (shape.type == autoware_perception_msgs::msg::Shape::POLYGON) {
+    polygon = footprint_to_polygon2d(pose, shape.footprint);
+  } else {
+    throw std::logic_error("The shape type is not supported in autoware_utils.");
+  }
+
+  // NOTE: push back the first point in order to close polygon
+  if (!polygon.outer().empty()) {
+    append_point_to_polygon(polygon, polygon.outer().front());
+  }
+
+  return is_clockwise(polygon) ? polygon : inverse_clockwise(polygon);
+}
+
+Polygon2d to_polygon2d_safe(
+  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape)
+{
+  Polygon2d polygon;
+
+  if (shape.type == autoware_perception_msgs::msg::Shape::BOUNDING_BOX) {
+    polygon = bbox_to_polygon2d(pose, shape.dimensions);
+  } else if (shape.type == autoware_perception_msgs::msg::Shape::CYLINDER) {
+    polygon = cylinder_to_polygon2d(pose, shape.dimensions.x / 2.0);
+  } else if (shape.type == autoware_perception_msgs::msg::Shape::POLYGON) {
+    polygon = footprint_to_polygon2d(pose, shape.footprint);
+  } else {
+    throw std::logic_error("The shape type is not supported in autoware_utils.");
+  }
+
+  // Guard against degenerate footprints that cannot form a valid area.
+  fix_if_invalid(polygon);
 
   // NOTE: push back the first point in order to close polygon
   if (!polygon.outer().empty()) {
@@ -256,6 +304,56 @@ autoware_utils_geometry::Polygon2d to_polygon2d(
     object.kinematics.initial_pose_with_covariance.pose, object.shape, buffer);
 }
 
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const geometry_msgs::msg::Pose & pose, const autoware_perception_msgs::msg::Shape & shape,
+  const double buffer)
+{
+  auto polygon = to_polygon2d_safe(pose, shape);
+  return expand_polygon_safe(polygon, buffer);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const autoware_perception_msgs::msg::DetectedObject & object)
+{
+  return autoware_utils_geometry::to_polygon2d_safe(
+    object.kinematics.pose_with_covariance.pose, object.shape);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const autoware_perception_msgs::msg::DetectedObject & object, const double buffer)
+{
+  return autoware_utils_geometry::to_polygon2d_safe(
+    object.kinematics.pose_with_covariance.pose, object.shape, buffer);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const autoware_perception_msgs::msg::TrackedObject & object)
+{
+  return autoware_utils_geometry::to_polygon2d_safe(
+    object.kinematics.pose_with_covariance.pose, object.shape);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const autoware_perception_msgs::msg::TrackedObject & object, const double buffer)
+{
+  return autoware_utils_geometry::to_polygon2d_safe(
+    object.kinematics.pose_with_covariance.pose, object.shape, buffer);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const autoware_perception_msgs::msg::PredictedObject & object)
+{
+  return autoware_utils_geometry::to_polygon2d_safe(
+    object.kinematics.initial_pose_with_covariance.pose, object.shape);
+}
+
+autoware_utils_geometry::Polygon2d to_polygon2d_safe(
+  const autoware_perception_msgs::msg::PredictedObject & object, const double buffer)
+{
+  return autoware_utils_geometry::to_polygon2d_safe(
+    object.kinematics.initial_pose_with_covariance.pose, object.shape, buffer);
+}
+
 Polygon2d to_footprint(
   const geometry_msgs::msg::Pose & base_link_pose, const double base_to_front,
   const double base_to_rear, const double width)
@@ -293,6 +391,36 @@ double get_area(const autoware_perception_msgs::msg::Shape & shape)
 //       is larger than the original one.
 //       This function fixes the issue.
 Polygon2d expand_polygon(const Polygon2d & input_polygon, const double offset)
+{
+  // NOTE: input_polygon is supposed to have a duplicated point.
+  const size_t num_points = input_polygon.outer().size() - 1;
+
+  Polygon2d expanded_polygon;
+  for (size_t i = 0; i < num_points; ++i) {
+    const auto & curr_p = input_polygon.outer().at(i);
+    const auto & next_p = input_polygon.outer().at(i + 1);
+    const auto & prev_p =
+      i == 0 ? input_polygon.outer().at(num_points - 1) : input_polygon.outer().at(i - 1);
+
+    Eigen::Vector2d current_to_next(next_p.x() - curr_p.x(), next_p.y() - curr_p.y());
+    Eigen::Vector2d current_to_prev(prev_p.x() - curr_p.x(), prev_p.y() - curr_p.y());
+    current_to_next.normalize();
+    current_to_prev.normalize();
+
+    const Eigen::Vector2d offset_vector = (-current_to_next - current_to_prev).normalized();
+    const double theta = std::acos(offset_vector.dot(current_to_next));
+    const double scaled_offset = offset / std::sin(theta);
+    const Eigen::Vector2d offset_point =
+      Eigen::Vector2d(curr_p.x(), curr_p.y()) + offset_vector * scaled_offset;
+
+    expanded_polygon.outer().push_back(Point2d(offset_point.x(), offset_point.y()));
+  }
+
+  boost::geometry::correct(expanded_polygon);
+  return expanded_polygon;
+}
+
+Polygon2d expand_polygon_safe(const Polygon2d & input_polygon, const double offset)
 {
   static constexpr double eps = 1e-2;
 

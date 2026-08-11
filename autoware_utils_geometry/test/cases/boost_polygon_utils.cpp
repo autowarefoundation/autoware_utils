@@ -220,6 +220,11 @@ TEST(boost_geometry, boost_to_polygon2d)
     EXPECT_DOUBLE_EQ(poly.outer().at(4).x(), 1.0);
     EXPECT_DOUBLE_EQ(poly.outer().at(4).y(), 0.29289323091506958);
   }
+}
+
+TEST(boost_geometry, boost_to_polygon2d_safe)
+{
+  using autoware_utils_geometry::to_polygon2d_safe;
 
   {  // degenerate polygon with a single footprint point
     constexpr double dummy_offset = 0.05;
@@ -228,7 +233,7 @@ TEST(boost_geometry, boost_to_polygon2d)
     shape.type = autoware_perception_msgs::msg::Shape::POLYGON;
     shape.footprint.points.push_back(create_point32(0.0, 0.0));
 
-    const auto poly = to_polygon2d(pose, shape);
+    const auto poly = to_polygon2d_safe(pose, shape);
     ASSERT_EQ(poly.outer().size(), 4U);
     EXPECT_NEAR(poly.outer().at(0).x(), 2.0, 1e-6);
     EXPECT_NEAR(poly.outer().at(0).y(), 3.0, 1e-6);
@@ -250,7 +255,7 @@ TEST(boost_geometry, boost_to_polygon2d)
     shape.footprint.points.push_back(create_point32(0.0, 0.0));
     shape.footprint.points.push_back(create_point32(1.0, 0.0));
 
-    const auto poly = to_polygon2d(pose, shape);
+    const auto poly = to_polygon2d_safe(pose, shape);
     ASSERT_EQ(poly.outer().size(), 4U);
     EXPECT_NEAR(poly.outer().at(0).x(), 2.0, 1e-6);
     EXPECT_NEAR(poly.outer().at(0).y(), 3.0, 1e-6);
@@ -370,20 +375,45 @@ TEST(boost_geometry, boost_expand_polygon)
 
   {  // empty polygon
     Polygon2d empty_poly;
-    const auto expanded_poly = expand_polygon(empty_poly, 1.0);
+    EXPECT_THROW(expand_polygon(empty_poly, 1.0), std::out_of_range);
+  }
+}
+
+TEST(boost_geometry, boost_expand_polygon_safe)
+{
+  using autoware_utils_geometry::expand_polygon_safe;
+
+  {  // box with a certain offset
+    Polygon2d box_poly{{{-1.0, -1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
+    const auto expanded_poly = expand_polygon_safe(box_poly, 1.0);
+    const auto expected_poly =
+      Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
+    EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
+  }
+
+  {  // box with no offset
+    Polygon2d box_poly{{{-1.0, -1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
+    const auto expanded_poly = expand_polygon_safe(box_poly, 0.0);
+
+    EXPECT_TRUE(polygons_equal(expanded_poly, box_poly));
+  }
+
+  {  // empty polygon
+    Polygon2d empty_poly;
+    const auto expanded_poly = expand_polygon_safe(empty_poly, 1.0);
     EXPECT_EQ(expanded_poly.outer().size(), 0U);
   }
 
   {  // polygon with fewer than three unique points
     Polygon2d two_point_poly{{{0.0, 0.0}, {1.0, 0.0}}};
-    const auto expanded_poly = expand_polygon(two_point_poly, 1.0);
+    const auto expanded_poly = expand_polygon_safe(two_point_poly, 1.0);
     EXPECT_TRUE(polygons_equal(expanded_poly, two_point_poly));
   }
 
   {  // polygon with duplicate consecutive points
     Polygon2d duplicated_poly{
       {{-1.0, -1.0}, {-1.0, 1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
-    const auto expanded_poly = expand_polygon(duplicated_poly, 1.0);
+    const auto expanded_poly = expand_polygon_safe(duplicated_poly, 1.0);
     const auto expected_poly =
       Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
     EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
@@ -392,7 +422,7 @@ TEST(boost_geometry, boost_expand_polygon)
   {  // polygon with collinear points
     Polygon2d collinear_poly{
       {{-1.0, -1.0}, {-1.0, 1.0}, {0.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
-    const auto expanded_poly = expand_polygon(collinear_poly, 1.0);
+    const auto expanded_poly = expand_polygon_safe(collinear_poly, 1.0);
     const auto expected_poly =
       Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
     EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
@@ -400,7 +430,7 @@ TEST(boost_geometry, boost_expand_polygon)
 
   {  // polygon that becomes degenerate after filtering
     Polygon2d degenerate_poly{{{0.0, 0.0}, {1.0, 0.0}, {2.0, 0.0}, {0.0, 0.0}}};
-    const auto expanded_poly = expand_polygon(degenerate_poly, 1.0);
+    const auto expanded_poly = expand_polygon_safe(degenerate_poly, 1.0);
     EXPECT_TRUE(polygons_equal(expanded_poly, degenerate_poly));
   }
 }
