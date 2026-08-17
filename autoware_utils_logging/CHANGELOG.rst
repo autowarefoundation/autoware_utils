@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.9.0 (2026-06-29)
 ------------------
 * feat(autoware_utils_logging): templatize LoggerLevelConfigure (`#113 <https://github.com/autowarefoundation/autoware_utils/issues/113>`_)

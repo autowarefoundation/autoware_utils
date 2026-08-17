@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_diagnostics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.9.0 (2026-06-29)
 ------------------
 
