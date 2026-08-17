@@ -44,6 +44,22 @@ geometry_msgs::msg::Pose create_pose(const double x, const double y, const doubl
 
   return p;
 }
+
+bool polygons_equal(const Polygon2d & lhs, const Polygon2d & rhs, const double epsilon = 1e-6)
+{
+  if (lhs.outer().size() != rhs.outer().size()) {
+    return false;
+  }
+  for (size_t i = 0; i < lhs.outer().size(); ++i) {
+    if (std::abs(lhs.outer().at(i).x() - rhs.outer().at(i).x()) > epsilon) {
+      return false;
+    }
+    if (std::abs(lhs.outer().at(i).y() - rhs.outer().at(i).y()) > epsilon) {
+      return false;
+    }
+  }
+  return true;
+}
 }  // namespace
 
 TEST(boost_geometry, boost_is_clockwise)
@@ -206,6 +222,54 @@ TEST(boost_geometry, boost_to_polygon2d)
   }
 }
 
+TEST(boost_geometry, boost_to_polygon2d_safe)
+{
+  using autoware_utils_geometry::to_polygon2d_safe;
+
+  {  // degenerate polygon with a single footprint point
+    constexpr double dummy_offset = 0.05;
+    const auto pose = create_pose(2.0, 3.0, 0.0);
+    autoware_perception_msgs::msg::Shape shape;
+    shape.type = autoware_perception_msgs::msg::Shape::POLYGON;
+    shape.footprint.points.push_back(create_point32(0.0, 0.0));
+
+    const auto poly = to_polygon2d_safe(pose, shape);
+    ASSERT_EQ(poly.outer().size(), 4U);
+    EXPECT_NEAR(poly.outer().at(0).x(), 2.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(0).y(), 3.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(1).x(), 2.0 + dummy_offset, 1e-6);
+    EXPECT_NEAR(poly.outer().at(1).y(), 3.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(2).x(), 2.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(2).y(), 3.0 - dummy_offset, 1e-6);
+    EXPECT_NEAR(poly.outer().at(3).x(), poly.outer().at(0).x(), 1e-6);
+    EXPECT_NEAR(poly.outer().at(3).y(), poly.outer().at(0).y(), 1e-6);
+    EXPECT_GT(boost::geometry::area(poly), 0.0);
+    EXPECT_TRUE(autoware_utils_geometry::is_clockwise(poly));
+  }
+
+  {  // degenerate polygon with two footprint points
+    constexpr double dummy_offset = 0.05;
+    const auto pose = create_pose(2.0, 3.0, 0.0);
+    autoware_perception_msgs::msg::Shape shape;
+    shape.type = autoware_perception_msgs::msg::Shape::POLYGON;
+    shape.footprint.points.push_back(create_point32(0.0, 0.0));
+    shape.footprint.points.push_back(create_point32(1.0, 0.0));
+
+    const auto poly = to_polygon2d_safe(pose, shape);
+    ASSERT_EQ(poly.outer().size(), 4U);
+    EXPECT_NEAR(poly.outer().at(0).x(), 2.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(0).y(), 3.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(1).x(), 3.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(1).y(), 3.0, 1e-6);
+    EXPECT_NEAR(poly.outer().at(2).x(), 2.5, 1e-6);
+    EXPECT_NEAR(poly.outer().at(2).y(), 3.0 - dummy_offset, 1e-6);
+    EXPECT_NEAR(poly.outer().at(3).x(), poly.outer().at(0).x(), 1e-6);
+    EXPECT_NEAR(poly.outer().at(3).y(), poly.outer().at(0).y(), 1e-6);
+    EXPECT_GT(boost::geometry::area(poly), 0.0);
+    EXPECT_TRUE(autoware_utils_geometry::is_clockwise(poly));
+  }
+}
+
 TEST(boost_geometry, boost_to_footprint)
 {
   using autoware_utils_geometry::to_footprint;
@@ -297,37 +361,76 @@ TEST(boost_geometry, boost_expand_polygon)
   {  // box with a certain offset
     Polygon2d box_poly{{{-1.0, -1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
     const auto expanded_poly = expand_polygon(box_poly, 1.0);
-
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(0).x(), -2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(0).y(), -2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(1).x(), -2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(1).y(), 2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(2).x(), 2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(2).y(), 2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(3).x(), 2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(3).y(), -2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(4).x(), -2.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(4).y(), -2.0);
+    const auto expected_poly =
+      Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
+    EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
   }
 
   {  // box with no offset
     Polygon2d box_poly{{{-1.0, -1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
     const auto expanded_poly = expand_polygon(box_poly, 0.0);
 
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(0).x(), -1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(0).y(), -1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(1).x(), -1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(1).y(), 1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(2).x(), 1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(2).y(), 1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(3).x(), 1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(3).y(), -1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(4).x(), -1.0);
-    EXPECT_DOUBLE_EQ(expanded_poly.outer().at(4).y(), -1.0);
+    EXPECT_TRUE(polygons_equal(expanded_poly, box_poly));
   }
 
   {  // empty polygon
     Polygon2d empty_poly;
     EXPECT_THROW(expand_polygon(empty_poly, 1.0), std::out_of_range);
+  }
+}
+
+TEST(boost_geometry, boost_expand_polygon_safe)
+{
+  using autoware_utils_geometry::expand_polygon_safe;
+
+  {  // box with a certain offset
+    Polygon2d box_poly{{{-1.0, -1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
+    const auto expanded_poly = expand_polygon_safe(box_poly, 1.0);
+    const auto expected_poly =
+      Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
+    EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
+  }
+
+  {  // box with no offset
+    Polygon2d box_poly{{{-1.0, -1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
+    const auto expanded_poly = expand_polygon_safe(box_poly, 0.0);
+
+    EXPECT_TRUE(polygons_equal(expanded_poly, box_poly));
+  }
+
+  {  // empty polygon
+    Polygon2d empty_poly;
+    const auto expanded_poly = expand_polygon_safe(empty_poly, 1.0);
+    EXPECT_EQ(expanded_poly.outer().size(), 0U);
+  }
+
+  {  // polygon with fewer than three unique points
+    Polygon2d two_point_poly{{{0.0, 0.0}, {1.0, 0.0}}};
+    const auto expanded_poly = expand_polygon_safe(two_point_poly, 1.0);
+    EXPECT_TRUE(polygons_equal(expanded_poly, two_point_poly));
+  }
+
+  {  // polygon with duplicate consecutive points
+    Polygon2d duplicated_poly{
+      {{-1.0, -1.0}, {-1.0, 1.0}, {-1.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
+    const auto expanded_poly = expand_polygon_safe(duplicated_poly, 1.0);
+    const auto expected_poly =
+      Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
+    EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
+  }
+
+  {  // polygon with collinear points
+    Polygon2d collinear_poly{
+      {{-1.0, -1.0}, {-1.0, 1.0}, {0.0, 1.0}, {1.0, 1.0}, {1.0, -1.0}, {-1.0, -1.0}}};
+    const auto expanded_poly = expand_polygon_safe(collinear_poly, 1.0);
+    const auto expected_poly =
+      Polygon2d{{{-2.0, -2.0}, {-2.0, 2.0}, {2.0, 2.0}, {2.0, -2.0}, {-2.0, -2.0}}};
+    EXPECT_TRUE(polygons_equal(expanded_poly, expected_poly));
+  }
+
+  {  // polygon that becomes degenerate after filtering
+    Polygon2d degenerate_poly{{{0.0, 0.0}, {1.0, 0.0}, {2.0, 0.0}, {0.0, 0.0}}};
+    const auto expanded_poly = expand_polygon_safe(degenerate_poly, 1.0);
+    EXPECT_TRUE(polygons_equal(expanded_poly, degenerate_poly));
   }
 }
