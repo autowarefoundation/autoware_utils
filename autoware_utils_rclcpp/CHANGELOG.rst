@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_rclcpp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.10.0 (2026-08-17)
+-------------------
+
 1.9.0 (2026-06-29)
 ------------------
 * feat(autoware_utils_rclcpp): templatize NodeT for `get_or_declare_parameter` (`#112 <https://github.com/autowarefoundation/autoware_utils/issues/112>`_)

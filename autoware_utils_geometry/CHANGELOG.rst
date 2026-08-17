@@ -2,6 +2,16 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+1.10.0 (2026-08-17)
+-------------------
+* feat(autoware_utils_geometry): improve boost_polygon_utils to guard against degenerate inputs (`#117 <https://github.com/autowarefoundation/autoware_utils/issues/117>`_)
+  * modify to_polygon2d() and expand_polygon() to guard against degenerate input polygons
+  * avoid using std::hypot, guard against division by zero
+  * add safe polygon APIs without changing originals
+  Keep original to_polygon2d() and expand_polygon() behavior unchanged, and add to_polygon2d_safe() / expand_polygon_safe() that guard against degenerate inputs. Move related tests to the safe APIs.
+  ---------
+* Contributors: mkquda
+
 1.9.0 (2026-06-29)
 ------------------
 * fix(autoware_utils_geometry): avoid to raise exception if the polygon is empty (`#85 <https://github.com/autowarefoundation/autoware_utils/issues/85>`_)
