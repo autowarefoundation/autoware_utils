@@ -1,4 +1,4 @@
-// Copyright 2020 Tier IV, Inc.
+// Copyright 2025 The Autoware Contributors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,18 +21,24 @@
 
 #include <geometry_msgs/msg/pose_stamped.hpp>
 
+#include <functional>
 #include <memory>
 
 namespace autoware_utils_tf
 {
-class SelfPoseListener
+template <class NodeT, class BufferT, class ListenerT>
+class SelfPoseListenerT
 {
 public:
-  explicit SelfPoseListener(rclcpp::Node * node) : transform_listener_(node) {}
+  explicit SelfPoseListenerT(NodeT * node) : transform_listener_(node) {}
 
-  void wait_for_first_pose()
+  /// @param is_ok Decides whether to keep waiting. The default asks rclcpp, which is the wrong
+  ///        context for a node spun by an AgnocastOnly executor: there rclcpp::ok() is false from
+  ///        the start and the wait returns without a pose. Such a node passes its own liveness
+  ///        check instead.
+  void wait_for_first_pose(const std::function<bool()> & is_ok = []() { return rclcpp::ok(); })
   {
-    while (rclcpp::ok()) {
+    while (is_ok()) {
       if (get_current_pose()) {
         return;
       }
@@ -53,8 +59,11 @@ public:
   }
 
 private:
-  TransformListener transform_listener_;
+  TransformListenerT<NodeT, BufferT, ListenerT> transform_listener_;
 };
+
+using SelfPoseListener =
+  SelfPoseListenerT<rclcpp::Node, tf2_ros::Buffer, tf2_ros::TransformListener>;
 }  // namespace autoware_utils_tf
 
 #endif  // AUTOWARE_UTILS_TF__SELF_POSE_LISTENER_HPP_
