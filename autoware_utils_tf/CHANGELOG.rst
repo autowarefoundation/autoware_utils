@@ -2,6 +2,21 @@
 Changelog for package autoware_utils_tf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* feat(autoware_utils_tf): templatize SelfPoseListener on the node type (`#121 <https://github.com/autowarefoundation/autoware_utils/issues/121>`_)
+  * feat(autoware_utils_tf): templatize SelfPoseListener on the node type
+  TransformListenerT already takes the node, buffer and listener types, but SelfPoseListener
+  stayed fixed to rclcpp::Node, so a node on an AgnocastOnly executor could not reach it.
+  wait_for_first_pose() also takes the liveness check as an argument. Its default asks rclcpp,
+  which is the wrong context for such a node: rclcpp::ok() is false from the start there and the
+  wait would return without a pose.
+  Callers are unchanged: SelfPoseListener stays as the rclcpp instantiation and the wait keeps
+  its old behaviour when called with no argument.
+  * chore(autoware_utils_tf): keep the original copyright header
+  ---------
+* Contributors: Koichi Imai
+
 1.10.0 (2026-08-17)
 -------------------
 

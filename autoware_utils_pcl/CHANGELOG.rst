@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_pcl
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.10.0 (2026-08-17)
 -------------------
 

@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_geometry
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.10.0 (2026-08-17)
 -------------------
 * feat(autoware_utils_geometry): improve boost_polygon_utils to guard against degenerate inputs (`#117 <https://github.com/autowarefoundation/autoware_utils/issues/117>`_)

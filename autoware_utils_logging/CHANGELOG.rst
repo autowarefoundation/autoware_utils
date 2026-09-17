@@ -2,6 +2,9 @@
 Changelog for package autoware_utils_logging
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 1.10.0 (2026-08-17)
 -------------------
 
