@@ -2,8 +2,8 @@
 Changelog for package autoware_utils_tf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.11.0 (2026-09-17)
+-------------------
 * feat(autoware_utils_tf): templatize SelfPoseListener on the node type (`#121 <https://github.com/autowarefoundation/autoware_utils/issues/121>`_)
   * feat(autoware_utils_tf): templatize SelfPoseListener on the node type
   TransformListenerT already takes the node, buffer and listener types, but SelfPoseListener
