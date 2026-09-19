@@ -14,4 +14,4 @@ if(BUILD_TESTING)
   target_include_directories(test_${PROJECT_NAME} PRIVATE include)
 endif()
 
-ament_auto_package()
+ament_auto_package(USE_SCOPED_HEADER_INSTALL_DIR)
