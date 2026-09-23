@@ -20,6 +20,7 @@ from launch.actions import PopLaunchConfigurations
 from launch.actions import PushLaunchConfigurations
 from launch.frontend import Parser
 from launch.substitutions import TextSubstitution
+import pytest
 
 from autoware_utils_launch.actions import GlobalParameters
 
@@ -48,16 +49,10 @@ def test_multiple_actions_are_merged():
     assert context.launch_configurations == {"global_params": PARAM_DATA_1 + PARAM_DATA_2}
 
 
-def test_missing_path_is_ignored():
+def test_missing_path():
     context = LaunchContext()
-    GlobalParameters(f"[{PARAM_FILE_1}, /no/such/file.param.yaml]").execute(context)
-    assert context.launch_configurations == {"global_params": PARAM_DATA_1}
-
-
-def test_only_missing_path():
-    context = LaunchContext()
-    GlobalParameters("/no/such/file.param.yaml").execute(context)
-    assert context.launch_configurations == {"global_params": []}
+    with pytest.raises(FileNotFoundError):
+        GlobalParameters("/no/such/file.param.yaml").execute(context)
 
 
 def test_path_is_substituted():
