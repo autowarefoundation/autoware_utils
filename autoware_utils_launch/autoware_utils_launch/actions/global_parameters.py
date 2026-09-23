@@ -44,10 +44,10 @@ class GlobalParameters(Action):
         paths = paths if type(paths) is list else [paths]
         paths = [pathlib.Path(path) for path in paths]
 
+        # If the file does not exist, leave it to exception handling.
         global_params = context.launch_configurations.get("global_params", [])
         for path in paths:
-            if path.is_file():
-                with path.open("r") as fp:
-                    params = yaml.safe_load(fp)["/**"]["ros__parameters"]
-                global_params.extend(params.items())
+            with path.open("r") as fp:
+                params = yaml.safe_load(fp)["/**"]["ros__parameters"]
+            global_params.extend(params.items())
         context.launch_configurations["global_params"] = global_params

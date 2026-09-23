@@ -1,4 +1,7 @@
 # Copyright 2025 The Autoware Contributors
+# SPDX-License-Identifier: Apache-2.0
+
+# https://github.com/ros2/launch_ros/blob/humble/launch_ros/launch_ros/actions/push_ros_namespace.py
 # Copyright 2019 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
