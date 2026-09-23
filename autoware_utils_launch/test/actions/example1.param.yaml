@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    param_1_name: 10
+    param_2_name: foo
