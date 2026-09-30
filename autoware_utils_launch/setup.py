@@ -1,3 +1,4 @@
+from setuptools import find_packages
 from setuptools import setup
 
 package_name = "autoware_utils_launch"
@@ -5,7 +6,7 @@ package_name = "autoware_utils_launch"
 setup(
     name=package_name,
     version="0.0.0",
-    packages=[package_name],
+    packages=find_packages(exclude=["test"]),
     data_files=[
         ("share/ament_index/resource_index/packages", [f"resource/{package_name}"]),
         (f"share/{package_name}", ["package.xml"]),
