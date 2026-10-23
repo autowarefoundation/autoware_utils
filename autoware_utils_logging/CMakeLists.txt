@@ -13,4 +13,4 @@ if(BUILD_TESTING)
   ament_target_dependencies(test_${PROJECT_NAME} rclcpp logging_demo)
 endif()
 
-ament_auto_package()
+ament_auto_package(USE_SCOPED_HEADER_INSTALL_DIR)
