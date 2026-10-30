@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(autoware_utils_pcl)
 
 find_package(autoware_cmake REQUIRED)
+find_package(Boost REQUIRED COMPONENTS date_time)
 autoware_package()
 
 if(BUILD_TESTING)
